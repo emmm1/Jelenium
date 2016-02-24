@@ -11,5 +11,6 @@ public class ToPrint {
     secondPoint.y = 8;
     System.out.println("Coordinates of the first point is " + firstPoint.x + ":" + firstPoint.y);
     System.out.println("Coordinates of the second point is " + secondPoint.x + ":" + secondPoint.y);
+    System.out.println("Distance between two points is " + Distance.distance(firstPoint,secondPoint));
   }
 }

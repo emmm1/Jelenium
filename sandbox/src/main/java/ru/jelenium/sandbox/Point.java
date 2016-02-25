@@ -15,8 +15,12 @@ public class Point {
   public static int power = 2;
   // общая переменная для возведения в квадрат
   public double distance(Point p2) {
-    double dist = sqrt(ToOutput.sqdiff(this.x, p2.x) + ToOutput.sqdiff(this.y, p2.y));
+    double dist = sqrt(Point.sqdiff(this.x, p2.x) + Point.sqdiff(this.y, p2.y));
     return dist;
   }
-
+  public static double sqdiff (double p1, double p2) {
+    // Возвращает квадрат разницы по одной оси
+    double sqd = pow((p1 - p2), Point.power);
+    return sqd;
+  }
 }

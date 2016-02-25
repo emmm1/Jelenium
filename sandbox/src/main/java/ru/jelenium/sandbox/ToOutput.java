@@ -11,9 +11,5 @@ public class ToOutput {
     System.out.println("Distance between thise two points is " + firstPoint.distance(secondPoint));
   }
 
-  public static double sqdiff (double p1, double p2) {
-    // Возвращает квадрат разницы по одной оси
-    double sqd = pow((p1 - p2), Point.power);
-    return sqd;
-  }
+
 }

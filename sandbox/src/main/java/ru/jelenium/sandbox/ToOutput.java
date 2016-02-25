@@ -10,11 +10,10 @@ public class ToOutput {
     System.out.println("Coordinates of the second point is " + secondPoint.x + ":" + secondPoint.y);
     System.out.println("Distance between thise two points is " + firstPoint.distance(secondPoint));
   }
-  public static int power = 2;
-  // общая переменная для возведения в квадрат
+
   public static double sqdiff (double p1, double p2) {
     // Возвращает квадрат разницы по одной оси
-    double sqd = pow((p1 - p2), ToOutput.power);
+    double sqd = pow((p1 - p2), Point.power);
     return sqd;
   }
 }

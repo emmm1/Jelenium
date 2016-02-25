@@ -12,6 +12,8 @@ public class Point {
     this.x = x;
     this.y = y;
   }
+  public static int power = 2;
+  // общая переменная для возведения в квадрат
   public double distance(Point p2) {
     double dist = sqrt(ToOutput.sqdiff(this.x, p2.x) + ToOutput.sqdiff(this.y, p2.y));
     return dist;

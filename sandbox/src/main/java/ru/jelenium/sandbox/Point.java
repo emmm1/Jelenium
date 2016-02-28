@@ -14,7 +14,7 @@ public class Point {
     this.y = y;
   }
 
-  public static int power = 2;
+  public static int mpower = 2;
 
   // общая переменная для возведения в квадрат
   public double distance(Point p2) {
@@ -24,7 +24,7 @@ public class Point {
 
   public static double sqdiff(double p1, double p2) {
     // Возвращает квадрат разницы по одной оси
-    double sqd = pow((p1 - p2), Point.power);
+    double sqd = pow((p1 - p2), Point.mpower);
     return sqd;
   }
 }

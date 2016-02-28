@@ -13,10 +13,16 @@ public class PointTest {
 
 
   //Создаем вспомогательную функцию вычисления катета из гипотенузы и второго катета дяя проверки математики
-  static double tCathetus(double hypothesis, double catehetus) {
-    return Math.sqrt(Math.pow(hypothesis, Point.mpower) - Math.pow(catehetus, Point.mpower));
-  //Но если сделать округление - return Math.round(Math.sqrt(Math.pow(hypothesis, Point.mpower) - Math.pow(catehetus, Point.mpower))); - то все почему-то сходится.
-  }
+  static double tCathetus(double hypothesis, double cathetus) {
+//    double cath2 = Math.sqrt(Math.pow(hypothesis, Point.mpower) - Math.pow(cathetus, Point.mpower));
+    double sqhyp = Math.pow(hypothesis, Point.mpower);
+    double sqcath = Math.pow(cathetus, Point.mpower);
+    double diffhc = sqhyp - sqcath;
+    double cath2 = Math.sqrt(diffhc);
+    System.out.println(cath2);
+    System.out.println(Math.round(cath2));
+    return Math.round(cath2);
+    }
 
 
   @Test

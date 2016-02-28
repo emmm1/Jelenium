@@ -9,6 +9,7 @@ public class ToOutput {
     System.out.println("Coordinates of the first point is " + firstPoint.x + ":" + firstPoint.y);
     System.out.println("Coordinates of the second point is " + secondPoint.x + ":" + secondPoint.y);
     System.out.println("Distance between thise two points is " + firstPoint.distance(secondPoint));
+    System.out.println(ToCheckTest.tCathetus(firstPoint.distance(secondPoint),(firstPoint.y-secondPoint.y)));
   }
 
 

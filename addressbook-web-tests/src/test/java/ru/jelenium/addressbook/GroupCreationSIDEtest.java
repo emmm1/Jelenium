@@ -17,13 +17,14 @@ public class GroupCreationSIDEtest {
   @BeforeClass(alwaysRun = true)
   public void setUp() throws Exception {
     driver = new FirefoxDriver();
-    baseUrl = "http://localhost/addressbook/";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//    baseUrl = "http://localhost";
+    driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
   }
 
   @Test
   public void GroupCreationSIDEtest() throws Exception {
 //    driver.get(baseUrl + "/addressbook/");
+    driver.get("http://localhost/addressbook/");
     driver.findElement(By.name("user")).clear();
     driver.findElement(By.name("user")).sendKeys("admin");
     driver.findElement(By.name("pass")).clear();

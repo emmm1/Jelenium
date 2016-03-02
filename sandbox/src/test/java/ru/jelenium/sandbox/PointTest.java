@@ -14,13 +14,13 @@ public class PointTest {
 
   //Создаем вспомогательную функцию вычисления катета из гипотенузы и второго катета дяя проверки математики
   static double tCathetus(double hypothesis, double cathetus) {
-//    double cath2 = Math.sqrt(Math.pow(hypothesis, Point.mpower) - Math.pow(cathetus, Point.mpower));
-    double sqhyp = Math.pow(hypothesis, Point.mpower);
+    double cath2 = Math.sqrt(Math.pow(hypothesis, Point.mpower) - Math.pow(cathetus, Point.mpower));
+ /*   double sqhyp = Math.pow(hypothesis, Point.mpower);
     double sqcath = Math.pow(cathetus, Point.mpower);
     double diffhc = sqhyp - sqcath;
     double cath2 = Math.sqrt(diffhc);
     System.out.println(cath2);
-    System.out.println(Math.round(cath2));
+    System.out.println(Math.round(cath2)); */
     return Math.round(cath2);
     }
 
@@ -47,6 +47,7 @@ public class PointTest {
     Assert.assertEquals(tp1.distance(tp2), tdistance);
     //Проверяем математику, например что значение расстояния от точки 1 до точки 2 равно расстоянию от 2 до 1(а вдруг?), заодно создаем проблему т.к. математически точно значения могут не сойтись.
     Assert.assertEquals(tp1.distance(tp2), tp2.distance(tp1));
+    //Вычисляем катет через разницу гипотенузы и второго катета
     Assert.assertEquals(tCathetus(tp1.distance(tp2), (tp1.x - tp2.x)), Math.abs(tp1.y - tp2.y));
 
   }

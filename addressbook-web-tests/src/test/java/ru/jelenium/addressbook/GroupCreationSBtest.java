@@ -15,56 +15,71 @@ import org.openqa.selenium.*;
 //import static org.openqa.selenium.OutputType.*;
 
 public class GroupCreationSBtest {
-    FirefoxDriver wd;
-    
-    public static boolean isAlertPresent(FirefoxDriver wd) {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
+  FirefoxDriver wd;
+
+  public static boolean isAlertPresent(FirefoxDriver wd) {
+    try {
+      wd.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
     }
-    
-    @BeforeMethod
-    public void setUp() throws Exception {
-        wd = new FirefoxDriver();
-        wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    }
-    
-    @Test
-    public void GroupCreationSBtest() {
-        wd.get("http://localhost/addressbook/");
-        wd.findElement(By.name("user")).click();
-        wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys("admin");
-        wd.findElement(By.name("pass")).click();
-        wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys("secret");
-        wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-        wd.findElement(By.linkText("groups")).click();
-        wd.findElement(By.name("new")).click();
-        wd.findElement(By.name("group_name")).click();
-        wd.findElement(By.name("group_name")).clear();
-        wd.findElement(By.name("group_name")).sendKeys("Test group for Selenium Builder");
-        wd.findElement(By.name("group_header")).click();
-        wd.findElement(By.name("group_header")).clear();
-        wd.findElement(By.name("group_header")).sendKeys();
-        wd.findElement(By.name("group_header")).click();
-        wd.findElement(By.name("group_header")).clear();
-        wd.findElement(By.name("group_header")).sendKeys();
-        wd.findElement(By.name("group_header")).click();
-        wd.findElement(By.name("group_header")).clear();
-        wd.findElement(By.name("group_header")).sendKeys("SB header");
-        wd.findElement(By.name("group_footer")).click();
-        wd.findElement(By.name("group_footer")).clear();
-        wd.findElement(By.name("group_footer")).sendKeys("SB footer");
-        wd.findElement(By.name("submit")).click();
-        wd.findElement(By.linkText("group page")).click();
-    }
-    
-    @AfterMethod
-    public void tearDown() {
-        wd.quit();
-    }
+  }
+
+  @BeforeMethod
+  public void setUp() throws Exception {
+    wd = new FirefoxDriver();
+    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+    login();
+  }
+
+  private void login() {
+    wd.get("http://localhost/addressbook/");
+    wd.findElement(By.name("user")).click();
+    wd.findElement(By.name("user")).clear();
+    wd.findElement(By.name("user")).sendKeys("admin");
+    wd.findElement(By.name("pass")).click();
+    wd.findElement(By.name("pass")).clear();
+    wd.findElement(By.name("pass")).sendKeys("secret");
+    wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
+  }
+
+  @Test
+  public void testGroupCreationSB() {
+
+    gotoGroupPage();
+    initNewGroup();
+    fillOutFields();
+    gotoGroupPageThrAnswerLink();
+  }
+
+  private void gotoGroupPageThrAnswerLink() {
+    wd.findElement(By.linkText("group page")).click();
+  }
+
+  private void fillOutFields() {
+    wd.findElement(By.name("group_name")).click();
+    wd.findElement(By.name("group_name")).clear();
+    wd.findElement(By.name("group_name")).sendKeys("Test group for Selenium Builder");
+    wd.findElement(By.name("group_header")).click();
+    wd.findElement(By.name("group_header")).clear();
+    wd.findElement(By.name("group_header")).sendKeys("SB header");
+    wd.findElement(By.name("group_footer")).click();
+    wd.findElement(By.name("group_footer")).clear();
+    wd.findElement(By.name("group_footer")).sendKeys("SB footer");
+    wd.findElement(By.name("submit")).click();
+  }
+
+  private void initNewGroup() {
+    wd.findElement(By.name("new")).click();
+  }
+
+  private void gotoGroupPage() {
+    wd.findElement(By.linkText("groups")).click();
+  }
+
+  @AfterMethod
+  public void tearDown() {
+    wd.quit();
+  }
 }

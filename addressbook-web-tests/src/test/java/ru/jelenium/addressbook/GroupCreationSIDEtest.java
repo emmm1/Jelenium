@@ -40,17 +40,17 @@ public class GroupCreationSIDEtest {
   public void testGroupCreationSIDE() throws Exception {
     gotoGroupPage();
     initGroupCreation();
-    fillOutGroupForm();
+    fillOutGroupForm((new GroupData("Test group for Selenium IDE", "SIDE logo", "footer SIDE")));
     gotoGroupPage();
   }
 
-  private void fillOutGroupForm() {
+  private void fillOutGroupForm(GroupData groupData) {
     driver.findElement(By.name("group_name")).clear();
-    driver.findElement(By.name("group_name")).sendKeys("Test group for Selenium IDE");
+    driver.findElement(By.name("group_name")).sendKeys(groupData.getName());
     driver.findElement(By.name("group_header")).clear();
-    driver.findElement(By.name("group_header")).sendKeys("SIDE logo");
+    driver.findElement(By.name("group_header")).sendKeys(groupData.getFooter());
     driver.findElement(By.name("group_footer")).clear();
-    driver.findElement(By.name("group_footer")).sendKeys("footer SIDE");
+    driver.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
     driver.findElement(By.name("submit")).click();
   }
 

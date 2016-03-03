@@ -46,10 +46,9 @@ public class GroupCreationSBtest {
 
   @Test
   public void testGroupCreationSB() {
-
     gotoGroupPage();
     initNewGroup();
-    fillOutFields();
+    fillOutFields(new GroupData("Test group for Selenium Builder", "SB header", "SB footer"));
     gotoGroupPageThrAnswerLink();
   }
 
@@ -57,16 +56,16 @@ public class GroupCreationSBtest {
     wd.findElement(By.linkText("group page")).click();
   }
 
-  private void fillOutFields() {
+  private void fillOutFields(GroupData groupData) {
     wd.findElement(By.name("group_name")).click();
     wd.findElement(By.name("group_name")).clear();
-    wd.findElement(By.name("group_name")).sendKeys("Test group for Selenium Builder");
+    wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
     wd.findElement(By.name("group_header")).click();
     wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys("SB header");
+    wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
     wd.findElement(By.name("group_footer")).click();
     wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys("SB footer");
+    wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
     wd.findElement(By.name("submit")).click();
   }
 

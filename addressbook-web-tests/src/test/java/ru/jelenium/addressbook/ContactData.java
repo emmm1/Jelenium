@@ -1,6 +1,6 @@
 package ru.jelenium.addressbook;
 
-public class ContantData {
+public class ContactData {
   private final String firstname;
   private final String middlename;
   private final String lastname;
@@ -10,7 +10,7 @@ public class ContantData {
   private final ContactPhone phone;
   private final ContactEData ContactEData;
 
-  public ContantData(String firstname, String middlename, String lastname, String nickname, String title, ContactTextInfo textInfo, ContactPhone phone, ContactEData ContactEData) {
+  public ContactData(String firstname, String middlename, String lastname, String nickname, String title, ContactTextInfo textInfo, ContactPhone phone, ContactEData ContactEData) {
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastname = lastname;

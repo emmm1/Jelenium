@@ -7,10 +7,10 @@ public class GroupCreationSIDEtest extends SIDEBase {
 
   @Test
   public void testGroupCreationSIDE() throws Exception {
-    gotoGroupPage();
-    initGroupCreation();
-    fillOutGroupForm((new GroupData("Test group for Selenium IDE", "SIDE logo", "footer SIDE")));
-    gotoGroupPage();
+    app.gotoGroupPage();
+    app.initGroupCreation();
+    app.fillOutGroupForm((new GroupData("Test group for Selenium IDE", "SIDE logo", "footer SIDE")));
+    app.gotoGroupPage();
   }
 
 

@@ -13,7 +13,7 @@ public class NewRecordSBtest extends SBBase{
   @Test
   public void NewRecordSBtest() {
 
-    app.getNavigationHelper().gotoAddNewPage();
+    app.getNavigationHelperSB().gotoAddNewPage();
         app.getContactHelperSB().fillOutForm(new ContactData("Тест", "Тестович", "Тестовый", "ттт", "Дорогой",
                 new ContactTextInfo("Тест продакшн", "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13", "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
                         "Помрешь, пока заполнишь"),

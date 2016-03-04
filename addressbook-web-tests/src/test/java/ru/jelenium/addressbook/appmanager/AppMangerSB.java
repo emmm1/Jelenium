@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class AppMangerSB {
   FirefoxDriver wd;
-  private NavigationHelper navigationHelper;
+  private NavigationHelperSB navigationHelperSB;
   private GroupHelperSB groupHelperSB;
   private ContactHelperSB contactHelperSB;
 
@@ -28,7 +28,7 @@ public class AppMangerSB {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
-    navigationHelper = new NavigationHelper(wd);
+    navigationHelperSB = new NavigationHelperSB(wd);
     contactHelperSB = new ContactHelperSB(wd);
     groupHelperSB = new GroupHelperSB(wd);
     login("admin", "secret");
@@ -60,7 +60,7 @@ public class AppMangerSB {
     return groupHelperSB;
   }
 
-  public NavigationHelper getNavigationHelper() {
-    return navigationHelper;
+  public NavigationHelperSB getNavigationHelperSB() {
+    return navigationHelperSB;
   }
 }

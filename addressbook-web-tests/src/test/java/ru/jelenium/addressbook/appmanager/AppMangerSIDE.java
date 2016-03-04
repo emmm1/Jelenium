@@ -27,15 +27,15 @@ public class AppMangerSIDE {
     driver = new FirefoxDriver();
     baseUrl = "http://localhost/addressbook/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    login();
+    login("admin", "secret");
   }
 
-  public void login() {
+  public void login(String user, String passwd) {
     driver.get(baseUrl);
     driver.findElement(By.name("user")).clear();
-    driver.findElement(By.name("user")).sendKeys("admin");
+    driver.findElement(By.name("user")).sendKeys(user);
     driver.findElement(By.name("pass")).clear();
-    driver.findElement(By.name("pass")).sendKeys("secret");
+    driver.findElement(By.name("pass")).sendKeys(passwd);
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
   }
 

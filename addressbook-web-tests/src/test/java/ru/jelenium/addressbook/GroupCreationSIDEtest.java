@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 //import org.openqa.selenium.support.ui.Select;
 
 public class GroupCreationSIDEtest {
-  private FirefoxDriver driver;
+  private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
@@ -23,10 +23,18 @@ public class GroupCreationSIDEtest {
     driver = new FirefoxDriver();
     baseUrl = "http://localhost";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    AddressBookAssistantSD.login(driver);
+    login();
 
   }
 
+  private void login() {
+    driver.get(baseUrl + "/addressbook/");
+    driver.findElement(By.name("user")).clear();
+    driver.findElement(By.name("user")).sendKeys("admin");
+    driver.findElement(By.name("pass")).clear();
+    driver.findElement(By.name("pass")).sendKeys("secret");
+    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
+  }
 
   @Test
   public void testGroupCreationSIDE() throws Exception {

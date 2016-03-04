@@ -7,10 +7,10 @@ public class GroupCreationSBtest extends SBBase {
 
   @Test
   public void testGroupCreationSB() {
-    app.gotoGroupPage();
+    app.getNavigationHelper().gotoGroupPage();
     app.initNewGroup();
-    app.fillOutFields(new GroupData("Test group for Selenium Builder", "SB header", "SB footer"));
-    app.gotoGroupPageThrAnswerLink();
+    app.getGroupHelperSB().fillOutFields(new GroupData("Test group for Selenium Builder", "SB header", "SB footer"));
+    app.getNavigationHelper().gotoGroupPageThrAnswerLink();
   }
 
 }

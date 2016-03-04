@@ -1,4 +1,4 @@
-package ru.jelenium.addressbook;
+package ru.jelenium.addressbook.model;
 
 public class ContactTextInfo {
   private final String company;

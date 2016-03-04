@@ -1,4 +1,4 @@
-package ru.jelenium.addressbook;
+package ru.jelenium.addressbook.model;
 
 public class ContactData {
   private final String firstname;

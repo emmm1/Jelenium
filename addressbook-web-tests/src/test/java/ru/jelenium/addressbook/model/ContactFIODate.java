@@ -1,4 +1,4 @@
-package ru.jelenium.addressbook;
+package ru.jelenium.addressbook.model;
 
 public class ContactFIODate {
   private final String firstname;

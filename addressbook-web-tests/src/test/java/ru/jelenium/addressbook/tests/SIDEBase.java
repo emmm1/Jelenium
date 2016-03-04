@@ -1,7 +1,8 @@
-package ru.jelenium.addressbook;
+package ru.jelenium.addressbook.tests;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import ru.jelenium.addressbook.appmanager.AppMangerSIDE;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.

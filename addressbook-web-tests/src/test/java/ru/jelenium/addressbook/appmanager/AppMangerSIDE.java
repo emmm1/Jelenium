@@ -1,4 +1,4 @@
-package ru.jelenium.addressbook;
+package ru.jelenium.addressbook.appmanager;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -6,6 +6,8 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import ru.jelenium.addressbook.model.ContactData;
+import ru.jelenium.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,19 +18,19 @@ import static org.testng.Assert.fail;
  */
 public class AppMangerSIDE {
   //private WebDriver driver;
-  protected FirefoxDriver driver;
-  protected String baseUrl;
-  protected boolean acceptNextAlert = true;
-  protected StringBuffer verificationErrors = new StringBuffer();
+  public FirefoxDriver driver;
+  public String baseUrl;
+  public boolean acceptNextAlert = true;
+  public StringBuffer verificationErrors = new StringBuffer();
 
-  protected void init() {
+  public void init() {
     driver = new FirefoxDriver();
     baseUrl = "http://localhost/addressbook/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     login();
   }
 
-  protected void login() {
+  public void login() {
     driver.get(baseUrl);
     driver.findElement(By.name("user")).clear();
     driver.findElement(By.name("user")).sendKeys("admin");
@@ -37,7 +39,7 @@ public class AppMangerSIDE {
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
   }
 
-  protected void fillOutForm(ContactData contactData) {
+  public void fillOutForm(ContactData contactData) {
     driver.findElement(By.name("firstname")).clear();
     driver.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
     driver.findElement(By.name("middlename")).clear();
@@ -87,11 +89,11 @@ public class AppMangerSIDE {
     driver.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
-  protected void gotoAddNewPage() {
+  public void gotoAddNewPage() {
     driver.findElement(By.linkText("add new")).click();
   }
 
-  protected void stop() {
+  public void stop() {
     driver.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
@@ -99,7 +101,7 @@ public class AppMangerSIDE {
     }
   }
 
-  protected boolean isElementPresent(By by) {
+  public boolean isElementPresent(By by) {
     try {
       driver.findElement(by);
       return true;
@@ -108,7 +110,7 @@ public class AppMangerSIDE {
     }
   }
 
-  protected boolean isAlertPresent() {
+  public boolean isAlertPresent() {
     try {
       driver.switchTo().alert();
       return true;
@@ -117,7 +119,7 @@ public class AppMangerSIDE {
     }
   }
 
-  protected String closeAlertAndGetItsText() {
+  public String closeAlertAndGetItsText() {
     try {
       Alert alert = driver.switchTo().alert();
       String alertText = alert.getText();
@@ -132,7 +134,7 @@ public class AppMangerSIDE {
     }
   }
 
-  protected void fillOutGroupForm(GroupData groupData) {
+  public void fillOutGroupForm(GroupData groupData) {
     driver.findElement(By.name("group_name")).clear();
     driver.findElement(By.name("group_name")).sendKeys(groupData.getName());
     driver.findElement(By.name("group_header")).clear();
@@ -142,11 +144,11 @@ public class AppMangerSIDE {
     driver.findElement(By.name("submit")).click();
   }
 
-  protected void initGroupCreation() {
+  public void initGroupCreation() {
     driver.findElement(By.name("new")).click();
   }
 
-  protected void gotoGroupPage() {
+  public void gotoGroupPage() {
     driver.findElement(By.linkText("groups")).click();
   }
 }

@@ -1,8 +1,10 @@
-package ru.jelenium.addressbook;
+package ru.jelenium.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.jelenium.addressbook.model.ContactData;
+import ru.jelenium.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +23,7 @@ public class AppMangerSB {
     }
   }
 
-  protected void init() {
+  public void init() {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
@@ -38,11 +40,11 @@ public class AppMangerSB {
     wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
   }
 
-  protected void gotoGroupPageThrAnswerLink() {
+  public void gotoGroupPageThrAnswerLink() {
     wd.findElement(By.linkText("group page")).click();
   }
 
-  protected void fillOutFields(GroupData groupData) {
+  public void fillOutFields(GroupData groupData) {
     wd.findElement(By.name("group_name")).click();
     wd.findElement(By.name("group_name")).clear();
     wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
@@ -55,19 +57,19 @@ public class AppMangerSB {
     wd.findElement(By.name("submit")).click();
   }
 
-  protected void initNewGroup() {
+  public void initNewGroup() {
     wd.findElement(By.name("new")).click();
   }
 
-  protected void gotoGroupPage() {
+  public void gotoGroupPage() {
     wd.findElement(By.linkText("groups")).click();
   }
 
-  protected void stop() {
+  public void stop() {
     wd.quit();
   }
 
-  protected void fillOutForm(ContactData cDate) {
+  public void fillOutForm(ContactData cDate) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(cDate.getFirstname());
@@ -149,7 +151,7 @@ public class AppMangerSB {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
-  protected void gotoAddNewPage() {
+  public void gotoAddNewPage() {
     wd.findElement(By.linkText("add new")).click();
   }
 }

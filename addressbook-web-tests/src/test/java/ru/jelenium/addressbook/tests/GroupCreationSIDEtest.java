@@ -1,6 +1,7 @@
-package ru.jelenium.addressbook;
+package ru.jelenium.addressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.jelenium.addressbook.model.GroupData;
 
 public class GroupCreationSIDEtest extends SIDEBase {
 

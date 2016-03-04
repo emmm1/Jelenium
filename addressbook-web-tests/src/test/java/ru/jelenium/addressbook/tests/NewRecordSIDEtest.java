@@ -1,6 +1,10 @@
-package ru.jelenium.addressbook;
+package ru.jelenium.addressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.jelenium.addressbook.model.ContactData;
+import ru.jelenium.addressbook.model.ContactEData;
+import ru.jelenium.addressbook.model.ContactPhone;
+import ru.jelenium.addressbook.model.ContactTextInfo;
 
 public class NewRecordSIDEtest extends SIDEBase {
 

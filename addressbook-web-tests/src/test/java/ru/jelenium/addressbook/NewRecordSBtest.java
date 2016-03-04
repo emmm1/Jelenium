@@ -1,21 +1,12 @@
 package ru.jelenium.addressbook;
 
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.By;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-//import static org.testng.Assert.*;
-
 import java.util.concurrent.TimeUnit;
-//import java.util.Date;
-//import java.io.File;
-
-//import org.openqa.selenium.support.ui.Select;
-//import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.*;
-
-//import static org.openqa.selenium.OutputType.*;
 
 public class NewRecordSBtest {
   FirefoxDriver wd;
@@ -43,19 +34,14 @@ public class NewRecordSBtest {
   public void NewRecordSBtest() {
 
     gotoAddNewPage();
-    fillOutForm(new FullContactDate("Тест", "Тестович", "Тестовый", "ттт", "Дорогой", "Тест продакшн", "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
-            "465464611263112", "+1245 54 545 68595489", "3546131564631", "+132(464) 54651 1564651 31", "test.testowy@testPro.com", "test.testowy@gmail.com",
-            "testy_1987@mail.ru", "http://localhost/addressbook", "25" ,"October", "1987", "12", "July", "2001", "[none]",
-            "РФ, Тестовая область, Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-            "2345464", "Помрешь, пока заполнишь"));
-    gotoMainPage();
+        fillOutForm(new ContantData("Тест", "Тестович", "Тестовый", "ттт", "Дорогой",
+                new ContactTextInfo("Тест продакшн", "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13", "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
+                        "Помрешь, пока заполнишь"),
+                new ContactPhone("465464611263112", "+1245 54 545 68595489", "3546131564631", "+132(464) 54651 1564651 31", "2345464"),
+                new ContactEData("test.testowy@testPro.com", "test.testowy@gmail.com","testy_1987@mail.ru", "http://localhost/addressbook")));
   }
 
-  private void gotoMainPage() {
-    wd.findElement(By.linkText("home")).click();
-  }
-
-  private void fillOutForm(FullContactDate cDate) {
+  private void fillOutForm(ContantData cDate) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(cDate.getFirstname());
@@ -67,40 +53,40 @@ public class NewRecordSBtest {
     wd.findElement(By.name("lastname")).sendKeys(cDate.getLastname());
     wd.findElement(By.name("nickname")).click();
     wd.findElement(By.name("nickname")).clear();
-    wd.findElement(By.name("nickname")).sendKeys(cDate.getNick());
+    wd.findElement(By.name("nickname")).sendKeys(cDate.getNickname());
     wd.findElement(By.name("title")).click();
     wd.findElement(By.name("title")).clear();
     wd.findElement(By.name("title")).sendKeys(cDate.getTitle());
     wd.findElement(By.name("company")).click();
     wd.findElement(By.name("company")).clear();
-    wd.findElement(By.name("company")).sendKeys(cDate.getCompany());
+    wd.findElement(By.name("company")).sendKeys(cDate.getTextInfo().getCompany());
     wd.findElement(By.name("address")).click();
     wd.findElement(By.name("address")).clear();
-    wd.findElement(By.name("address")).sendKeys(cDate.getAddress());
+    wd.findElement(By.name("address")).sendKeys(cDate.getTextInfo().getAddress1());
     wd.findElement(By.name("home")).click();
     wd.findElement(By.name("home")).clear();
-    wd.findElement(By.name("home")).sendKeys(cDate.getHomephone());
+    wd.findElement(By.name("home")).sendKeys(cDate.getPhone().getHome1());
     wd.findElement(By.name("mobile")).click();
     wd.findElement(By.name("mobile")).clear();
-    wd.findElement(By.name("mobile")).sendKeys(cDate.getMobile());
+    wd.findElement(By.name("mobile")).sendKeys(cDate.getPhone().getMobile());
     wd.findElement(By.name("work")).click();
     wd.findElement(By.name("work")).clear();
-    wd.findElement(By.name("work")).sendKeys(cDate.getWorkphone());
+    wd.findElement(By.name("work")).sendKeys(cDate.getPhone().getWork());
     wd.findElement(By.name("fax")).click();
     wd.findElement(By.name("fax")).clear();
-    wd.findElement(By.name("fax")).sendKeys(cDate.getFax());
+    wd.findElement(By.name("fax")).sendKeys(cDate.getPhone().getFax());
     wd.findElement(By.name("email")).click();
     wd.findElement(By.name("email")).clear();
-    wd.findElement(By.name("email")).sendKeys(cDate.getEmail());
+    wd.findElement(By.name("email")).sendKeys(cDate.getContactEData().getEmail1());
     wd.findElement(By.name("email2")).click();
     wd.findElement(By.name("email2")).clear();
-    wd.findElement(By.name("email2")).sendKeys(cDate.getEmail2());
+    wd.findElement(By.name("email2")).sendKeys(cDate.getContactEData().getEmail2());
     wd.findElement(By.name("email3")).click();
     wd.findElement(By.name("email3")).clear();
-    wd.findElement(By.name("email3")).sendKeys(cDate.getEmail3());
+    wd.findElement(By.name("email3")).sendKeys(cDate.getContactEData().getEmail3());
     wd.findElement(By.name("homepage")).click();
     wd.findElement(By.name("homepage")).clear();
-    wd.findElement(By.name("homepage")).sendKeys(cDate.getHomepage());
+    wd.findElement(By.name("homepage")).sendKeys(cDate.getContactEData().getHomepage());
       if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[1]")).isSelected()) {
             wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[1]")).click();
         }
@@ -110,14 +96,10 @@ public class NewRecordSBtest {
     if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[8]")).isSelected()) {
       wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[8]")).click();
     }
-/*    String tmp = cDate.getBday();
-    new Select(wd.findElement(By.name("bday"))).selectByVisibleText(tmp);
-    new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(cDate.getBmonth()); */
+
     wd.findElement(By.name("byear")).click();
     wd.findElement(By.name("byear")).clear();
-    wd.findElement(By.name("byear")).sendKeys(cDate.getByear());
-/*    new Select(wd.findElement(By.name("aday"))).selectByVisibleText(cDate.getAday());
-    new Select(wd.findElement(By.name("amonth"))).selectByVisibleText(cDate.getAmonth());*/
+    wd.findElement(By.name("byear")).sendKeys("1987");
     if (!wd.findElement(By.xpath("//div[@id='content']/form/select[3]//option[14]")).isSelected()) {
       wd.findElement(By.xpath("//div[@id='content']/form/select[3]//option[14]")).click();
     }
@@ -127,22 +109,21 @@ public class NewRecordSBtest {
 
     wd.findElement(By.name("ayear")).click();
     wd.findElement(By.name("ayear")).clear();
-    wd.findElement(By.name("ayear")).sendKeys(cDate.getAyear());
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).isSelected()) {
+    wd.findElement(By.name("ayear")).sendKeys("2001");
+      if (!wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).isSelected()) {
       wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).click();
     }
 
-    //new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(cDate.getAddToGroup());
 
     wd.findElement(By.name("address2")).click();
     wd.findElement(By.name("address2")).clear();
-    wd.findElement(By.name("address2")).sendKeys(cDate.getAddress2());
+    wd.findElement(By.name("address2")).sendKeys(cDate.getTextInfo().getAddress2());
     wd.findElement(By.name("phone2")).click();
     wd.findElement(By.name("phone2")).clear();
-    wd.findElement(By.name("phone2")).sendKeys(cDate.getHomephone2());
+    wd.findElement(By.name("phone2")).sendKeys(cDate.getPhone().getHome2());
     wd.findElement(By.name("notes")).click();
     wd.findElement(By.name("notes")).clear();
-    wd.findElement(By.name("notes")).sendKeys(cDate.getNotes());
+    wd.findElement(By.name("notes")).sendKeys(cDate.getTextInfo().getNotes());
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 

@@ -1,12 +1,18 @@
 package ru.jelenium.addressbook;
 
-//import java.util.regex.Pattern;
-import java.util.concurrent.TimeUnit;
-import org.testng.annotations.*;
-import static org.testng.Assert.*;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
+
+import static org.testng.Assert.fail;
 
 public class NewRecordSIDEtest {
 //  private WebDriver driver;
@@ -42,7 +48,6 @@ public class NewRecordSIDEtest {
                     new ContactEData("dfsdafsdf.asdffasdf@fasd-dsfdff", "dfsdfasdf@dsf.sdfsd", "sdfa@sdfs.adf", "htttp://ldjkflasdjfsdflj/asdlkfj")));
   }
 
-  //new ContactFIODate("dfsdafsdf", "dsfasdf", "asdfsdf", "dfdf", "dfasdf"),
   private void fillOutForm(ContantData contantData) {
     driver.findElement(By.name("firstname")).clear();
     driver.findElement(By.name("firstname")).sendKeys(contantData.getFirstname());

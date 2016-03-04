@@ -1,13 +1,9 @@
 package ru.jelenium.addressbook;
 
 //import java.util.regex.Pattern;
-
 import java.util.concurrent.TimeUnit;
-
 import org.testng.annotations.*;
-
 import static org.testng.Assert.*;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 //import org.openqa.selenium.support.ui.Select;
@@ -21,30 +17,21 @@ public class GroupCreationSIDEtest {
   @BeforeClass(alwaysRun = true)
   public void setUp() throws Exception {
     driver = new FirefoxDriver();
-    baseUrl = "http://localhost";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    login();
-
+//    baseUrl = "http://localhost";
+    driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
   }
 
-  private void login() {
-    driver.get(baseUrl + "/addressbook/");
+  @Test
+  public void GroupCreationSIDEtest() throws Exception {
+//    driver.get(baseUrl + "/addressbook/");
+    driver.get("http://localhost/addressbook/");
     driver.findElement(By.name("user")).clear();
     driver.findElement(By.name("user")).sendKeys("admin");
     driver.findElement(By.name("pass")).clear();
     driver.findElement(By.name("pass")).sendKeys("secret");
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-  }
-
-  @Test
-  public void testGroupCreationSIDE() throws Exception {
-    gotoGroupPage();
-    initGroupCreation();
-    fillOutGroupForm();
-    gotoGroupPage();
-  }
-
-  private void fillOutGroupForm() {
+    driver.findElement(By.linkText("groups")).click();
+    driver.findElement(By.name("new")).click();
     driver.findElement(By.name("group_name")).clear();
     driver.findElement(By.name("group_name")).sendKeys("Test group for Selenium IDE");
     driver.findElement(By.name("group_header")).clear();
@@ -52,14 +39,7 @@ public class GroupCreationSIDEtest {
     driver.findElement(By.name("group_footer")).clear();
     driver.findElement(By.name("group_footer")).sendKeys("footer SIDE");
     driver.findElement(By.name("submit")).click();
-  }
-
-  private void initGroupCreation() {
-    driver.findElement(By.name("new")).click();
-  }
-
-  private void gotoGroupPage() {
-    driver.findElement(By.linkText("groups")).click();
+    driver.findElement(By.linkText("group page")).click();
   }
 
   @AfterClass(alwaysRun = true)

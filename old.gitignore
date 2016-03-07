@@ -13,6 +13,3 @@ gradle-app.setting
 .idea/misc.xml
 .idea/libraries/*
 
-# Gradle:
-.idea/gradle.xml
-.idea/libraries

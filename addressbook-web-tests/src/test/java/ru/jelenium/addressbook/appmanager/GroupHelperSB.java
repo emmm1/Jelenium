@@ -7,7 +7,7 @@ import ru.jelenium.addressbook.model.GroupData;
 /**
  * Created by mikhail.evseev on 04.03.2016.
  */
-public class GroupHelperSB extends HelperBase{
+public class GroupHelperSB extends HelperBase {
 
   public GroupHelperSB(FirefoxDriver wd) {
     super(wd);
@@ -19,6 +19,7 @@ public class GroupHelperSB extends HelperBase{
     type(By.name("group_footer"), groupData.getFooter());
     click(By.name("submit"));
   }
+
   public void initNewGroup() {
     click(By.name("new"));
   }

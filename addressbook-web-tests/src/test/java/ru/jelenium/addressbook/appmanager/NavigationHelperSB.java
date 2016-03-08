@@ -6,24 +6,24 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 /**
  * Created by mikhail.evseev on 04.03.2016.
  */
-public class NavigationHelperSB {
-  private FirefoxDriver wd;
+public class NavigationHelperSB extends HelperBase {
+//  private FirefoxDriver wd;
 
   public NavigationHelperSB(FirefoxDriver wd) {
-
-    this.wd = wd;
+    super(wd);
+//    this.wd = wd;
   }
 
   public void gotoGroupPageThrAnswerLink() {
-    wd.findElement(By.linkText("group page")).click();
+    click(By.linkText("group page"));
   }
 
   public void gotoGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
+    click(By.linkText("groups"));
   }
 
   public void gotoAddNewPage() {
-    wd.findElement(By.linkText("add new")).click();
+    click(By.linkText("add new"));
   }
 
 }

@@ -33,13 +33,12 @@ public class AppMangerSB {
     contactHelperSB = new ContactHelperSB(wd);
     groupHelperSB = new GroupHelperSB(wd);
     sessionHelper = new SessionHelper(wd);
+//Вынести логин и пароль в объект аутдата
     sessionHelper.login("admin", "secret");
   }
 
 
-  public void initNewGroup() {
-    wd.findElement(By.name("new")).click();
-  }
+
 
   public void stop() {
     wd.quit();

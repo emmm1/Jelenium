@@ -19,5 +19,9 @@ public class GroupHelperSB extends HelperBase{
     type(By.name("group_footer"), groupData.getFooter());
     click(By.name("submit"));
   }
+  public void initNewGroup() {
+    click(By.name("new"));
+  }
+
 
 }

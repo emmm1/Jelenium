@@ -1,8 +1,8 @@
 package ru.jelenium.addressbook.appmanager;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.jelenium.addressbook.model.AuthData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +15,7 @@ public class AppMangerSB {
   private NavigationHelperSB navigationHelperSB;
   private GroupHelperSB groupHelperSB;
   private ContactHelperSB contactHelperSB;
+  private AuthData authData;
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
     try {
@@ -33,11 +34,9 @@ public class AppMangerSB {
     contactHelperSB = new ContactHelperSB(wd);
     groupHelperSB = new GroupHelperSB(wd);
     sessionHelper = new SessionHelper(wd);
-//Вынести логин и пароль в объект аутдата
-    sessionHelper.login("admin", "secret");
+    authData = new AuthData("admin", "secret");
+    sessionHelper.login(authData.getLogin(), authData.getPass());
   }
-
-
 
 
   public void stop() {

@@ -25,4 +25,5 @@ public class NavigationHelperSB {
   public void gotoAddNewPage() {
     wd.findElement(By.linkText("add new")).click();
   }
+
 }

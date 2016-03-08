@@ -14,6 +14,7 @@ public class ContactHelperSB {
     this.wd = wd;
   }
 
+
   public void fillOutForm(ContactData cDate) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();

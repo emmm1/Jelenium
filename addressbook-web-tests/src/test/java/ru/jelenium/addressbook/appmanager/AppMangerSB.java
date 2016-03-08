@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class AppMangerSB {
   FirefoxDriver wd;
+  private SessionHelper sessionHelper;
   private NavigationHelperSB navigationHelperSB;
   private GroupHelperSB groupHelperSB;
   private ContactHelperSB contactHelperSB;
@@ -31,18 +32,10 @@ public class AppMangerSB {
     navigationHelperSB = new NavigationHelperSB(wd);
     contactHelperSB = new ContactHelperSB(wd);
     groupHelperSB = new GroupHelperSB(wd);
-    login("admin", "secret");
+    sessionHelper = new SessionHelper(wd);
+    sessionHelper.login("admin", "secret");
   }
 
-  private void login(String user, String passwd) {
-    wd.findElement(By.name("user")).click();
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys(user);
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(passwd);
-    wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-  }
 
   public void initNewGroup() {
     wd.findElement(By.name("new")).click();

@@ -9,12 +9,12 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by mikhail.evseev on 04.03.2016.
  */
-public class AppMangerSB {
+public class AppManger {
   FirefoxDriver wd;
   private SessionHelper sessionHelper;
-  private NavigationHelperSB navigationHelperSB;
-  private GroupHelperSB groupHelperSB;
-  private ContactHelperSB contactHelperSB;
+  private NavigationHelper navigationHelper;
+  private GroupHelper groupHelper;
+  private ContactHelper contactHelper;
   private AuthData authData;
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
@@ -30,9 +30,9 @@ public class AppMangerSB {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
-    navigationHelperSB = new NavigationHelperSB(wd);
-    contactHelperSB = new ContactHelperSB(wd);
-    groupHelperSB = new GroupHelperSB(wd);
+    navigationHelper = new NavigationHelper(wd);
+    contactHelper = new ContactHelper(wd);
+    groupHelper = new GroupHelper(wd);
     sessionHelper = new SessionHelper(wd);
     authData = new AuthData("admin", "secret");
     sessionHelper.login(authData.getLogin(), authData.getPass());
@@ -43,15 +43,15 @@ public class AppMangerSB {
     wd.quit();
   }
 
-  public ContactHelperSB getContactHelperSB() {
-    return contactHelperSB;
+  public ContactHelper getContactHelper() {
+    return contactHelper;
   }
 
-  public GroupHelperSB getGroupHelperSB() {
-    return groupHelperSB;
+  public GroupHelper getGroupHelper() {
+    return groupHelper;
   }
 
-  public NavigationHelperSB getNavigationHelperSB() {
-    return navigationHelperSB;
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
 }

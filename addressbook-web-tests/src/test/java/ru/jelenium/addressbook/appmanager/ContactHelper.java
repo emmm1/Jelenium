@@ -7,10 +7,10 @@ import ru.jelenium.addressbook.model.ContactData;
 /**
  * Created by mikhail.evseev on 04.03.2016.
  */
-public class ContactHelperSB extends HelperBase {
+public class ContactHelper extends HelperBase {
 //  private FirefoxDriver wd;
 
-  public ContactHelperSB(FirefoxDriver wd) {
+  public ContactHelper(FirefoxDriver wd) {
 //    this.wd = wd;
     super(wd);
   }

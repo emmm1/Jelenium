@@ -7,9 +7,9 @@ import ru.jelenium.addressbook.model.GroupData;
 /**
  * Created by mikhail.evseev on 04.03.2016.
  */
-public class GroupHelperSB extends HelperBase {
+public class GroupHelper extends HelperBase {
 
-  public GroupHelperSB(FirefoxDriver wd) {
+  public GroupHelper(FirefoxDriver wd) {
     super(wd);
   }
 

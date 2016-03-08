@@ -2,15 +2,15 @@ package ru.jelenium.addressbook.tests;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import ru.jelenium.addressbook.appmanager.AppMangerSB;
+import ru.jelenium.addressbook.appmanager.AppManger;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
  */
-public class SBBase {
+public class TestBase {
 
 
-  protected final AppMangerSB app = new AppMangerSB();
+  protected final AppManger app = new AppManger();
 
   @BeforeMethod
   public void setUp() throws Exception {

@@ -3,14 +3,13 @@ package ru.jelenium.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.GroupData;
 
-public class GroupCreationTest extends TestBase {
+public class GroupDeletionTest extends TestBase {
 
   @Test
   public void testGroupCreationSB() {
     app.getNavigationHelper().gotoGroupPage();
-    app.getGroupHelper().initNewGroup();
-    app.getGroupHelper().fillOutFields(new GroupData("Test group for Selenium Builder", "SB header", "SB footer"));
-    app.getGroupHelper().saveNewGroup();
+    app.getGroupHelper().chooseGroup(1);
+    app.getGroupHelper().deleteGroup();
     app.getNavigationHelper().gotoGroupPageThrAnswerLink();
   }
 

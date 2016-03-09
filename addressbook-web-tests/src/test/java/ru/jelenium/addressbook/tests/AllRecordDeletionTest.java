@@ -9,15 +9,16 @@ import org.testng.annotations.Test;
 
 
 
-public class FirstRecordDeletionTest extends TestBase {
+public class AllRecordDeletionTest extends TestBase {
 
   @Test
   public void firstRecordDelete() {
     app.getNavigationHelper().gotoHomePage();
     //передаем номер записи
-    app.getHomeNav().gotoDetails(1);
-    app.getNavigationHelper().gotoRecordEditorThrViewRecordPage();
-    app.getContactHelper().deleteRecord();
+    app.getHomeNav().selectAll();
+    app.getHomeNav().pushDelete();
+    app.getHomeNav().closeAlarm();
+
   }
 
 }

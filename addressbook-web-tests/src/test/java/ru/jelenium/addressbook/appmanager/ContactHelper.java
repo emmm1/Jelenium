@@ -3,6 +3,7 @@ package ru.jelenium.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.jelenium.addressbook.model.ContactData;
+import ru.jelenium.addressbook.model.DataData;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -29,8 +30,8 @@ public class ContactHelper extends HelperBase {
     type(By.name("email2"), cDate.getContactEData().getEmail2());
     type(By.name("email3"), cDate.getContactEData().getEmail3());
     type(By.name("homepage"), cDate.getContactEData().getHomepage());
-    chooseBirthday(5, 6, "1987");
-    chooseAnniversary(12, 11, "2011");
+    chooseBirthday(cDate.getBirthDate().getDay(), cDate.getBirthDate().getMonth(), cDate.getBirthDate().getYear());
+    chooseAnniversary(cDate.getAnnDate().getDay(), cDate.getAnnDate().getMonth(), cDate.getAnnDate().getYear());
     //choose(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
     type(By.name("address2"), cDate.getTextInfo().getAddress2());
     type(By.name("phone2"), cDate.getPhone().getHome2());
@@ -61,7 +62,7 @@ public class ContactHelper extends HelperBase {
     choose(By.xpath("//div[@id='content']/form/select[5]//option[" + groupNum + "]"));
   }
 
-  public void deleteGroup() {
+  public void deleteRecord() {
     click(By.xpath(".//*[@id='content']/form[2]/input[2]"));
   }
 

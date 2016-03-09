@@ -34,6 +34,11 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void pushEnterAddNewPage() {
-   click(By.xpath("//div[@id='content']/form/input[21]"));
+    click(By.xpath("//div[@id='content']/form/input[21]"));
   }
+
+  public void pushUpdateEditPage() {
+    click(By.xpath(".//*[@id='content']/form[1]/input[22]"));
+  }
+
 }

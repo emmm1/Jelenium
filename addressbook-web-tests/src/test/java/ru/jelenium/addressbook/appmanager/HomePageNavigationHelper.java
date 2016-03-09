@@ -28,4 +28,20 @@ public class HomePageNavigationHelper extends HelperBase {
     click(By.xpath(recordXpath));
   }
 
+  public void selectAll() {
+    click(By.xpath(".//*[@id='MassCB']"));
+  }
+
+  public void selectFirst() {
+    click(By.name("selected[]"));
+  }
+
+  public void pushDelete() {
+    click(By.xpath(".//*[@id='content']/form[2]/div[2]/input"));
+  }
+
+  public void closeAlarm() {
+    wd.switchTo().alert().accept();
+  }
+
 }

@@ -60,4 +60,5 @@ public class AppManger {
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
   }
+
 }

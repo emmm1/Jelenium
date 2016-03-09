@@ -16,6 +16,7 @@ public class AppManger {
   private GroupHelper groupHelper;
   private ContactHelper contactHelper;
   private AuthData authData;
+  private HomePageNavigationHelper homeNav;
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
     try {
@@ -34,6 +35,7 @@ public class AppManger {
     contactHelper = new ContactHelper(wd);
     groupHelper = new GroupHelper(wd);
     sessionHelper = new SessionHelper(wd);
+    homeNav = new HomePageNavigationHelper(wd);
     authData = new AuthData("admin", "secret");
     sessionHelper.login(authData.getLogin(), authData.getPass());
   }
@@ -42,6 +44,10 @@ public class AppManger {
   public void stop() {
     wd.quit();
   }
+
+  public HomePageNavigationHelper getHomeNav() {
+    return homeNav;
+  };
 
   public ContactHelper getContactHelper() {
     return contactHelper;

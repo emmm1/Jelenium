@@ -8,9 +8,12 @@ public class ContactData {
   private final String title;
   private final ContactTextInfo textInfo;
   private final ContactPhone phone;
-  private final ContactEData ContactEData;
+  private final ContactEData contactEData;
+  private final DataData birthDate;
+  private final DataData annDate;
 
-  public ContactData(String firstname, String middlename, String lastname, String nickname, String title, ContactTextInfo textInfo, ContactPhone phone, ContactEData ContactEData) {
+  public ContactData(String firstname, String middlename, String lastname, String nickname, String title, ContactTextInfo textInfo, ContactPhone phone, ContactEData contactEData, DataData birthDate,
+                     DataData annDate) {
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastname = lastname;
@@ -18,7 +21,9 @@ public class ContactData {
     this.title = title;
     this.textInfo = textInfo;
     this.phone = phone;
-    this.ContactEData = ContactEData;
+    this.contactEData = contactEData;
+    this.birthDate = birthDate;
+    this.annDate = annDate;
   }
 
   public String getFirstname() {
@@ -50,6 +55,14 @@ public class ContactData {
   }
 
   public ContactEData getContactEData() {
-    return ContactEData;
+    return contactEData;
+  }
+
+  public DataData getBirthDate() {
+    return birthDate;
+  }
+
+  public DataData getAnnDate() {
+    return annDate;
   }
 }

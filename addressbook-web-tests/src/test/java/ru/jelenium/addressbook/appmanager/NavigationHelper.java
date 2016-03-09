@@ -7,13 +7,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  * Created by mikhail.evseev on 04.03.2016.
  */
 public class NavigationHelper extends HelperBase {
-//  private FirefoxDriver wd;
 
   public NavigationHelper(FirefoxDriver wd) {
     super(wd);
-//    this.wd = wd;
   }
 
+  //Сюда всю основную навигацию и со страниц где будет только один элемент для тестирования
   public void gotoGroupPageThrAnswerLink() {
     click(By.linkText("group page"));
   }
@@ -26,4 +25,15 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
+  public void gotoHomePage() {
+    click(By.linkText("home"));
+  }
+
+  public void gotoRecordEditorThrViewRecordPage() {
+    click(By.name("modifiy"));
+  }
+
+  public void pushEnterAddNewPage() {
+   click(By.xpath("//div[@id='content']/form/input[21]"));
+  }
 }

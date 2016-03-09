@@ -8,13 +8,10 @@ import ru.jelenium.addressbook.model.ContactData;
  * Created by mikhail.evseev on 04.03.2016.
  */
 public class ContactHelper extends HelperBase {
-//  private FirefoxDriver wd;
 
   public ContactHelper(FirefoxDriver wd) {
-//    this.wd = wd;
     super(wd);
   }
-
 
   public void fillOutForm(ContactData cDate) {
     type(By.name("firstname"), cDate.getFirstname());
@@ -32,17 +29,40 @@ public class ContactHelper extends HelperBase {
     type(By.name("email2"), cDate.getContactEData().getEmail2());
     type(By.name("email3"), cDate.getContactEData().getEmail3());
     type(By.name("homepage"), cDate.getContactEData().getHomepage());
-    choose(By.xpath("//div[@id='content']/form/select[1]//option[1]"));
-    choose(By.xpath("//div[@id='content']/form/select[1]//option[15]"));
-    choose(By.xpath("//div[@id='content']/form/select[2]//option[8]"));
-    type(By.name("byear"), "1987");
-    choose(By.xpath("//div[@id='content']/form/select[3]//option[14]"));
-    choose(By.xpath("//div[@id='content']/form/select[4]//option[10]"));
-    type(By.name("ayear"), "2001");
-    choose(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
+    chooseBirthday(5, 6, "1987");
+    chooseAnniversary(12, 11, "2011");
+    //choose(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
     type(By.name("address2"), cDate.getTextInfo().getAddress2());
     type(By.name("phone2"), cDate.getPhone().getHome2());
     type(By.name("notes"), cDate.getTextInfo().getNotes());
-    click(By.xpath("//div[@id='content']/form/input[21]"));
   }
+
+  //как выучим работу с условиями - вынесу в общий метод и добавлю в параметры тип даты
+  public void chooseBirthday(Integer day, Integer month, String year) {
+    //оставить как было - первая позиция
+    day = day + 2;
+    month = month + 2;
+    choose(By.xpath("//div[@id='content']/form/select[1]//option[" + day + "]"));
+    choose(By.xpath("//div[@id='content']/form/select[2]//option[" + month + "]"));
+    type(By.name("byear"), year);
+  }
+
+  public void chooseAnniversary(Integer day, Integer month, String year) {
+    //оставить как было - первая позиция
+    day = day + 2;
+    month = month + 2;
+    choose(By.xpath("//div[@id='content']/form/select[3]//option[" + day + "]"));
+    choose(By.xpath("//div[@id='content']/form/select[4]//option[" + month + "]"));
+    type(By.name("ayear"), year);
+  }
+
+  public void chooseGroup(Integer groupNum) {
+    //xpath .//*[@id='content']/form/select[5]/option[3] - последний элемент - номер группы в выпадающем списке
+    choose(By.xpath("//div[@id='content']/form/select[5]//option[" + groupNum + "]"));
+  }
+
+  public void deleteGroup() {
+    click(By.xpath(".//*[@id='content']/form[2]/input[2]"));
+  }
+
 }

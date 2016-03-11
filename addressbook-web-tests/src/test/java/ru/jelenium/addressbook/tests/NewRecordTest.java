@@ -7,7 +7,7 @@ public class NewRecordTest extends TestBase {
 
 
   @Test
-  public void NewRecordSBtest() {
+  public void newRecordTest() {
 
     app.getNavigationHelper().gotoAddNewPage();
     app.getContactHelper().fillOutForm(new ContactData("Тест", "Тестович", "Тестовый", "ттт", "Дорогой",

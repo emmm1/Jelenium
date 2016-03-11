@@ -7,7 +7,7 @@ public class FirstRecordUpdateTest extends TestBase {
 
 
   @Test
-  public void NewRecordSBtest() {
+  public void updateRecordTest() {
 
     app.getNavigationHelper().gotoHomePage();
     app.getHomeNav().gotoEdit(2);

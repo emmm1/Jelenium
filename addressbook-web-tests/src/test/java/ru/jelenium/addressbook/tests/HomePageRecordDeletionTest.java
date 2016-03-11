@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class HomePageRecordDeletionTest extends TestBase {
 
   @Test
-  public void firstRecordDelete() {
+  public void homePageRecordDelete() {
     app.getNavigationHelper().gotoHomePage();
     //передаем номер записи
     app.getHomeNav().selectFirst();

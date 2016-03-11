@@ -6,7 +6,7 @@ import ru.jelenium.addressbook.model.GroupData;
 public class GroupUpdateTest extends TestBase {
 
   @Test
-  public void testGroupCreationSB() {
+  public void testGroupUpdateSB() {
     app.getNavigationHelper().gotoGroupPage();
     app.getGroupHelper().chooseGroup(1);
     app.getGroupHelper().editGroup();

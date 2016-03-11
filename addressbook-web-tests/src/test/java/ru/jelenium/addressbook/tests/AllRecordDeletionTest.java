@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class AllRecordDeletionTest extends TestBase {
 
   @Test
-  public void firstRecordDelete() {
+  public void allRecordDelete() {
     app.getNavigationHelper().gotoHomePage();
     //передаем номер записи
     app.getHomeNav().selectAll();

@@ -10,7 +10,7 @@ import ru.jelenium.addressbook.appmanager.AppManger;
 public class TestBase {
 
 
-  protected final AppManger app = new AppManger("Firefox");
+  protected final AppManger app = new AppManger("Chrome");
 
   @BeforeMethod
   public void setUp() throws Exception {

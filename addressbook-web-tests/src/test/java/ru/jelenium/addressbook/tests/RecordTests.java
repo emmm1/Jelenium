@@ -11,12 +11,12 @@ public class RecordTests extends TestBase {
 
     app.getNavigationHelper().gotoAddNewPage();
     app.getContactHelper().fillOutForm(new ContactData("Тест", "Тестович", "Тестовый", "ттт", "Дорогой",
-            new ContactTextInfo("Тест продакшн", "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13", "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
+            1, new ContactTextInfo("Тест продакшн", "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13", "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
                     "Помрешь, пока заполнишь"),
             new ContactPhone("465464611263112", "+1245 54 545 68595489", "3546131564631", "+132(464) 54651 1564651 31", "2345464"),
             new ContactEData("test.testowy@testPro.com", "test.testowy@gmail.com", "testy_1987@mail.ru", "http://localhost/addressbook"),
-            new DataData(12, 5, "1987"), new DataData(25, 11, "2011")));
-    app.getContactHelper().chooseGroup(2);
+            new DataData(12, 5, "1987"), new DataData(25, 11, "2011")), true);
+    //app.getContactHelper().chooseGroup(2);
     app.getNavigationHelper().pushEnterAddNewPage();
 
   }
@@ -26,12 +26,12 @@ public class RecordTests extends TestBase {
 
     app.getNavigationHelper().gotoHomePage();
     app.getHomeNav().gotoEdit(2);
-    app.getContactHelper().fillOutForm(new ContactData("UТест", "UТестович", "UТестовый", "Uттт", "UДорогой",
+    app.getContactHelper().fillOutForm(new ContactData("UТест", "UТестович", "UТестовый", "Uттт", "UДорогой", null,
             new ContactTextInfo("UТест продакшн", "UРФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13", "UТестовый район, с. Тестовое, 1я тестовая улица, д. 23",
                     "UПомрешь, пока заполнишь"),
             new ContactPhone("++465464611263112", "++1245 54 545 68595489", "++3546131564631", "++132(464) 54651 1564651 31", "++2345464"),
             new ContactEData("Utest.testowy@testPro.com", "Utest.testowy@gmail.com", "Utesty_1987@mail.ru", "Uhttp://localhost/addressbook"),
-            new DataData(9, 3, "2016"), new DataData(9, 3, "2016")));
+            new DataData(9, 3, "2016"), new DataData(9, 3, "2016")), true);
     app.getNavigationHelper().pushUpdateEditPage();
 
   }

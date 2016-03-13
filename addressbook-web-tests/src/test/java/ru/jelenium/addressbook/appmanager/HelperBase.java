@@ -33,8 +33,10 @@ public class HelperBase {
   protected void type(By locator, String text) {
     click(locator);
     if (text != null) {
-      wd.findElement(locator).clear();
-      wd.findElement(locator).sendKeys(text);
+      if (!wd.findElement(locator).getAttribute("value").equals(text)) {
+        wd.findElement(locator).clear();
+        wd.findElement(locator).sendKeys(text);
+      }
     }
   }
 }

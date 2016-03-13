@@ -10,7 +10,6 @@ public class NewRecordTest extends TestBase {
   public void newRecordTest() {
 
     app.getNavigationHelper().gotoAddNewPage();
-    app.getNavigationHelper().gotoAddNewPage();
     app.getContactHelper().fillOutForm(new ContactData("Тест", "Тестович", "Тестовый", "ттт", "Дорогой", 1,
             new ContactTextInfo("Тест продакшн", "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13", "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
                     "Помрешь, пока заполнишь"),

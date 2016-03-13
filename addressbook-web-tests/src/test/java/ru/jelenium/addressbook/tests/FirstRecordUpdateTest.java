@@ -10,6 +10,7 @@ public class FirstRecordUpdateTest extends TestBase {
   public void updateRecordTest() {
 
     app.getNavigationHelper().gotoHomePage();
+    app.getNavigationHelper().gotoHomePage();
     app.getHomeNav().gotoEdit(2);
     app.getContactHelper().fillOutForm(new ContactData("UТест", "UТестович", "UТестовый", "Uttt", "UДорогой",
                     null, new ContactTextInfo("UТест продакшн", "UРФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13", "UТестовый район, с. Тестовое, 1я тестовая улица, д. 23",

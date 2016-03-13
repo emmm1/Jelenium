@@ -18,16 +18,15 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoGroupPage() {
-    if (isElementHere(By.tagName("h1")) && isElementHere(By.name("new")) && wd.findElement(By.tagName("h1")).getText().equals("Groups")) {
-      /* */
+    if (isElementHere(By.cssSelector("div#content h1")) && isElementHere(By.name("new")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Groups")) {
       return;
     }
-    String temp = wd.findElement(By.tagName("h1")).getText();
     click(By.linkText("groups"));
   }
 
   public void gotoAddNewPage() {
-    if (isElementHere(By.tagName("h1")) && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
+    if (isElementHere(By.cssSelector("div#content h1")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
+        && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter")) {
       // && isElementHere(By.name("Submit"))
       return;
     }

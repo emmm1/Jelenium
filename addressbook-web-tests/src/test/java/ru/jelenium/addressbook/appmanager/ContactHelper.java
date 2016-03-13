@@ -2,7 +2,7 @@ package ru.jelenium.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ru.jelenium.addressbook.model.ContactData;
+import ru.jelenium.addressbook.model.*;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -31,9 +31,9 @@ public class ContactHelper extends HelperBase {
     type(By.name("homepage"), cDate.getContactEData().getHomepage());
     chooseBirthday(cDate.getBirthDate().getDay(), cDate.getBirthDate().getMonth(), cDate.getBirthDate().getYear());
     chooseAnniversary(cDate.getAnnDate().getDay(), cDate.getAnnDate().getMonth(), cDate.getAnnDate().getYear());
-    if(!isUpdate) {
+    if (!isUpdate) {
       if (cDate.getGroupNum() != null) {
-        choose(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
+        chooseGroup(cDate.getGroupNum());
       }
     }
     type(By.name("address2"), cDate.getTextInfo().getAddress2());
@@ -67,6 +67,47 @@ public class ContactHelper extends HelperBase {
 
   public void deleteRecord() {
     click(By.xpath(".//*[@id='content']/form[2]/input[2]"));
+  }
+
+  public void createRecord(ContactData cDate, boolean isUpdate) {
+    gotoAddNewPage();
+    fillOutForm(cDate, isUpdate);
+    pushEnterAddNewPage();
+    gotoHomePage();
+  }
+
+
+
+  public void gotoAddNewPage() {
+    if (isElementHere(By.cssSelector("div#content h1")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
+            && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter")) {
+      // && isElementHere(By.name("Submit"))
+      return;
+    }
+    click(By.linkText("add new"));
+  }
+
+  public void pushEnterAddNewPage() {
+    click(By.xpath("//div[@id='content']/form/input[21]"));
+  }
+
+  public void createWhenNoContact(ContactData cDate, boolean isUpdate) {
+    if (!isThereAContact()) {
+      createRecord(cDate, isUpdate);
+    }
+  }
+
+  private boolean isThereAContact() {
+    return isElementHere(By.name("selected[]"));
+  }
+
+
+  public void pushUpdateEditPage() {
+    click(By.xpath(".//*[@id='content']/form[1]/input[22]"));
+  }
+
+  public void gotoRecordEditorThrViewRecordPage() {
+    click(By.name("modifiy"));
   }
 
 }

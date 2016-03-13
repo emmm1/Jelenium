@@ -22,32 +22,5 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("groups"));
   }
 
-  public void gotoAddNewPage() {
-    if (isElementHere(By.cssSelector("div#content h1")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
-        && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter")) {
-      // && isElementHere(By.name("Submit"))
-      return;
-    }
-    click(By.linkText("add new"));
-  }
-
-  public void gotoHomePage() {
-    if (isElementHere(By.id("maintable"))) {
-      return;
-    }
-    click(By.linkText("home"));
-  }
-
-  public void gotoRecordEditorThrViewRecordPage() {
-    click(By.name("modifiy"));
-  }
-
-  public void pushEnterAddNewPage() {
-    click(By.xpath("//div[@id='content']/form/input[21]"));
-  }
-
-  public void pushUpdateEditPage() {
-    click(By.xpath(".//*[@id='content']/form[1]/input[22]"));
-  }
 
 }

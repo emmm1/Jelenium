@@ -2,7 +2,6 @@ package ru.jelenium.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -19,14 +18,26 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoGroupPage() {
+    if (isElementHere(By.tagName("h1")) && isElementHere(By.name("new")) && wd.findElement(By.tagName("h1")).getText().equals("Groups")) {
+      /* */
+      return;
+    }
+    String temp = wd.findElement(By.tagName("h1")).getText();
     click(By.linkText("groups"));
   }
 
   public void gotoAddNewPage() {
+    if (isElementHere(By.tagName("h1")) && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
+      // && isElementHere(By.name("Submit"))
+      return;
+    }
     click(By.linkText("add new"));
   }
 
   public void gotoHomePage() {
+    if (isElementHere(By.id("maintable"))) {
+      return;
+    }
     click(By.linkText("home"));
   }
 

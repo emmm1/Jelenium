@@ -18,7 +18,7 @@ public class FirstRecordUpdateTest extends TestBase {
             new ContactEData("Utest.testowy@testPro.com", "Utest.testowy@gmail.com", "Utesty_1987@mail.ru", "Uhttp://localhost/addressbook"),
             new DataData(9, 3, "2016"), new DataData(9, 3, "2016")),
             true);
-    //app.getNavigationHelper().pushUpdateEditPage();
+    app.getNavigationHelper().pushUpdateEditPage();
 
   }
 

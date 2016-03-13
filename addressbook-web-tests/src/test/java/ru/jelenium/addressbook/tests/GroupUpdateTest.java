@@ -8,6 +8,7 @@ public class GroupUpdateTest extends TestBase {
   @Test
   public void testGroupUpdateSB() {
     app.getNavigationHelper().gotoGroupPage();
+    app.getNavigationHelper().gotoGroupPage();
     app.getGroupHelper().chooseGroup(1);
     app.getGroupHelper().editGroup();
     app.getGroupHelper().fillOutFields(new GroupData("UTest group for Selenium Builder", "USB header", "USB footer"));

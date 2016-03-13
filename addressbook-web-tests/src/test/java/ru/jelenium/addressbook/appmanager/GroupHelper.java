@@ -2,7 +2,6 @@ package ru.jelenium.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.jelenium.addressbook.model.GroupData;
 
 /**
@@ -44,4 +43,24 @@ public class GroupHelper extends HelperBase {
     click(By.name("edit"));
   }
 
+  public void gotoGroupPageThrAnswerLink() {
+    click(By.linkText("group page"));
+  }
+
+  public void createGroup(GroupData groupData) {
+    initNewGroup();
+    fillOutFields(groupData);
+    saveNewGroup();
+    gotoGroupPageThrAnswerLink();
+  }
+
+  public void createWhenNoGroup(GroupData groupData) {
+    if (!isThereAGroup()) {
+      createGroup(groupData);
+    }
+  }
+
+  public boolean isThereAGroup() {
+    return isElementHere(By.name("selected[]"));
+  }
 }

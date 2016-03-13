@@ -1,15 +1,23 @@
 package ru.jelenium.addressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.jelenium.addressbook.model.GroupData;
 
 public class GroupDeletionTest extends TestBase {
 
   @Test
-  public void testGroupDeletionSB() {
+  public void testGroupDeletion() {
     app.getNavigationHelper().gotoGroupPage();
+    app.getGroupHelper().createWhenNoGroup(new GroupData("Test group for delete", "For delete header", "For delete footer"));
     app.getGroupHelper().chooseGroup(1);
     app.getGroupHelper().deleteGroup();
-    app.getNavigationHelper().gotoGroupPageThrAnswerLink();
+    app.getGroupHelper().gotoGroupPageThrAnswerLink();
   }
 
+/*  private void createWhenNoGroup() {
+    if (!app.getGroupHelper().isThereAGroup()) {
+      app.getGroupHelper().createGroup(new GroupData("Test group for delete", "For delete header", "For delete footer"));
+    }
+  }
+*/
 }

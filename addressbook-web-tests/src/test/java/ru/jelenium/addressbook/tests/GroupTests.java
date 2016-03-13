@@ -11,7 +11,7 @@ public class GroupTests extends TestBase {
     app.getGroupHelper().initNewGroup();
     app.getGroupHelper().fillOutFields(new GroupData("Test group for Selenium Builder", "SB header", "SB footer"));
     app.getGroupHelper().saveNewGroup();
-    app.getNavigationHelper().gotoGroupPageThrAnswerLink();
+    app.getGroupHelper().gotoGroupPageThrAnswerLink();
   }
 
   @Test
@@ -21,7 +21,7 @@ public class GroupTests extends TestBase {
     app.getGroupHelper().editGroup();
     app.getGroupHelper().fillOutFields(new GroupData("UTest group for Selenium Builder", "USB header", "USB footer"));
     app.getGroupHelper().saveUpdatedGroup();
-    app.getNavigationHelper().gotoGroupPageThrAnswerLink();
+    app.getGroupHelper().gotoGroupPageThrAnswerLink();
   }
 
   @Test
@@ -29,6 +29,6 @@ public class GroupTests extends TestBase {
     app.getNavigationHelper().gotoGroupPage();
     app.getGroupHelper().chooseGroup(1);
     app.getGroupHelper().deleteGroup();
-    app.getNavigationHelper().gotoGroupPageThrAnswerLink();
+    app.getGroupHelper().gotoGroupPageThrAnswerLink();
   }
 }

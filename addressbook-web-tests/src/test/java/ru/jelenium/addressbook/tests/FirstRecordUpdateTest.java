@@ -11,7 +11,7 @@ public class FirstRecordUpdateTest extends TestBase {
 
     app.getNavigationHelper().gotoHomePage();
     app.getHomeNav().gotoEdit(2);
-    app.getContactHelper().fillOutForm(new ContactData("UТест", "UТестович", "UТестовый", "Uттт", "UДорогой",
+    app.getContactHelper().fillOutForm(new ContactData("UТест", "UТестович", "UТестовый", "Uttt", "UДорогой",
             new ContactTextInfo("UТест продакшн", "UРФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13", "UТестовый район, с. Тестовое, 1я тестовая улица, д. 23",
                     "UПомрешь, пока заполнишь"),
             new ContactPhone("++465464611263112", "++1245 54 545 68595489", "++3546131564631", "++132(464) 54651 1564651 31", "++2345464"),

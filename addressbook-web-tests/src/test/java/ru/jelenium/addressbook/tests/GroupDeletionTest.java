@@ -13,11 +13,4 @@ public class GroupDeletionTest extends TestBase {
     app.getGroupHelper().deleteGroup();
     app.getGroupHelper().gotoGroupPageThrAnswerLink();
   }
-
-/*  private void createWhenNoGroup() {
-    if (!app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("Test group for delete", "For delete header", "For delete footer"));
-    }
-  }
-*/
 }

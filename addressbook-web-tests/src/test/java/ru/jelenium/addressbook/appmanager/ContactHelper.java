@@ -73,7 +73,6 @@ public class ContactHelper extends HelperBase {
     gotoAddNewPage();
     fillOutForm(cDate, isUpdate);
     pushEnterAddNewPage();
-    gotoHomePage();
   }
 
 
@@ -94,6 +93,7 @@ public class ContactHelper extends HelperBase {
   public void createWhenNoContact(ContactData cDate, boolean isUpdate) {
     if (!isThereAContact()) {
       createRecord(cDate, isUpdate);
+      gotoHomePage();
     }
   }
 

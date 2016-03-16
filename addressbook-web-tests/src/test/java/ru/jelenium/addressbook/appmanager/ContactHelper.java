@@ -29,8 +29,8 @@ public class ContactHelper extends HelperBase {
     type(By.name("email2"), cDate.getContactEData().getEmail2());
     type(By.name("email3"), cDate.getContactEData().getEmail3());
     type(By.name("homepage"), cDate.getContactEData().getHomepage());
-    chooseBirthday(cDate.getBirthDate().getDay(), cDate.getBirthDate().getMonth(), cDate.getBirthDate().getYear());
-    chooseAnniversary(cDate.getAnnDate().getDay(), cDate.getAnnDate().getMonth(), cDate.getAnnDate().getYear());
+    chooseDate(cDate.getBirthDate().getDay(), cDate.getBirthDate().getMonth(), cDate.getBirthDate().getYear(), true);
+    chooseDate(cDate.getAnnDate().getDay(), cDate.getAnnDate().getMonth(), cDate.getAnnDate().getYear(), false);
     if (!isUpdate) {
       if (cDate.getGroupNum() != null) {
         chooseGroup(cDate.getGroupNum());
@@ -41,24 +41,32 @@ public class ContactHelper extends HelperBase {
     type(By.name("notes"), cDate.getTextInfo().getNotes());
   }
 
-  //как выучим работу с условиями - вынесу в общий метод и добавлю в параметры тип даты
-  public void chooseBirthday(Integer day, Integer month, String year) {
+
+  public void chooseDate(Integer day, Integer month, String year, Boolean isBirthday) {
     //оставить как было - первая позиция
-    day = day + 2;
-    month = month + 2;
-    choose(By.xpath("//div[@id='content']/form/select[1]//option[" + day + "]"));
-    choose(By.xpath("//div[@id='content']/form/select[2]//option[" + month + "]"));
-    type(By.name("byear"), year);
+    Integer sel;
+    String yearLocator;
+    if (isBirthday) {
+      sel = 1;
+      yearLocator = "byear";
+    } else {
+      sel = 3;
+      yearLocator = "ayear";
+    }
+
+    if (day != null) {
+      day = day + 2;
+      choose(By.xpath("//div[@id='content']/form/select[" + sel + "]//option[" + day + "]"));
+    }
+
+    if (month != null) {
+      month = month + 2;
+      choose(By.xpath("//div[@id='content']/form/select[" + (sel + 1) + "]//option[" + month + "]"));
+    }
+
+    type(By.name(yearLocator), year);
   }
 
-  public void chooseAnniversary(Integer day, Integer month, String year) {
-    //оставить как было - первая позиция
-    day = day + 2;
-    month = month + 2;
-    choose(By.xpath("//div[@id='content']/form/select[3]//option[" + day + "]"));
-    choose(By.xpath("//div[@id='content']/form/select[4]//option[" + month + "]"));
-    type(By.name("ayear"), year);
-  }
 
   public void chooseGroup(Integer groupNum) {
     //xpath .//*[@id='content']/form/select[5]/option[3] - последний элемент - номер группы в выпадающем списке
@@ -75,8 +83,6 @@ public class ContactHelper extends HelperBase {
     pushEnterAddNewPage();
   }
 
-
-
   public void gotoAddNewPage() {
     if (isElementHere(By.cssSelector("div#content h1")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
             && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter")) {
@@ -90,9 +96,9 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void createWhenNoContact(ContactData cDate, boolean isUpdate) {
+  public void createWhenNoContact(ContactData cDate) {
     if (!isThereAContact()) {
-      createRecord(cDate, isUpdate);
+      createRecord(cDate, false);
       gotoHomePage();
     }
   }

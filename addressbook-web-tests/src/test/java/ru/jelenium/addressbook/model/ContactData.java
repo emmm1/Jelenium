@@ -16,17 +16,40 @@ public class ContactData {
   public ContactData(String firstname, String middlename, String lastname, String nickname, String title, Integer groupNum,
                      ContactTextInfo textInfo, ContactPhone phone, ContactEData contactEData, DataData birthDate,
                      DataData annDate) {
+    //Сделал отключения ненужных блоков информации
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastname = lastname;
     this.nickname = nickname;
     this.title = title;
-    this.groupNum = groupNum;
-    this.textInfo = textInfo;
-    this.phone = phone;
-    this.contactEData = contactEData;
-    this.birthDate = birthDate;
-    this.annDate = annDate;
+    this.groupNum = (Integer) notNull(groupNum, null);
+    this.textInfo = (ContactTextInfo) notNull(textInfo, new ContactTextInfo(null,null,null,null));
+    this.phone = (ContactPhone) notNull(phone, new ContactPhone(null,null,null,null,null));
+    this.contactEData = (ContactEData) notNull(contactEData, new ContactEData(null,null,null,null));
+    this.birthDate = (DataData) notNull(birthDate, new DataData(null, null, null));
+    this.annDate = (DataData) notNull(annDate, new DataData(null, null, null));
+  }
+
+  public ContactData(String firstname, String lastname){
+    //Минимальный конструктор
+    this.firstname = firstname;
+    this.middlename = null;
+    this.lastname = lastname;
+    this.nickname = null;
+    this.title = null;
+    this.groupNum = null;
+    this.textInfo = new ContactTextInfo(null,null,null,null);
+    this.phone = new ContactPhone(null,null,null,null,null);
+    this.contactEData = new ContactEData(null,null,null,null);
+    this.birthDate = new DataData(null, null, null);
+    this.annDate = new DataData(null, null, null);
+    }
+
+  public Object notNull(Object toCheckObj, Object defObj) {
+    if (toCheckObj != null) {
+      return toCheckObj;
+    }
+    return defObj;
   }
 
   public String getFirstname() {

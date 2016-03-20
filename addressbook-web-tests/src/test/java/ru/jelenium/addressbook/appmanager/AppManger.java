@@ -4,6 +4,7 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import ru.jelenium.addressbook.model.AuthData;
 
@@ -44,6 +45,8 @@ public class AppManger {
       wd = new ChromeDriver();
     } else if (browser.equals("IE")){
       wd = new InternetExplorerDriver();
+    } else if (browser.equals("HU")) {
+      wd = new HtmlUnitDriver();
     }
 
 

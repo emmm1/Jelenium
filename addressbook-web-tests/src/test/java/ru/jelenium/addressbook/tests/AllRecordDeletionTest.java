@@ -15,7 +15,7 @@ public class AllRecordDeletionTest extends TestBase {
   @Test
   public void allRecordDelete() {
     app.getNavigationHelper().gotoHomePage();
-    app.getContactHelper().createWhenNoContact(new ContactData("ForAllRecDelТест", "ForAllRecDelТестовый"));
+    app.getContactHelper().createWhenNoContact(new ContactData("ForAllRecDelТест", "ForAllRecDel" + unicDate));
     app.getHomeNav().selectAll();
     app.getHomeNav().pushDelete();
     app.getHomeNav().closeAlarm();

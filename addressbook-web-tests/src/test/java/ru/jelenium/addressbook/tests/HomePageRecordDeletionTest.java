@@ -16,7 +16,7 @@ public class HomePageRecordDeletionTest extends TestBase {
   public void homePageRecordDelete() {
     app.getNavigationHelper().gotoHomePage();
     //передаем номер записи
-    app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "ForHomePageDeleteТестовый"));
+    app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
     app.getHomeNav().selectFirst();
     app.getHomeNav().pushDelete();
     app.getHomeNav().closeAlarm();

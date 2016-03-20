@@ -2,7 +2,11 @@ package ru.jelenium.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.jelenium.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -32,6 +36,8 @@ public class GroupHelper extends HelperBase {
   }
 
   public void chooseGroup(Integer groupNum) {
+    //номерм чекбокса для такого адреса - 1 - первый элесент. Чтобы при вызыве 0 был первым увеличиваю значение на 1
+    groupNum++;
     click(By.xpath(".//*[@id='content']/form/span["+ groupNum + "]/input"));
   }
 
@@ -62,5 +68,18 @@ public class GroupHelper extends HelperBase {
 
   public boolean isThereAGroup() {
     return isElementHere(By.name("selected[]"));
+  }
+
+  public Integer groupQty() {
+    return wd.findElements(By.className("group")).size();
+  }
+
+  public List<GroupData> getGroupList() {
+    List <GroupData> groupList = new ArrayList<GroupData>();
+    List <WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    for (WebElement element : elements) {
+      groupList.add(new GroupData(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")), element.getText(), null, null));
+    }
+    return groupList;
   }
 }

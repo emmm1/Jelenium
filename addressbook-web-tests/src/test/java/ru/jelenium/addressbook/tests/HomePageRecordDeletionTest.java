@@ -14,16 +14,15 @@ public class HomePageRecordDeletionTest extends TestBase {
 
   @Test
   public void homePageRecordDelete() {
-    if (!browserType.equals("HU")) {
-      app.getNavigationHelper().gotoHomePage();
-      app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
-      app.getHomeNav().selectFirst();
-      app.getHomeNav().pushDelete();
-      app.getHomeNav().closeAlarm();
-      app.getNavigationHelper().gotoHomePage();
-    } else {
+    if (browserType.equals("HU")) {
       throw new Error("такой тип броузера использровать нельзя");
-    }
+      }
+    app.getNavigationHelper().gotoHomePage();
+    app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
+    app.getHomeNav().selectFirst();
+    app.getHomeNav().pushDelete();
+    app.getHomeNav().closeAlarm();
+    app.getNavigationHelper().gotoHomePage();
   }
 
 }

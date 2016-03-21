@@ -12,13 +12,14 @@ public class GroupDeletionTest extends TestBase {
     app.getNavigationHelper().gotoGroupPage();
     app.getGroupHelper().createWhenNoGroup(new GroupData("Create 2del" + unicDate, "For delete header", "For delete footer"));
     //получаем список групп
-    //посмотреть как реализован выбор группы и сравниить с моим и переделать, чтобы нумерация первого элемента была 0
-
     app.getGroupHelper().chooseGroup(1);
     app.getGroupHelper().deleteGroup();
     app.getGroupHelper().gotoGroupPageThrAnswerLink();
-    //удаляем из списка групп нужную
-
+    //создаем список после
+    //сравниваем длины списокв
+    //находим группу которая есть в до и нет в после
+    //удаляем из списка групп найденную
+    //сортируем списки
     //сравниваем списки групп
 
   }

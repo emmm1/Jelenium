@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import ru.jelenium.addressbook.model.AuthData;
 
 import java.util.concurrent.TimeUnit;
@@ -29,7 +30,7 @@ public class AppManger {
     this.browser = browser;
   }
 
-  public static boolean isAlertPresent(FirefoxDriver wd) {
+  public static boolean isAlertPresent(WebDriver wd) {
     try {
       wd.switchTo().alert();
       return true;
@@ -48,6 +49,7 @@ public class AppManger {
     } else if (browser.equals("HU")) {
       wd = new HtmlUnitDriver();
     }
+
 
 
     wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);

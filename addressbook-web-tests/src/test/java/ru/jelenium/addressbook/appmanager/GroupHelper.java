@@ -7,6 +7,7 @@ import ru.jelenium.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -75,11 +76,14 @@ public class GroupHelper extends HelperBase {
   }
 
   public List<GroupData> getGroupList() {
-    List <GroupData> groupList = new ArrayList<GroupData>();
+    List <GroupData> groupList = new ArrayList<>();
     List <WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements) {
       groupList.add(new GroupData(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")), element.getText(), null, null));
     }
+
+    // Красиво, но неправильно (((
+    // elements.stream().forEach(e -> groupList.add(new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)));
     return groupList;
   }
 }

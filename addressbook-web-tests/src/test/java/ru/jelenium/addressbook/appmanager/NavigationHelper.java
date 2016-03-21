@@ -12,10 +12,7 @@ public class NavigationHelper extends HelperBase {
     super(wd);
   }
 
-  //Сюда всю основную навигацию и со страниц где будет только один элемент для тестирования
-
-
-  public void gotoGroupPage() {
+   public void gotoGroupPage() {
     if (isElementHere(By.cssSelector("div#content h1")) && isElementHere(By.name("new")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Groups")) {
       return;
     }

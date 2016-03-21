@@ -13,7 +13,7 @@ import java.util.Date;
 public class TestBase {
 
   //Чтобы лучше контролировать результат работы HTMLUnit
-  public final String browserType = "HU";
+  public final String browserType = "Firefox";
   protected AppManger app = new AppManger(browserType);
 
   // сделать тестовые записи уникальными

@@ -23,8 +23,7 @@ public class GroupUpdateTest extends TestBase {
     app.getGroupHelper().gotoGroupPageThrAnswerLink();
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size());
-    before.remove(before.indexOf(app.getGroupHelper().getDiff(after, before)));
-    before.add(group);
+    before.set((before.indexOf(app.getGroupHelper().getDiff(after, before))),group);
     before.sort(app.getGroupHelper().getById());
     after.sort(app.getGroupHelper().getById());
     Assert.assertEquals(after, before);

@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.jelenium.addressbook.model.GroupData;
-
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.stream.Collectors;
+
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -34,12 +34,6 @@ public class GroupHelper extends HelperBase {
 
   public void initNewGroup() {
     click(By.name("new"));
-  }
-
-  public void chooseGroup(Integer groupNum) {
-    //номерм чекбокса для такого адреса - 1 - первый элесент. Чтобы при вызыве 0 был первым увеличиваю значение на 1
-    groupNum++;
-    click(By.xpath(".//*[@id='content']/form/span["+ groupNum + "]/input"));
   }
 
   public void deleteGroup() {
@@ -71,19 +65,44 @@ public class GroupHelper extends HelperBase {
     return isElementHere(By.name("selected[]"));
   }
 
-  public Integer groupQty() {
-    return wd.findElements(By.className("group")).size();
-  }
-
   public List<GroupData> getGroupList() {
-    List <GroupData> groupList = new ArrayList<>();
-    List <WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-    for (WebElement element : elements) {
+    //List<GroupData> groupList = new ArrayList<>();
+    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    /* for (WebElement element : elements) {
       groupList.add(new GroupData(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")), element.getText(), null, null));
-    }
+    } */
+    // Красиво, но типа нечестно (((
+    //elements.stream().forEach(e -> groupList.add(new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)));
 
-    // Красиво, но неправильно (((
-    // elements.stream().forEach(e -> groupList.add(new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)));
+
+    //Function<? super WebElement,? extends GroupData> toGroupData = e -> (new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null));
+    //Stream<GroupData> streamGroups = elements.stream().map(e -> (new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)));
+    List<GroupData> groupList = elements.stream().map(e -> (new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)))
+            .collect(Collectors.toList());
+
     return groupList;
   }
+
+  public void chooseGroup(Integer groupNum) {
+    //номер чекбокса для такого адреса - 1 - первый элемент. Чтобы при вызыве 0 был первым увеличиваю значение на 1
+    //groupNum++;
+    //click(By.xpath(".//*[@id='content']/form/span[" + groupNum + "]/input"));
+    wd.findElements(By.name("selected[]")).get(groupNum).click();
+  }
+
+  public int getGroupId(int groupNum) {
+    groupNum++;
+    return Integer.parseInt(wd.findElement(By.xpath(".//*[@id='content']/form/span[" + groupNum + "]/input")).getAttribute("value"));
+  }
+
+  public GroupData getDiff(List<GroupData> small, List<GroupData> full) {
+    return full.stream().filter((g) -> !small.contains(g)).findFirst().get();
+  }
+
+  Comparator<? super GroupData> ById = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+
+  public Comparator<? super GroupData> getById() {
+    return ById;
+  }
+
 }

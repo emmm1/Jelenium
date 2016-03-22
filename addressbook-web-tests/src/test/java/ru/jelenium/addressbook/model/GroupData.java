@@ -1,7 +1,6 @@
 package ru.jelenium.addressbook.model;
 
 
-
 public class GroupData {
   private int id;
   private final String name;
@@ -26,6 +25,18 @@ public class GroupData {
     return name;
   }
 
+  public String getHeader() {
+    return header;
+  }
+
+  public String getFooter() {
+    return footer;
+  }
+
+  public int getId() {
+    return id;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -44,20 +55,6 @@ public class GroupData {
     result = 31 * result + (name != null ? name.hashCode() : 0);
     return result;
   }
-
-  public String getHeader() {
-    return header;
-  }
-
-  public String getFooter() {
-    return footer;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-
   @Override
   public String toString() {
     return "GroupData{" +

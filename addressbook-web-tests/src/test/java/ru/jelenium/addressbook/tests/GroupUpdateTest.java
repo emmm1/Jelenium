@@ -1,7 +1,10 @@
 package ru.jelenium.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.GroupData;
+
+import java.util.List;
 
 public class GroupUpdateTest extends TestBase {
 
@@ -9,16 +12,22 @@ public class GroupUpdateTest extends TestBase {
   public void testGroupUpdate() {
     app.getNavigationHelper().gotoGroupPage();
     app.getGroupHelper().createWhenNoGroup(new GroupData("Create 2up" + unicDate, "For update header", "For update footer"));
-    //создаем список групп до
-    app.getGroupHelper().chooseGroup(1);
+    List<GroupData> before = app.getGroupHelper().getGroupList();
+    int groupNum = before.size() - 1;
+    app.getGroupHelper().chooseGroup(groupNum);
+    int groupId = app.getGroupHelper().getGroupId(groupNum);
+    GroupData group = new GroupData(groupId, "Updated test group, browser type" + unicDate, "USB header", "USB footer");
     app.getGroupHelper().editGroup();
-    app.getGroupHelper().fillOutFields(new GroupData("Updated test group, browser type" + unicDate, "USB header", "USB footer"));
+    app.getGroupHelper().fillOutFields(group);
     app.getGroupHelper().saveUpdatedGroup();
     app.getGroupHelper().gotoGroupPageThrAnswerLink();
-    //создаем список после
-    //сравниваем длину
-    //сотируем списки
-    //сравниваем списки
+    List<GroupData> after = app.getGroupHelper().getGroupList();
+    Assert.assertEquals(after.size(), before.size());
+    before.remove(before.indexOf(app.getGroupHelper().getDiff(after, before)));
+    before.add(group);
+    before.sort(app.getGroupHelper().getById());
+    after.sort(app.getGroupHelper().getById());
+    Assert.assertEquals(after, before);
   }
 
 }

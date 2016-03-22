@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.jelenium.addressbook.model.GroupData;
+
+import java.util.List;
 
 /**
  * Created by Idea on 08.03.2016.
@@ -56,4 +59,5 @@ public class HelperBase {
     }
     click(By.linkText("home"));
   }
+
 }

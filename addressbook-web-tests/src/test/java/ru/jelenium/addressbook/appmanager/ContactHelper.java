@@ -2,7 +2,11 @@ package ru.jelenium.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.jelenium.addressbook.model.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -116,4 +120,13 @@ public class ContactHelper extends HelperBase {
     click(By.name("modifiy"));
   }
 
+  public Object getContacts() {
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+    List<ContactData> contacts = new ArrayList<>();
+    List<String> tmp = new ArrayList<>();
+    for (WebElement el : elements){
+      tmp = el.findElement
+    }
+    return contacts;
+  }
 }

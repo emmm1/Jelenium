@@ -1,7 +1,12 @@
 package ru.jelenium.addressbook.tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.*;
+
+import java.util.List;
 
 public class NewRecordTest extends TestBase {
 
@@ -11,7 +16,7 @@ public class NewRecordTest extends TestBase {
 
     app.getNavigationHelper().gotoHomePage();
     //получаем список до
-    app.getContactHelper().getContacts();
+    List<ContactData> before =  app.getContactHelper().getContacts();
     app.getContactHelper().createRecord(new ContactData("Тест", "Тестович", "Тестовый"  + unicDate, "ттт", "Дорогой", 1,
             new ContactTextInfo("Тест продакшн", "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13", "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
                     "Помрешь, пока заполнишь" + unicDate),
@@ -20,10 +25,16 @@ public class NewRecordTest extends TestBase {
             new DataData(12, 5, "1987"), new DataData(25, 11, "2011")), false);
     app.getNavigationHelper().gotoHomePage();
     //получаем список после
+    List<ContactData> after =  app.getContactHelper().getContacts();
     //сравиваем длины
+    Assert.assertEquals(before.size(), after.size()-1);
     //добавляем в список до отсутвующее
     //сортируем списки
     //сравниваем
+
+
+
+
   }
 
 }

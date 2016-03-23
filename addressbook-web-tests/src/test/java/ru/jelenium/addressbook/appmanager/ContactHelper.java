@@ -120,12 +120,11 @@ public class ContactHelper extends HelperBase {
     click(By.name("modifiy"));
   }
 
-  public Object getContacts() {
-    List<WebElement> elements = wd.findElements(By.name("entry"));
+  public List<ContactData> getContacts() {
     List<ContactData> contacts = new ArrayList<>();
-    List<String> tmp = new ArrayList<>();
-    for (WebElement el : elements){
-      tmp = el.findElement
+    List<WebElement> rows = wd.findElements(By.name("entry"));
+    for (WebElement row:rows) {
+      contacts.add(new ContactData(row.findElements(By.tagName("td")).get(2).getText(), row.findElements(By.tagName("td")).get(1).getText()));
     }
     return contacts;
   }

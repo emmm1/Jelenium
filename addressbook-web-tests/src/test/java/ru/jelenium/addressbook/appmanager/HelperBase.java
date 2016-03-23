@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.jelenium.addressbook.model.GroupData;
 
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -60,4 +61,10 @@ public class HelperBase {
     click(By.linkText("home"));
   }
 
+  public void chooseCheckBox(Integer checkBoxNum) {
+    //номер чекбокса для такого адреса - 1 - первый элемент. Чтобы при вызыве 0 был первым увеличиваю значение на 1
+    //groupNum++;
+    //click(By.xpath(".//*[@id='content']/form/span[" + groupNum + "]/input"));
+    wd.findElements(By.name("selected[]")).get(checkBoxNum).click();
+  }
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import ru.jelenium.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -124,8 +125,17 @@ public class ContactHelper extends HelperBase {
     List<ContactData> contacts = new ArrayList<>();
     List<WebElement> rows = wd.findElements(By.name("entry"));
     for (WebElement row : rows) {
-      contacts.add(new ContactData(row.findElements(By.tagName("td")).get(2).getText(), row.findElements(By.tagName("td")).get(1).getText()));
+      ContactData tmp = new ContactData(row.findElements(By.tagName("td")).get(2).getText(), row.findElements(By.tagName("td")).get(1).getText());
+      tmp.setId(Integer.parseInt(row.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")));
+      contacts.add(tmp);
     }
     return contacts;
   }
+
+  public ContactData findDiff(List<ContactData> small, List<ContactData> full) {
+    return full.stream().filter(f -> !small.contains(f)).findFirst().get();
+  }
+
+  public Comparator<? super ContactData> ById = (c1, c2) -> (Integer.compare(c1.getId(), c2.getId()));
+
 }

@@ -27,10 +27,12 @@ public class NewRecordTest extends TestBase {
     //сравиваем длины
     Assert.assertEquals(before.size(), after.size() - 1);
     //добавляем в список до отсутвующее
-    //сортируем списки
+    before.add(app.getContactHelper().findDiff(before, after));
+    //сортируем списки - вынести ById в HelperBase
+    before.sort(app.getContactHelper().ById);
+    after.sort(app.getContactHelper().ById);
     //сравниваем
-
+    Assert.assertEquals(after,before);
 
   }
-
 }

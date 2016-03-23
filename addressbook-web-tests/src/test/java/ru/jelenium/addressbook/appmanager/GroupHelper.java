@@ -83,13 +83,6 @@ public class GroupHelper extends HelperBase {
     return groupList;
   }
 
-  public void chooseGroup(Integer groupNum) {
-    //номер чекбокса для такого адреса - 1 - первый элемент. Чтобы при вызыве 0 был первым увеличиваю значение на 1
-    //groupNum++;
-    //click(By.xpath(".//*[@id='content']/form/span[" + groupNum + "]/input"));
-    wd.findElements(By.name("selected[]")).get(groupNum).click();
-  }
-
   public int getGroupId(int groupNum) {
     groupNum++;
     return Integer.parseInt(wd.findElement(By.xpath(".//*[@id='content']/form/span[" + groupNum + "]/input")).getAttribute("value"));
@@ -99,8 +92,8 @@ public class GroupHelper extends HelperBase {
     return full.stream().filter((g) -> !small.contains(g)).findFirst().get();
   }
 
-  Comparator<? super GroupData> ById = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
 
+  Comparator<? super GroupData> ById = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
   public Comparator<? super GroupData> getById() {
     return ById;
   }

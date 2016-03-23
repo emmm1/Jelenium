@@ -14,7 +14,7 @@ public class GroupUpdateTest extends TestBase {
     app.getGroupHelper().createWhenNoGroup(new GroupData("Create 2up" + unicDate, "For update header", "For update footer"));
     List<GroupData> before = app.getGroupHelper().getGroupList();
     int groupNum = before.size() - 1;
-    app.getGroupHelper().chooseGroup(groupNum);
+    app.getGroupHelper().chooseCheckBox(groupNum);
     int groupId = app.getGroupHelper().getGroupId(groupNum);
     GroupData group = new GroupData(groupId, "Updated test group, browser type" + unicDate, "USB header", "USB footer");
     app.getGroupHelper().editGroup();

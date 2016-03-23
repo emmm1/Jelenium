@@ -33,9 +33,11 @@ public class HomePageNavigationHelper extends HelperBase {
     click(By.xpath(".//*[@id='MassCB']"));
   }
 
-  public void selectFirst() {
-    click(By.name("selected[]"));
+/*  public void selectFirst(int contactId) {
+    //click(By.name("selected[]"));
+    chooseCheckBox(contactId);
   }
+*/
 
   public void pushDelete() {
     click(By.xpath(".//*[@id='content']/form[2]/div[2]/input"));

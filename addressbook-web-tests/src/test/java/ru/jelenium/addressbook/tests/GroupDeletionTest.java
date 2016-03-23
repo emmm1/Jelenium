@@ -13,7 +13,7 @@ public class GroupDeletionTest extends TestBase {
     app.getNavigationHelper().gotoGroupPage();
     app.getGroupHelper().createWhenNoGroup(new GroupData("Create 2del" + unicDate, "For delete header", "For delete footer"));
     List<GroupData> before = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().chooseGroup(before.size() - 1);
+    app.getGroupHelper().chooseCheckBox(before.size() - 1);
     app.getGroupHelper().deleteGroup();
     app.getGroupHelper().gotoGroupPageThrAnswerLink();
     List<GroupData> after = app.getGroupHelper().getGroupList();

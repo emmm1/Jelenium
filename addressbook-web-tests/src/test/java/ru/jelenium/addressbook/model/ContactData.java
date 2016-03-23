@@ -23,14 +23,14 @@ public class ContactData {
     this.nickname = nickname;
     this.title = title;
     this.groupNum = (Integer) notNull(groupNum, null);
-    this.textInfo = (ContactTextInfo) notNull(textInfo, new ContactTextInfo(null,null,null,null));
-    this.phone = (ContactPhone) notNull(phone, new ContactPhone(null,null,null,null,null));
-    this.contactEData = (ContactEData) notNull(contactEData, new ContactEData(null,null,null,null));
+    this.textInfo = (ContactTextInfo) notNull(textInfo, new ContactTextInfo(null, null, null, null));
+    this.phone = (ContactPhone) notNull(phone, new ContactPhone(null, null, null, null, null));
+    this.contactEData = (ContactEData) notNull(contactEData, new ContactEData(null, null, null, null));
     this.birthDate = (DataData) notNull(birthDate, new DataData(null, null, null));
     this.annDate = (DataData) notNull(annDate, new DataData(null, null, null));
   }
 
-  public ContactData(String firstname, String lastname){
+  public ContactData(String firstname, String lastname) {
     //Минимальный конструктор
     this.firstname = firstname;
     this.middlename = null;
@@ -38,12 +38,12 @@ public class ContactData {
     this.nickname = null;
     this.title = null;
     this.groupNum = null;
-    this.textInfo = new ContactTextInfo(null,null,null,null);
-    this.phone = new ContactPhone(null,null,null,null,null);
-    this.contactEData = new ContactEData(null,null,null,null);
+    this.textInfo = new ContactTextInfo(null, null, null, null);
+    this.phone = new ContactPhone(null, null, null, null, null);
+    this.contactEData = new ContactEData(null, null, null, null);
     this.birthDate = new DataData(null, null, null);
     this.annDate = new DataData(null, null, null);
-    }
+  }
 
   public Object notNull(Object toCheckObj, Object defObj) {
     if (toCheckObj != null) {
@@ -72,7 +72,9 @@ public class ContactData {
     return title;
   }
 
-  public Integer getGroupNum() {return groupNum;}
+  public Integer getGroupNum() {
+    return groupNum;
+  }
 
   public ContactTextInfo getTextInfo() {
     return textInfo;

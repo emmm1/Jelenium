@@ -3,7 +3,7 @@ package ru.jelenium.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.jelenium.addressbook.model.*;
+import ru.jelenium.addressbook.model.ContactData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +123,7 @@ public class ContactHelper extends HelperBase {
   public List<ContactData> getContacts() {
     List<ContactData> contacts = new ArrayList<>();
     List<WebElement> rows = wd.findElements(By.name("entry"));
-    for (WebElement row:rows) {
+    for (WebElement row : rows) {
       contacts.add(new ContactData(row.findElements(By.tagName("td")).get(2).getText(), row.findElements(By.tagName("td")).get(1).getText()));
     }
     return contacts;

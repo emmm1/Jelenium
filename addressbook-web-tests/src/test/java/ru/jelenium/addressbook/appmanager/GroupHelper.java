@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.jelenium.addressbook.model.GroupData;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,17 +70,16 @@ public class GroupHelper extends HelperBase {
     //List<GroupData> groupList = new ArrayList<>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     /* for (WebElement element : elements) {
-      groupList.add(new GroupData(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")), element.getText(), null, null));
-    } */
+       String tmp = element.getText();
+      groupList.add(new GroupData(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")), tmp, null, null));
+    }
+    */
     // Красиво, но типа нечестно (((
     //elements.stream().forEach(e -> groupList.add(new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)));
-
-
     //Function<? super WebElement,? extends GroupData> toGroupData = e -> (new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null));
     //Stream<GroupData> streamGroups = elements.stream().map(e -> (new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)));
     List<GroupData> groupList = elements.stream().map(e -> (new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)))
             .collect(Collectors.toList());
-
     return groupList;
   }
 

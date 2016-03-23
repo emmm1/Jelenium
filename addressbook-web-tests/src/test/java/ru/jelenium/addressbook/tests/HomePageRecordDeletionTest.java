@@ -24,7 +24,7 @@ public class HomePageRecordDeletionTest extends TestBase {
     //список до
     List<ContactData> before = app.getContactHelper().getContacts();
     //переделать вызов по номеру как в группах
-    app.getHomeNav().chooseCheckBox(0);
+    app.getHomeNav().chooseCheckBox(before.size() - 1);
     app.getHomeNav().pushDelete();
     app.getHomeNav().closeAlarm();
     app.getNavigationHelper().gotoHomePage();

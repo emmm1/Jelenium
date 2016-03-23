@@ -24,7 +24,8 @@ public class HomePageNavigationHelper extends HelperBase {
 
   public void gotoEdit(Integer position) {
     String recordXpath;
-    position++;
+    //позиция начинается с 2, метод нормально работает, переписывать не хочется
+    position += 2;
     recordXpath = (".//*[@id='maintable']/tbody/tr[" + position + "]/td[8]/a/img");
     click(By.xpath(recordXpath));
   }

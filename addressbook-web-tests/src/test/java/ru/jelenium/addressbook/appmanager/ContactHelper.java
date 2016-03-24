@@ -8,6 +8,7 @@ import ru.jelenium.addressbook.model.ContactData;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -88,24 +89,17 @@ public class ContactHelper extends HelperBase {
     pushEnterAddNewPage();
   }
 
-  public void gotoAddNewPage() {
-    if (isElementHere(By.cssSelector("div#content h1")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
-            && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter")) {
-      // && isElementHere(By.name("Submit"))
-      return;
-    }
-    click(By.linkText("add new"));
-  }
-
   public void pushEnterAddNewPage() {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void createWhenNoContact(ContactData cDate) {
+  public boolean createWhenNoContact(ContactData cDate) {
     if (!isThereAContact()) {
       createRecord(cDate, false);
       gotoHomePage();
+      return true;
     }
+    return false;
   }
 
   private boolean isThereAContact() {
@@ -117,18 +111,17 @@ public class ContactHelper extends HelperBase {
     click(By.xpath(".//*[@id='content']/form[1]/input[22]"));
   }
 
-  public void gotoRecordEditorThrViewRecordPage() {
-    click(By.name("modifiy"));
-  }
-
   public List<ContactData> getContacts() {
     List<ContactData> contacts = new ArrayList<>();
     List<WebElement> rows = wd.findElements(By.name("entry"));
-    for (WebElement row : rows) {
+    /*for (WebElement row : rows) {
       ContactData tmp = new ContactData(row.findElements(By.tagName("td")).get(2).getText(), row.findElements(By.tagName("td")).get(1).getText());
       tmp.setId(Integer.parseInt(row.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")));
       contacts.add(tmp);
-    }
+    }*/
+
+    contacts = (rows.stream().map(r -> new ContactData(Integer.parseInt(r.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")),
+            r.findElements(By.tagName("td")).get(2).getText(), r.findElements(By.tagName("td")).get(1).getText())).collect(Collectors.toList()));
     return contacts;
   }
 
@@ -137,5 +130,25 @@ public class ContactHelper extends HelperBase {
   }
 
   public Comparator<? super ContactData> ById = (c1, c2) -> (Integer.compare(c1.getId(), c2.getId()));
+
+  public void gotoHomePage() {
+    if (isElementHere(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("home"));
+  }
+
+  public void gotoAddNewPage() {
+    if (isElementHere(By.cssSelector("div#content h1")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
+            && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter")) {
+      // && isElementHere(By.name("Submit"))
+      return;
+    }
+    click(By.linkText("add new"));
+  }
+
+  public void gotoRecordEditorThrViewRecordPage() {
+    click(By.name("modifiy"));
+  }
 
 }

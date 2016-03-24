@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.GroupData;
 
+import java.util.Date;
 import java.util.List;
 
 public class GroupUpdateTest extends TestBase {
@@ -16,7 +17,7 @@ public class GroupUpdateTest extends TestBase {
     int groupNum = before.size() - 1;
     app.getGroupHelper().chooseCheckBox(groupNum);
     int groupId = app.getGroupHelper().getGroupId(groupNum);
-    GroupData group = new GroupData(groupId, "Updated test group, browser type" + unicDate, "USB header", "USB footer");
+    GroupData group = new GroupData(groupId, "Updated test group, browser type" + " " + browserType + " " + new Date(System.currentTimeMillis()), "USB header", "USB footer");
     app.getGroupHelper().editGroup();
     app.getGroupHelper().fillOutFields(group);
     app.getGroupHelper().saveUpdatedGroup();

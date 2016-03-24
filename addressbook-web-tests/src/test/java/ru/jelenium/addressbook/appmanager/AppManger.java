@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import ru.jelenium.addressbook.model.AuthData;
 
 import java.util.concurrent.TimeUnit;
@@ -26,7 +25,7 @@ public class AppManger {
   private String browser;
 
 
-  public AppManger(String browser){
+  public AppManger(String browser) {
     this.browser = browser;
   }
 
@@ -40,16 +39,15 @@ public class AppManger {
   }
 
   public void init() {
-    if (browser.equals("Firefox")){
+    if (browser.equals("Firefox")) {
       wd = new FirefoxDriver();
-    } else if (browser.equals("Chrome")){
+    } else if (browser.equals("Chrome")) {
       wd = new ChromeDriver();
-    } else if (browser.equals("IE")){
+    } else if (browser.equals("IE")) {
       wd = new InternetExplorerDriver();
     } else if (browser.equals("HU")) {
       wd = new HtmlUnitDriver();
     }
-
 
 
     wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -70,7 +68,9 @@ public class AppManger {
 
   public HomePageNavigationHelper getHomeNav() {
     return homeNav;
-  };
+  }
+
+  ;
 
   public ContactHelper getContactHelper() {
     return contactHelper;

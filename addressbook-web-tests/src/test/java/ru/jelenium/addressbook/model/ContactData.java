@@ -47,6 +47,22 @@ public class ContactData {
     this.annDate = new DataData(null, null, null);
   }
 
+  public ContactData(int id, String firstname, String lastname) {
+    //Минимальный конструктор с ид
+    this.id = id;
+    this.firstname = firstname;
+    this.middlename = null;
+    this.lastname = lastname;
+    this.nickname = null;
+    this.title = null;
+    this.groupNum = null;
+    this.textInfo = new ContactTextInfo(null, null, null, null);
+    this.phone = new ContactPhone(null, null, null, null, null);
+    this.contactEData = new ContactEData(null, null, null, null);
+    this.birthDate = new DataData(null, null, null);
+    this.annDate = new DataData(null, null, null);
+  }
+
   public Object notNull(Object toCheckObj, Object defObj) {
     if (toCheckObj != null) {
       return toCheckObj;

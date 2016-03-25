@@ -14,7 +14,7 @@ public class FirstRecordUpdateTest extends TestBase {
   @Test
   public void updateRecordTest() {
 
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     app.getContactHelper().createWhenNoContact(new ContactData("ForUpdateТест", "ForUpdate" + unicDate));
     //список до
     List<ContactData> before = app.getContactHelper().getContacts();

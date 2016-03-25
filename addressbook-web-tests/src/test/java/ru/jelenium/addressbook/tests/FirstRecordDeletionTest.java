@@ -16,7 +16,7 @@ public class FirstRecordDeletionTest extends TestBase {
 
   @Test
   public void firstRecordDelete() {
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     app.getContactHelper().createWhenNoContact(new ContactData("ForDeleteТест", "2Del" + unicDate));
     //список до
     List<ContactData> before = app.getContactHelper().getContacts();

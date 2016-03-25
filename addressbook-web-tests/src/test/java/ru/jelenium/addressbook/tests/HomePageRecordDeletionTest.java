@@ -19,7 +19,7 @@ public class HomePageRecordDeletionTest extends TestBase {
     if (browserType.equals("HU")) {
       throw new Error("такой тип броузера использровать нельзя");
     }
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
     //список до
     List<ContactData> before = app.getContactHelper().getContacts();
@@ -27,7 +27,7 @@ public class HomePageRecordDeletionTest extends TestBase {
     app.getHomeNav().chooseCheckBox(before.size() - 1);
     app.getHomeNav().pushDelete();
     app.getHomeNav().closeAlarm();
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     //список после
     List<ContactData> after = app.getContactHelper().getContacts();
     //сравнить размеры списков

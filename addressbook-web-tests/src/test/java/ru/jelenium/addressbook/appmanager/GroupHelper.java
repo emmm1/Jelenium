@@ -37,7 +37,7 @@ public class GroupHelper extends HelperBase {
     click(By.name("new"));
   }
 
-  public void deleteGroup() {
+  public void delete() {
     click(By.name("delete"));
   }
 
@@ -49,10 +49,11 @@ public class GroupHelper extends HelperBase {
     initNewGroup();
     fillOutFields(groupData);
     saveNewGroup();
-    gotoGroupPageThrAnswerLink();
+    confirm();
   }
 
-  public void createWhenNoGroup(GroupData groupData) {
+  public void createWhenNo(GroupData groupData) {
+    
     if (!isThereAGroup()) {
       createGroup(groupData);
     }
@@ -94,7 +95,7 @@ public class GroupHelper extends HelperBase {
     return ById;
   }
 
-  public void gotoGroupPageThrAnswerLink() {
+  public void confirm() {
     click(By.linkText("group page"));
   }
 }

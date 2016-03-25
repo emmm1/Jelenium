@@ -11,22 +11,22 @@ public class GroupUpdateTest extends TestBase {
 
   @Test
   public void testGroupUpdate() {
-    app.getNavigationHelper().gotoGroupPage();
-    app.getGroupHelper().createWhenNoGroup(new GroupData("Create 2up" + unicDate, "For update header", "For update footer"));
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    app.goTo().groupPage();
+    app.group().createWhenNo(new GroupData("Create 2up" + unicDate, "For update header", "For update footer"));
+    List<GroupData> before = app.group().getGroupList();
     int groupNum = before.size() - 1;
-    app.getGroupHelper().chooseCheckBox(groupNum);
-    int groupId = app.getGroupHelper().getGroupId(groupNum);
+    app.group().chooseCheckBox(groupNum);
+    int groupId = app.group().getGroupId(groupNum);
     GroupData group = new GroupData(groupId, "Updated test group, browser type" + " " + browserType + " " + new Date(System.currentTimeMillis()), "USB header", "USB footer");
-    app.getGroupHelper().editGroup();
-    app.getGroupHelper().fillOutFields(group);
-    app.getGroupHelper().saveUpdatedGroup();
-    app.getGroupHelper().gotoGroupPageThrAnswerLink();
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    app.group().editGroup();
+    app.group().fillOutFields(group);
+    app.group().saveUpdatedGroup();
+    app.group().confirm();
+    List<GroupData> after = app.group().getGroupList();
     Assert.assertEquals(after.size(), before.size());
-    before.set((before.indexOf(app.getGroupHelper().getDiff(after, before))),group);
-    before.sort(app.getGroupHelper().getById());
-    after.sort(app.getGroupHelper().getById());
+    before.set((before.indexOf(app.group().getDiff(after, before))),group);
+    before.sort(app.group().getById());
+    after.sort(app.group().getById());
     Assert.assertEquals(after, before);
   }
 

@@ -1,10 +1,9 @@
 package ru.jelenium.addressbook.tests;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import ru.jelenium.addressbook.appmanager.AppManger;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,8 +11,8 @@ import java.util.Date;
  */
 public class TestBase {
 
-  public final String browserType = "Firefox";
-  protected AppManger app = new AppManger(browserType);
+  protected static String browserType = "Chrome";
+  protected static AppManger app = new AppManger(browserType);
 
   //Чтобы лучше контролировать результат работы HTMLUnit
   // сделать тестовые записи уникальными
@@ -21,12 +20,12 @@ public class TestBase {
   String unicDate = " " + browserType + " " + new Date(System.currentTimeMillis());
 
 
-  @BeforeMethod
+  @BeforeSuite
   public void setUp() throws Exception {
     app.init();
   }
 
-  @AfterMethod
+  @AfterSuite
   public void tearDown() {
     app.stop();
   }

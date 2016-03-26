@@ -3,10 +3,11 @@ package ru.jelenium.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.jelenium.addressbook.model.GroupData;
+import ru.jelenium.addressbook.model.Group;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -19,10 +20,10 @@ public class GroupHelper extends HelperBase {
     super(wd);
   }
 
-  public void fillOutFields(GroupData groupData) {
-    type(By.name("group_name"), groupData.getName());
-    type(By.name("group_header"), groupData.getHeader());
-    type(By.name("group_footer"), groupData.getFooter());
+  public void fillOutFields(Group group) {
+    type(By.name("group_name"), group.getName());
+    type(By.name("group_header"), group.getHeader());
+    type(By.name("group_footer"), group.getFooter());
   }
 
   public void saveNewGroup() {
@@ -41,21 +42,24 @@ public class GroupHelper extends HelperBase {
     click(By.name("delete"));
   }
 
-  public void editGroup() {
+  public void editGroup(Group group) {
     click(By.name("edit"));
+    fillOutFields(group);
+    saveUpdatedGroup();
+    confirm();
   }
 
-  public void createGroup(GroupData groupData) {
+  public void create(Group group) {
     initNewGroup();
-    fillOutFields(groupData);
+    fillOutFields(group);
     saveNewGroup();
     confirm();
   }
 
-  public void createWhenNo(GroupData groupData) {
+  public void createWhenNo(Group group) {
     
     if (!isThereAGroup()) {
-      createGroup(groupData);
+      create(group);
     }
   }
 
@@ -63,20 +67,11 @@ public class GroupHelper extends HelperBase {
     return isElementHere(By.name("selected[]"));
   }
 
-  public List<GroupData> getGroupList() {
-    //List<GroupData> groupList = new ArrayList<>();
-    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-    /* for (WebElement element : elements) {
-       String tmp = element.getText();
-      groupList.add(new GroupData(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")), tmp, null, null));
-    }
-    */
-    // Красиво, но типа нечестно (((
-    //elements.stream().forEach(e -> groupList.add(new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)));
-    //Function<? super WebElement,? extends GroupData> toGroupData = e -> (new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null));
-    //Stream<GroupData> streamGroups = elements.stream().map(e -> (new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)));
-    List<GroupData> groupList = elements.stream().map(e -> (new GroupData(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value")), e.getText(), null, null)))
-            .collect(Collectors.toList());
+  public Set<Group> list() {
+    //List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    Set<Group> groupList = wd.findElements(By.cssSelector("span.group")).stream()
+            .map(e -> (new Group().withId(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value"))).withName(e.getText())))
+            .collect(Collectors.toSet());
     return groupList;
   }
 
@@ -85,13 +80,13 @@ public class GroupHelper extends HelperBase {
     return Integer.parseInt(wd.findElement(By.xpath(".//*[@id='content']/form/span[" + groupNum + "]/input")).getAttribute("value"));
   }
 
-  public GroupData getDiff(List<GroupData> small, List<GroupData> full) {
+  public Group getDiff(Set<Group> small, Set<Group> full) {
     return full.stream().filter((g) -> !small.contains(g)).findFirst().get();
   }
 
-  Comparator<? super GroupData> ById = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+  Comparator<? super Group> ById = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
 
-  public Comparator<? super GroupData> getById() {
+  public Comparator<? super Group> getById() {
     return ById;
   }
 

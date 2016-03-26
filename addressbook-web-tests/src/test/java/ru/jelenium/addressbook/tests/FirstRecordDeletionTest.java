@@ -2,6 +2,7 @@ package ru.jelenium.addressbook.tests;
 
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.ContactData;
 
@@ -13,6 +14,11 @@ import java.util.List;
 
 
 public class FirstRecordDeletionTest extends TestBase {
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().gotoHomePage();
+    app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
+  }
 
   @Test
   public void firstRecordDelete() {

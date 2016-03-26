@@ -1,37 +1,31 @@
 package ru.jelenium.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.jelenium.addressbook.model.Group;
+import ru.jelenium.addressbook.model.GroupData;
+import ru.jelenium.addressbook.model.Groups;
 
-import java.util.List;
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupDeletionTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().groupPage();
-    app.group().createWhenNo(new Group().withName("Create 2del" + unicDate).withName("For delete header").withFooter("For delete footer"));
+    app.group().createWhenNo(new GroupData().withName("Create 2del" + unicDate).withName("For delete header").withFooter("For delete footer"));
   }
 
   @Test
   public void testGroupDeletion() {
     app.goTo().groupPage();
-    //здесь будет сэт вместо листа
-    Set<Group> before = app.group().list();
-    //вместо этого выбираем произвольную группу и ее ищем по Id
-    app.group().chooseCheckBox(before.size() - 1);
+    Groups before = app.group().list();
+    GroupData group = before.iterator().next();
+    app.group().choose(group);
     app.group().delete();
-    app.group().confirm();
-    //сэт вместо листа
-    Set<Group> after = app.group().list();
-    //ну и тут hamcrest
-    Assert.assertEquals(after.size(), before.size() - 1);
-    before.remove(app.group().getDiff(after, before));
-    //before.sort(app.group().getById());
-    //after.sort(app.group().getById());
-    Assert.assertEquals(after, before);
+    app.goTo().groupPage();
+    Groups after = app.group().list();
+    assertThat(after.size(), equalTo(before.size() - 1));
+    assertThat(after, equalTo(before.without(group)));
   }
 }

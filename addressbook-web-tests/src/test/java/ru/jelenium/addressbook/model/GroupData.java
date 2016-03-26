@@ -1,7 +1,7 @@
 package ru.jelenium.addressbook.model;
 
 
-public class Group {
+public class GroupData {
   private int id = Integer.MAX_VALUE;
   private String name;
   private String header;
@@ -23,22 +23,22 @@ public class Group {
     return id;
   }
 
-  public Group withId(int id) {
+  public GroupData withId(int id) {
     this.id = id;
     return this;
   }
 
-  public Group withName(String name) {
+  public GroupData withName(String name) {
     this.name = name;
     return this;
   }
 
-  public Group withHeader(String header) {
+  public GroupData withHeader(String header) {
     this.header = header;
     return this;
   }
 
-  public Group withFooter(String footer) {
+  public GroupData withFooter(String footer) {
     this.footer = footer;
     return this;
   }
@@ -48,7 +48,7 @@ public class Group {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    Group group = (Group) o;
+    GroupData group = (GroupData) o;
 
     if (id != group.id) return false;
     return name != null ? name.equals(group.name) : group.name == null;
@@ -61,11 +61,12 @@ public class Group {
     result = 31 * result + (name != null ? name.hashCode() : 0);
     return result;
   }
+
   @Override
   public String toString() {
-    return "Group{" +
-            "name='" + name + '\'' +
-            ", id=" + id +
+    return "GroupData{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
             '}';
   }
 

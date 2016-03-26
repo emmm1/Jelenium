@@ -2,6 +2,7 @@ package ru.jelenium.addressbook.tests;
 
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.ContactData;
 
@@ -14,11 +15,21 @@ import java.util.List;
 
 public class HomePageRecordDeletionTest extends TestBase {
 
-  @Test
-  public void homePageRecordDelete() {
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().gotoHomePage();
+    app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
+  }
+
+  public void checkBrowser() {
     if (browserType.equals("HU")) {
       throw new Error("такой тип броузера использровать нельзя");
     }
+  }
+
+  @Test
+  public void homePageRecordDelete() {
+
     app.goTo().gotoHomePage();
     app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
     //список до

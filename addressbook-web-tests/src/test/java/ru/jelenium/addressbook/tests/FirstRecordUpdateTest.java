@@ -1,6 +1,7 @@
 package ru.jelenium.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.*;
 
@@ -9,6 +10,12 @@ import java.util.HashSet;
 import java.util.List;
 
 public class FirstRecordUpdateTest extends TestBase {
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().gotoHomePage();
+    app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
+  }
 
 
   @Test

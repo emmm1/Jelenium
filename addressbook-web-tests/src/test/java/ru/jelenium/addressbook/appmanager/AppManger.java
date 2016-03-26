@@ -66,13 +66,11 @@ public class AppManger {
     wd.quit();
   }
 
-  public HomePageNavigationHelper getHomeNav() {
+  public HomePageNavigationHelper onHomepage() {
     return homeNav;
   }
 
-  ;
-
-  public ContactHelper getContactHelper() {
+  public ContactHelper contact() {
     return contactHelper;
   }
 

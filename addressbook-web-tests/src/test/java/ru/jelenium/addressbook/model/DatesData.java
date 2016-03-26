@@ -3,19 +3,27 @@ package ru.jelenium.addressbook.model;
 /**
  * Created by mikhail.evseev on 09.03.2016.
  */
-public class DataData {
+public class DatesData {
   private Integer day;
   private Integer month;
   private String year;
 
-
-  //выпадающие списки с датами рождения и годовщин
-  public DataData(Integer day, Integer month, String year) {
-
+  public DatesData day(Integer day) {
     this.day = day;
-    this.month = month;
-    this.year = year;
+    return this;
   }
+
+  public DatesData month(Integer month) {
+    this.month = month;
+    return this;
+  }
+
+  public DatesData year(String year) {
+    this.year = year;
+    return this;
+  }
+  //выпадающие списки с датами рождения и годовщин
+
 
   public Integer getDay() {
     return day;

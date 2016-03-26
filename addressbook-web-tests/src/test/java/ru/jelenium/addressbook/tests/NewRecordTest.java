@@ -1,37 +1,54 @@
 package ru.jelenium.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.*;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class NewRecordTest extends TestBase {
 
   @Test
   public void newRecordTest() {
 
-    app.goTo().gotoHomePage();
-    //получаем список до
-    List<ContactData> before = app.getContactHelper().getContacts();
-    app.getContactHelper().createRecord(new ContactData("Тест", "Тестович", "Тестовый" + unicDate, "ттт", "Дорогой", 1,
-            new ContactTextInfo("Тест продакшн", "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13", "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-                    "Помрешь, пока заполнишь" + unicDate),
-            new ContactPhone("465464611263112", "+1245 54 545 68595489", "3546131564631", "+132(464) 54651 1564651 31", "2345464"),
-            new ContactEData(null, "test.testowy@gmail.com", "testy_1987@mail.ru", "http://localhost/addressbook"),
-            new DataData(12, 5, "1987"), new DataData(25, 11, "2011")), false);
-    app.goTo().gotoHomePage();
-    //получаем список после
-    List<ContactData> after = app.getContactHelper().getContacts();
-    //сравиваем длины
-    Assert.assertEquals(before.size(), after.size() - 1);
-    //добавляем в список до отсутвующее
-    before.add(app.getContactHelper().findDiff(before, after));
-    //сортируем списки - вынести ById в HelperBase
-    before.sort(app.getContactHelper().ById);
-    after.sort(app.getContactHelper().ById);
-    //сравниваем
-    Assert.assertEquals(after, before);
-
+    app.goTo().homePage();
+    Contacts before = app.contact().list();
+    //хочу посмотреть как будут выглядеть все данные
+    ContactData contact = new ContactData()
+            .withFirstname("Тест")
+            .withMiddlename("Тестович")
+            .withLastname("Тестовый" + unicDate)
+            .withTitle("Дорогой")
+            .withNickname("ттт")
+            .withGroupNum(1)
+            .where(new ContactTextInfo()
+                    .address1("РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13")
+                    .address2("Тестовый район, с. Тестовое, 1я тестовая улица, д. 23")
+                    .company("Тест продакшн")
+                    .notes("Помрешь, пока заполнишь"))
+            .withNumbersOf(new ContactPhone()
+                    .phoneHome1("465464611263112")
+                    .phoneHome2("+1245 54 545 68595489")
+                    .mobilePhone("+132(464) 54651 1564651 31")
+                    .workPhone("3546131564631")
+                    .fax("2345464"))
+            .and(new ContactEData()
+                    .email1(null)
+                    .email2("test.testowy@gmail.com")
+                    .email3("testy_1987@mail.ru")
+                    .homepage("http://localhost/addressbook"))
+            .withAnniversary(new DatesData()
+                    .day(12)
+                    .month(5)
+                    .year("1987"))
+            .withBirth(new DatesData()
+                    .day(25)
+                    .month(11)
+                    .year("2011"));
+    app.contact().create(contact);
+    app.goTo().homePage();
+    Contacts after = app.contact().list();
+    assertThat(after.size(), equalTo(before.size() + 1));
+    assertThat(after, equalTo(before.with(contact.setId((app.contact().findDiff(before, after)).getId()))));
   }
 }

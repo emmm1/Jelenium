@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.ContactData;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mikhail.evseev on 09.03.2016.
@@ -16,25 +16,23 @@ import java.util.List;
 public class FirstRecordDeletionTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().gotoHomePage();
-    app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
+    app.goTo().homePage();
+    app.contact().createWhenNoContact(new ContactData().withFirstname("ForHomePageDeleteТест").withLastname("2HPRDel" + unicDate));
   }
 
   @Test
   public void firstRecordDelete() {
-    app.goTo().gotoHomePage();
-    app.getContactHelper().createWhenNoContact(new ContactData("ForDeleteТест", "2Del" + unicDate));
+    app.goTo().homePage();
+    app.contact().createWhenNoContact(new ContactData().withFirstname("ForDeleteТест").withLastname("2Del" + unicDate));
     //список до
-    List<ContactData> before = app.getContactHelper().getContacts();
-    app.getHomeNav().gotoDetails(0);
-    app.getContactHelper().gotoRecordEditorThrViewRecordPage();
-    app.getContactHelper().deleteRecord();
-    app.getContactHelper().gotoHomePage();
-    List<ContactData> after = app.getContactHelper().getContacts();
+    Set<ContactData> before = app.contact().list();
+    app.onHomepage().gotoDetails(0);
+    app.contact().gotoRecordEditorThrViewRecordPage();
+    app.contact().deleteRecord();
+    app.goTo().homePage();
+    Set<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() - 1);
-    before.remove(app.getContactHelper().findDiff(after, before));
-    before.sort(app.getContactHelper().ById);
-    after.sort(app.getContactHelper().ById);
+    before.remove(app.contact().findDiff(after, before));
     Assert.assertEquals(after, before);
   }
 

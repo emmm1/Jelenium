@@ -34,7 +34,7 @@ public class HomePageNavigationHelper extends HelperBase {
     wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + position + "]/td[7]/a/img")).click();
   }
 
-  public void gotoEdit(Integer position) {
+/*  public void clickEdit(Integer position) {
     String recordXpath;
     //позиция начинается с 2, метод нормально работает, переписывать не хочется
     position += 2;
@@ -42,5 +42,5 @@ public class HomePageNavigationHelper extends HelperBase {
     click(By.xpath(recordXpath));
 
   }
-
+*/
 }

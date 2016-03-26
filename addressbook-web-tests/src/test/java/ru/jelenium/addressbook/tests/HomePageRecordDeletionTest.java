@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.ContactData;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mikhail.evseev on 09.03.2016.
@@ -17,8 +17,8 @@ public class HomePageRecordDeletionTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().gotoHomePage();
-    app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
+    app.goTo().homePage();
+    app.contact().createWhenNoContact(new ContactData().withFirstname("ForHomePageDeleteТест").withLastname("2HPRDel" + unicDate));
   }
 
   public void checkBrowser() {
@@ -30,24 +30,21 @@ public class HomePageRecordDeletionTest extends TestBase {
   @Test
   public void homePageRecordDelete() {
 
-    app.goTo().gotoHomePage();
-    app.getContactHelper().createWhenNoContact(new ContactData("ForHomePageDeleteТест", "2HPRDel" + unicDate));
+    app.goTo().homePage();
+    app.contact().createWhenNoContact(new ContactData().withFirstname("ForHomePageDeleteТест").withLastname("2HPRDel" + unicDate));
     //список до
-    List<ContactData> before = app.getContactHelper().getContacts();
+    Set<ContactData> before = app.contact().list();
     //переделать вызов по номеру как в группах
-    app.getHomeNav().chooseCheckBox(before.size() - 1);
-    app.getHomeNav().pushDelete();
-    app.getHomeNav().closeAlarm();
-    app.goTo().gotoHomePage();
+    app.onHomepage().chooseCheckBox(before.size() - 1);
+    app.onHomepage().pushDelete();
+    app.onHomepage().closeAlarm();
+    app.goTo().homePage();
     //список после
-    List<ContactData> after = app.getContactHelper().getContacts();
+    Set<ContactData> after = app.contact().list();
     //сравнить размеры списков
     Assert.assertEquals(after.size(), before.size() - 1);
     //удалить из до удаленную группу
-    before.remove(app.getContactHelper().findDiff(after, before));
-    //отсортировать списки
-    before.sort(app.getContactHelper().ById);
-    after.sort(app.getContactHelper().ById);
+    before.remove(app.contact().findDiff(after, before));
     //сравнить
     Assert.assertEquals(after, before);
   }

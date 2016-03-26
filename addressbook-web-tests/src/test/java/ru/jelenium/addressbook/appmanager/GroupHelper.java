@@ -81,20 +81,23 @@ public class GroupHelper extends HelperBase {
     return full.stream().filter((g) -> !small.contains(g)).findFirst().get();
   }
 
-  Comparator<? super GroupData> ById = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
 
-  public Comparator<? super GroupData> getById() {
-    return ById;
-  }
 
   public void confirm() {
     click(By.linkText("group page"));
   }
 
+  /*
+    Comparator<? super GroupData> ById = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+
+    public Comparator<? super GroupData> getById() {
+    return ById;
+  }
+
   public int getGroupId(int groupNum) {
     groupNum++;
     return Integer.parseInt(wd.findElement(By.xpath(".//*[@id='content']/form/span[" + groupNum + "]/input")).getAttribute("value"));
-  }
+  }*/
 
   public void choose(GroupData group) {
     wd.findElement(By.cssSelector("input[value='" + group.getId() + "']")).click();

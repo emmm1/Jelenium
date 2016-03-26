@@ -1,19 +1,46 @@
 package ru.jelenium.addressbook.model;
 
 public class ContactPhone {
-  private final String home1;
-  private final String mobile;
-  private final String work;
-  private final String fax;
-  private final String home2;
+  private String home1;
+  private String mobile;
+  private String work;
+  private String fax;
+  private String home2;
 
-  public ContactPhone(String home1, String mobile, String work, String fax, String home2) {
-    this.home1 = home1;
-    this.mobile = mobile;
-    this.work = work;
+/*  public ContactPhone(String phoneHome1, String mobilePhone, String workPhone, String fax, String phoneHome2) {
+    this.phoneHome1 = phoneHome1;
+    this.mobilePhone = mobilePhone;
+    this.workPhone = workPhone;
     this.fax = fax;
-    this.home2 = home2;
+    this.phoneHome2 = phoneHome2;
   }
+*/
+
+  public ContactPhone phoneHome2(String home2) {
+    this.home2 = home2;
+    return this;
+  }
+
+  public ContactPhone workPhone(String work) {
+    this.work = work;
+    return this;
+  }
+
+  public ContactPhone mobilePhone(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+
+  public ContactPhone phoneHome1(String home1) {
+    this.home1 = home1;
+    return this;
+  }
+
+  public ContactPhone fax(String fax) {
+    this.fax = fax;
+    return this;
+  }
+
 
   public String getHome1() {
     return home1;
@@ -34,4 +61,6 @@ public class ContactPhone {
   public String getHome2() {
     return home2;
   }
+
 }
+

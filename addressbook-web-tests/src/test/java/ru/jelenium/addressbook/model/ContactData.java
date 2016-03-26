@@ -3,21 +3,102 @@ package ru.jelenium.addressbook.model;
 public class ContactData {
 
   private int id;
-  private final String firstname;
-  private final String middlename;
-  private final String lastname;
-  private final String nickname;
-  private final String title;
-  private final Integer groupNum;
-  private final ContactTextInfo textInfo;
-  private final ContactPhone phone;
-  private final ContactEData contactEData;
-  private final DataData birthDate;
-  private final DataData annDate;
+  private String firstname;
+  private String middlename;
+  private String lastname;
+  private String nickname;
+  private String title;
+  private Integer groupNum;
+  private ContactPhone phone;
+  private ContactEData contactEData;
+  private DatesData birthDate;
+  private DatesData annDate;
+  private ContactTextInfo textInfo;
 
+
+  public ContactData(int id, String firstname, String lastname) {
+    this.id = id;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.phone = new ContactPhone();
+    this.contactEData = new ContactEData();
+    this.textInfo = new ContactTextInfo();
+    this.birthDate = new DatesData();
+    this.annDate = new DatesData();
+  }
+
+
+  public ContactData() {
+    this.id = 0;
+    this.phone = new ContactPhone();
+    this.contactEData = new ContactEData();
+    this.textInfo = new ContactTextInfo();
+    this.birthDate = new DatesData();
+    this.annDate = new DatesData();
+
+  }
+
+
+  public ContactData where(ContactTextInfo textInfo) {
+    this.textInfo = textInfo;
+    return this;
+  }
+
+
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withNumbersOf(ContactPhone phone) {
+    this.phone = phone;
+    return this;
+  }
+
+  public ContactData and(ContactEData contactEData) {
+    this.contactEData = contactEData;
+    return this;
+  }
+
+  public ContactData withAnniversary(DatesData annDate) {
+    this.annDate = annDate;
+    return this;
+  }
+
+  public ContactData withBirth(DatesData birthDate) {
+    this.birthDate = birthDate;
+    return this;
+  }
+
+  public ContactData withGroupNum(Integer groupNum) {
+    this.groupNum = groupNum;
+    return this;
+  }
+
+  public ContactData withTitle(String title) {
+    this.title = title;
+    return this;
+  }
+
+  public ContactData withNickname(String nickname) {
+    this.nickname = nickname;
+    return this;
+  }
+
+  public ContactData withMiddlename(String middlename) {
+    this.middlename = middlename;
+    return this;
+  }
+
+/*
   public ContactData(String firstname, String middlename, String lastname, String nickname, String title, Integer groupNum,
-                     ContactTextInfo textInfo, ContactPhone phone, ContactEData contactEData, DataData birthDate,
-                     DataData annDate) {
+                     ContactTextInfo textInfo, ContactPhone phone, ContactEData contactEData, DatesData birthDate,
+                     DatesData annDate) {
     //Сделал отключения ненужных блоков информации
     this.firstname = firstname;
     this.middlename = middlename;
@@ -28,8 +109,8 @@ public class ContactData {
     this.textInfo = (ContactTextInfo) notNull(textInfo, new ContactTextInfo(null, null, null, null));
     this.phone = (ContactPhone) notNull(phone, new ContactPhone(null, null, null, null, null));
     this.contactEData = (ContactEData) notNull(contactEData, new ContactEData(null, null, null, null));
-    this.birthDate = (DataData) notNull(birthDate, new DataData(null, null, null));
-    this.annDate = (DataData) notNull(annDate, new DataData(null, null, null));
+    this.birthDate = (DatesData) notNull(birthDate, new DatesData(null, null, null));
+    this.annDate = (DatesData) notNull(annDate, new DatesData(null, null, null));
   }
 
   public ContactData(String firstname, String lastname) {
@@ -43,8 +124,8 @@ public class ContactData {
     this.textInfo = new ContactTextInfo(null, null, null, null);
     this.phone = new ContactPhone(null, null, null, null, null);
     this.contactEData = new ContactEData(null, null, null, null);
-    this.birthDate = new DataData(null, null, null);
-    this.annDate = new DataData(null, null, null);
+    this.birthDate = new DatesData(null, null, null);
+    this.annDate = new DatesData(null, null, null);
   }
 
   public ContactData(int id, String firstname, String lastname) {
@@ -59,16 +140,12 @@ public class ContactData {
     this.textInfo = new ContactTextInfo(null, null, null, null);
     this.phone = new ContactPhone(null, null, null, null, null);
     this.contactEData = new ContactEData(null, null, null, null);
-    this.birthDate = new DataData(null, null, null);
-    this.annDate = new DataData(null, null, null);
+    this.birthDate = new DatesData(null, null, null);
+    this.annDate = new DatesData(null, null, null);
   }
 
-  public Object notNull(Object toCheckObj, Object defObj) {
-    if (toCheckObj != null) {
-      return toCheckObj;
-    }
-    return defObj;
-  }
+*/
+
 
   public String getFirstname() {
     return firstname;
@@ -106,11 +183,11 @@ public class ContactData {
     return contactEData;
   }
 
-  public DataData getBirthDate() {
+  public DatesData getBirthDate() {
     return birthDate;
   }
 
-  public DataData getAnnDate() {
+  public DatesData getAnnDate() {
     return annDate;
   }
 
@@ -118,8 +195,9 @@ public class ContactData {
     return id;
   }
 
-  public void setId(int id) {
+  public ContactData setId(int id) {
     this.id = id;
+    return this;
   }
 
   @Override

@@ -1,17 +1,32 @@
 package ru.jelenium.addressbook.model;
 
 public class ContactTextInfo {
-  private final String company;
-  private final String address1;
-  private final String address2;
-  private final String notes;
+  private String company;
+  private String address1;
+  private String address2;
+  private String notes;
 
-  public ContactTextInfo(String company, String address1, String address2, String notes) {
-    this.company = company;
-    this.address1 = address1;
-    this.address2 = address2;
+
+  public ContactTextInfo notes(String notes) {
     this.notes = notes;
+    return this;
   }
+
+  public ContactTextInfo address2(String address2) {
+    this.address2 = address2;
+    return this;
+  }
+
+  public ContactTextInfo company(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public ContactTextInfo address1(String address1) {
+    this.address1 = address1;
+    return this;
+  }
+
 
   public String getCompany() {
     return company;

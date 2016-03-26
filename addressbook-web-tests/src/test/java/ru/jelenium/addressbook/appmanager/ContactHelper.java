@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.jelenium.addressbook.model.ContactData;
+import ru.jelenium.addressbook.model.Contacts;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.io.ByteArrayOutputStream;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -19,7 +19,7 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void fillOutForm(ContactData cDate, boolean isUpdate) {
+  public void fillOutForm(ContactData cDate) {
     type(By.name("firstname"), cDate.getFirstname());
     type(By.name("middlename"), cDate.getMiddlename());
     type(By.name("lastname"), cDate.getLastname());
@@ -37,11 +37,6 @@ public class ContactHelper extends HelperBase {
     type(By.name("homepage"), cDate.getContactEData().getHomepage());
     chooseDate(cDate.getBirthDate().getDay(), cDate.getBirthDate().getMonth(), cDate.getBirthDate().getYear(), true);
     chooseDate(cDate.getAnnDate().getDay(), cDate.getAnnDate().getMonth(), cDate.getAnnDate().getYear(), false);
-    if (!isUpdate) {
-      if (cDate.getGroupNum() != null) {
-        chooseGroup(cDate.getGroupNum());
-      }
-    }
     type(By.name("address2"), cDate.getTextInfo().getAddress2());
     type(By.name("phone2"), cDate.getPhone().getHome2());
     type(By.name("notes"), cDate.getTextInfo().getNotes());
@@ -83,11 +78,20 @@ public class ContactHelper extends HelperBase {
     click(By.xpath(".//*[@id='content']/form[2]/input[2]"));
   }
 
-  public void createRecord(ContactData cDate, boolean isUpdate) {
+  public void create(ContactData cDate) {
     gotoAddNewPage();
-    fillOutForm(cDate, isUpdate);
+    fillOutForm(cDate);
+      if (cDate.getGroupNum() != null) {
+        chooseGroup(cDate.getGroupNum());
+      }
     pushEnterAddNewPage();
   }
+
+  public void updateTo(ContactData cDate) {
+    fillOutForm(cDate);
+    pushUpdateEditPage();
+  }
+
 
   public void pushEnterAddNewPage() {
     click(By.xpath("//div[@id='content']/form/input[21]"));
@@ -95,9 +99,7 @@ public class ContactHelper extends HelperBase {
 
   public boolean createWhenNoContact(ContactData cDate) {
     if (!isThereAContact()) {
-      createRecord(cDate, false);
-      gotoHomePage();
-      return true;
+      create(cDate);
     }
     return false;
   }
@@ -111,32 +113,25 @@ public class ContactHelper extends HelperBase {
     click(By.xpath(".//*[@id='content']/form[1]/input[22]"));
   }
 
-  public List<ContactData> getContacts() {
-    List<ContactData> contacts = new ArrayList<>();
+  public Contacts list() {
+    //Set<ContactData> contacts = new HashSet<>();
     List<WebElement> rows = wd.findElements(By.name("entry"));
-    /*for (WebElement row : rows) {
-      ContactData tmp = new ContactData(row.findElements(By.tagName("td")).get(2).getText(), row.findElements(By.tagName("td")).get(1).getText());
-      tmp.setId(Integer.parseInt(row.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")));
-      contacts.add(tmp);
-    }*/
-
-    contacts = (rows.stream().map(r -> new ContactData(Integer.parseInt(r.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")),
-            r.findElements(By.tagName("td")).get(2).getText(), r.findElements(By.tagName("td")).get(1).getText())).collect(Collectors.toList()));
+    Contacts contacts = (rows.stream()
+            .map(r -> new ContactData(
+                    Integer.parseInt(r.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")),
+                    r.findElements(By.tagName("td")).get(2).getText(),
+                    r.findElements(By.tagName("td")).get(1).getText()))
+            .collect(Collectors.toCollection(Contacts::new)));
     return contacts;
   }
 
-  public ContactData findDiff(List<ContactData> small, List<ContactData> full) {
+  public ContactData findDiff(Set<ContactData> small, Set<ContactData> full) {
     return full.stream().filter(f -> !small.contains(f)).findFirst().get();
   }
 
   public Comparator<? super ContactData> ById = (c1, c2) -> (Integer.compare(c1.getId(), c2.getId()));
 
-  public void gotoHomePage() {
-    if (isElementHere(By.id("maintable"))) {
-      return;
-    }
-    click(By.linkText("home"));
-  }
+
 
   public void gotoAddNewPage() {
     if (isElementHere(By.cssSelector("div#content h1")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
@@ -151,4 +146,7 @@ public class ContactHelper extends HelperBase {
     click(By.name("modifiy"));
   }
 
+  public void edit(ContactData changed) {
+    wd.findElements(By.tagName("a").findElement(By.ByName);
+  }
 }

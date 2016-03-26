@@ -13,11 +13,11 @@ public class Groups extends ForwardingSet<GroupData> {
   private Set<GroupData> delagate;
 
   public Groups(Groups groups) {
-    this.delagate = new HashSet<GroupData>(groups.delagate);
+    this.delagate = new HashSet<>(groups.delagate);
   }
 
   public Groups() {
-    this.delagate = new HashSet<GroupData>();
+    this.delagate = new HashSet<>();
   }
 
   public Groups with(GroupData group) {

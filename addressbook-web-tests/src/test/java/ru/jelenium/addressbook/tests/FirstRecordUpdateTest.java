@@ -1,16 +1,11 @@
 package ru.jelenium.addressbook.tests;
 
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FirstRecordUpdateTest extends TestBase {
 
@@ -25,13 +20,8 @@ public class FirstRecordUpdateTest extends TestBase {
   public void updateRecordTest() {
 
     app.goTo().homePage();
-    //список до
-    Contacts before = app.contact().list();
-    //определить изменяемую группу
+    Contacts before = app.contact().getAll();
     ContactData changed = before.iterator().next();
-    /*тут нужно азменить на выбор случайной группы и сохранять изменяемую группу
-    app.onHomepage().clickEdit(checkBoxNum);
-    ContactData contactBefore = before.get(checkBoxNum);*/
     app.contact().edit(changed);
     ContactData newInfo = new ContactData()
             .withFirstname("UpdatedТест")
@@ -65,10 +55,9 @@ public class FirstRecordUpdateTest extends TestBase {
                     .year("2011"));
     app.contact().updateTo(newInfo);
     app.goTo().homePage();
-    Contacts after = app.contact().list();
+    Contacts after = app.contact().getAll();
     assertThat(before.size(), equalTo(after.size()));
-    //вычислить несовпадающий контакт в списке до и сравнить с данными контакта до изменения
-    assertThat(app.contact().findDiff(before,after), equalTo(newInfo.setId(changed.getId())));
-    assertThat(after, equalTo(before.withChangedTO(changed,newInfo.setId(app.contact().findDiff(before,after).getId()))));
+    assertThat(app.contact().findDifference(before, after), equalTo(newInfo.withId(changed.getId())));//проверяем, что изменная группа такая же что и данные для изменений+меняем ид
+    assertThat(after, equalTo(before.withChangedTO(changed, newInfo)));
   }
 }

@@ -25,14 +25,14 @@ public class FirstRecordDeletionTest extends TestBase {
     app.goTo().homePage();
     app.contact().createWhenNoContact(new ContactData().withFirstname("ForDeleteТест").withLastname("2Del" + unicDate));
     //список до
-    Set<ContactData> before = app.contact().list();
+    Set<ContactData> before = app.contact().getAll();
     app.onHomepage().gotoDetails(0);
     app.contact().gotoRecordEditorThrViewRecordPage();
     app.contact().deleteRecord();
     app.goTo().homePage();
-    Set<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().getAll();
     Assert.assertEquals(after.size(), before.size() - 1);
-    before.remove(app.contact().findDiff(after, before));
+    before.remove(app.contact().findDifference(after, before));
     Assert.assertEquals(after, before);
   }
 

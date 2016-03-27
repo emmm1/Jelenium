@@ -195,7 +195,7 @@ public class ContactData {
     return id;
   }
 
-  public ContactData setId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
     return this;
   }

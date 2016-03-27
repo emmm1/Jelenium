@@ -9,6 +9,7 @@ import ru.jelenium.addressbook.model.Contacts;
 import java.io.ByteArrayOutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -113,7 +114,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath(".//*[@id='content']/form[1]/input[22]"));
   }
 
-  public Contacts list() {
+  public Contacts getAll() {
     //Set<ContactData> contacts = new HashSet<>();
     List<WebElement> rows = wd.findElements(By.name("entry"));
     Contacts contacts = (rows.stream()
@@ -125,7 +126,7 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
-  public ContactData findDiff(Set<ContactData> small, Set<ContactData> full) {
+  public ContactData findDifference(Set<ContactData> small, Set<ContactData> full) {
     return full.stream().filter(f -> !small.contains(f)).findFirst().get();
   }
 
@@ -147,6 +148,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void edit(ContactData changed) {
-    wd.findElements(By.tagName("a").findElement(By.ByName);
+    String locator = "a[href=\"edit.php?id=" + changed.getId() + "\"]";
+    wd.findElement(By.cssSelector(locator)).click();
   }
 }

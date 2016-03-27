@@ -12,7 +12,7 @@ public class NewRecordTest extends TestBase {
   public void newRecordTest() {
 
     app.goTo().homePage();
-    Contacts before = app.contact().list();
+    Contacts before = app.contact().getAll();
     //хочу посмотреть как будут выглядеть все данные
     ContactData contact = new ContactData()
             .withFirstname("Тест")
@@ -47,8 +47,8 @@ public class NewRecordTest extends TestBase {
                     .year("2011"));
     app.contact().create(contact);
     app.goTo().homePage();
-    Contacts after = app.contact().list();
+    Contacts after = app.contact().getAll();
     assertThat(after.size(), equalTo(before.size() + 1));
-    assertThat(after, equalTo(before.with(contact.setId((app.contact().findDiff(before, after)).getId()))));
+    assertThat(after, equalTo(before.with(contact.withId((app.contact().findDifference(before, after)).getId()))));
   }
 }

@@ -39,7 +39,7 @@ public class AllRecordDeletionTest extends TestBase {
     app.onHomepage().pushDelete();
     app.onHomepage().closeAlarm();
     app.goTo().homePage();
-    Assert.assertEquals(app.contact().list().size(), 0);
+    Assert.assertEquals(app.contact().getAll().size(), 0);
 
   }
 }

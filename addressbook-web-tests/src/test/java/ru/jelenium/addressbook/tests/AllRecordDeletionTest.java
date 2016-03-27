@@ -38,7 +38,7 @@ public class AllRecordDeletionTest extends TestBase {
     app.onHomepage().selectAll();
     app.onHomepage().pushDelete();
     app.onHomepage().closeAlarm();
-    app.goTo().homePage();
+    app.goTo().homePage();//для Chrome
     Assert.assertEquals(app.contact().getAll().size(), 0);
 
   }

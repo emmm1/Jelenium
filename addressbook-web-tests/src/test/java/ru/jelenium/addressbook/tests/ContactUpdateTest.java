@@ -7,7 +7,7 @@ import ru.jelenium.addressbook.model.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class FirstRecordUpdateTest extends TestBase {
+public class ContactUpdateTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -58,6 +58,6 @@ public class FirstRecordUpdateTest extends TestBase {
     Contacts after = app.contact().getAll();
     assertThat(before.size(), equalTo(after.size()));
     assertThat(app.contact().findDifference(before, after), equalTo(newInfo.withId(changed.getId())));//проверяем, что изменная группа такая же что и данные для изменений+меняем ид
-    assertThat(after, equalTo(before.withChangedTO(changed, newInfo)));
+    assertThat(after, equalTo(before.change(changed, newInfo)));
   }
 }

@@ -2,6 +2,7 @@ package ru.jelenium.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import ru.jelenium.addressbook.model.ContactData;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -24,14 +25,9 @@ public class HomePageNavigationHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void gotoDetails(Integer position) {
-    /*String recordXpath;
-    position++;
-    recordXpath = (".//*[@id='maintable']/tbody/tr[" + position + "]/td[7]/a/img");
-    click(By.xpath(recordXpath));
-    */
-    position += 2;
-    wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + position + "]/td[7]/a/img")).click();
+  public void chooseContact(ContactData deleted) {
+    String locator = "input[id=\"" + deleted.getId() + "\"]";
+    wd.findElement(By.cssSelector(locator)).click();
   }
 
 /*  public void clickEdit(Integer position) {
@@ -40,7 +36,12 @@ public class HomePageNavigationHelper extends HelperBase {
     position += 2;
     recordXpath = (".//*[@id='maintable']/tbody/tr[" + position + "]/td[8]/a/img");
     click(By.xpath(recordXpath));
-
   }
+
+  public void gotoDetails(Integer position) {
+  position += 2;
+  wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + position + "]/td[7]/a/img")).click();
+}
+
 */
 }

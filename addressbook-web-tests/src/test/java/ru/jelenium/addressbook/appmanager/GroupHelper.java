@@ -66,15 +66,11 @@ public class GroupHelper extends HelperBase {
     return isElementHere(By.name("selected[]"));
   }
 
-  public Groups list() {
-    /*Set<GroupData> groupSet = wd.findElements(By.cssSelector("span.group")).stream()
-            .map(e -> (new GroupData().withId(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value"))).withName(e.getText())))
-            .collect(Collectors.toSet());*/
+  public Groups getAll() {
 
-    Groups groupList = wd.findElements(By.cssSelector("span.group")).stream()
+    return wd.findElements(By.cssSelector("span.group")).stream()
             .map(e -> new GroupData().withId(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value"))).withName(e.getText()))
             .collect(Collectors.toCollection(Groups::new));
-    return groupList;
   }
 
   public GroupData findDiff(Set<GroupData> small, Set<GroupData> full) {

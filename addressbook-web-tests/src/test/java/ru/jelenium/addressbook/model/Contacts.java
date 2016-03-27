@@ -31,10 +31,17 @@ public class Contacts extends ForwardingSet<ContactData> {
     return contacts;
   }
 
-  public Contacts withChangedTO(ContactData old, ContactData newInfo) {
+  public Contacts change(ContactData old, ContactData newInfo) {
     Contacts contacts = new Contacts(this);
     contacts.remove(old);
     contacts.add(newInfo);
     return contacts;
+  }
+
+  public Object without(ContactData deleted) {
+    Contacts contacts = new Contacts(this);
+    contacts.remove(deleted);
+    return contacts;
+
   }
 }

@@ -13,13 +13,13 @@ public class GroupCreationTest extends TestBase {
   @Test
   public void testGroupCreation() {
     app.goTo().groupPage();
-    Groups before = app.group().list();
+    Groups before = app.group().getAll();
     GroupData group = new GroupData()
             .withName("Test group for" + unicDate)
             .withHeader("SB header")
             .withFooter("SB footer");
     app.group().create(group);
-    Groups after = app.group().list();
+    Groups after = app.group().getAll();
     assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(before.with(group.withId(app.group().findDiff(before, after).getId()))));
   }

@@ -82,9 +82,9 @@ public class ContactHelper extends HelperBase {
   public void create(ContactData cDate) {
     gotoAddNewPage();
     fillOutForm(cDate);
-      if (cDate.getGroupNum() != null) {
-        chooseGroup(cDate.getGroupNum());
-      }
+    if (cDate.getGroupNum() != null) {
+      chooseGroup(cDate.getGroupNum());
+    }
     pushEnterAddNewPage();
   }
 
@@ -117,21 +117,19 @@ public class ContactHelper extends HelperBase {
   public Contacts getAll() {
     //Set<ContactData> contacts = new HashSet<>();
     List<WebElement> rows = wd.findElements(By.name("entry"));
-    Contacts contacts = (rows.stream()
+    return (rows.stream()
             .map(r -> new ContactData(
                     Integer.parseInt(r.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")),
                     r.findElements(By.tagName("td")).get(2).getText(),
                     r.findElements(By.tagName("td")).get(1).getText()))
             .collect(Collectors.toCollection(Contacts::new)));
-    return contacts;
   }
 
   public ContactData findDifference(Set<ContactData> small, Set<ContactData> full) {
     return full.stream().filter(f -> !small.contains(f)).findFirst().get();
   }
 
-  public Comparator<? super ContactData> ById = (c1, c2) -> (Integer.compare(c1.getId(), c2.getId()));
-
+//  public Comparator<? super ContactData> ById = (c1, c2) -> (Integer.compare(c1.getId(), c2.getId()));
 
 
   public void gotoAddNewPage() {
@@ -143,12 +141,11 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
-  public void gotoRecordEditorThrViewRecordPage() {
+  public void modify() {
     click(By.name("modifiy"));
   }
 
   public void edit(ContactData changed) {
-    String locator = "a[href=\"edit.php?id=" + changed.getId() + "\"]";
-    wd.findElement(By.cssSelector(locator)).click();
+    wd.findElement(By.cssSelector("a[href=\"edit.php?id=" + changed.getId() + "\"]")).click();
   }
 }

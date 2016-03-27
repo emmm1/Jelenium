@@ -24,7 +24,7 @@ public class GroupUpdateTest extends TestBase {
   @Test
   public void testGroupUpdate() {
     app.goTo().groupPage();
-    Groups before = app.group().list();
+    Groups before = app.group().getAll();
     GroupData changed = before.iterator().next();
     app.group().choose(changed);
     GroupData newData = new GroupData()
@@ -33,7 +33,7 @@ public class GroupUpdateTest extends TestBase {
             .withHeader("Updated header")
             .withFooter("Updated footer");
     app.group().edit(newData);
-    Groups after = app.group().list();
+    Groups after = app.group().getAll();
     assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before.withChangedGroup(((app.group().findDiff(after, before))), newData)));
   }

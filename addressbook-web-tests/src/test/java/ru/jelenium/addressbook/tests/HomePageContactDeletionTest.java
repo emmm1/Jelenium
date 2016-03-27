@@ -19,10 +19,8 @@ public class HomePageContactDeletionTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
-    app.contact().createWhenNoContact(new ContactData().withFirstname("ForHomePageDeleteТест").withLastname("2HPRDel" + unicDate));
-  }
-
-  public void checkBrowser() {
+    Contacts before = app.contact().getAll();
+    app.contact().createWhenNoContact(before, new ContactData().withFirstname("ForHomePageDeleteТест").withLastname("2HPRDel" + unicDate));
     if (browserType.equals("HU")) {
       throw new Error("такой тип броузера использровать нельзя");
     }
@@ -36,7 +34,7 @@ public class HomePageContactDeletionTest extends TestBase {
     ContactData deleted = before.iterator().next();
     app.onHomepage().chooseContact(deleted);
     app.onHomepage().pushDelete();
-    app.onHomepage().closeAlarm();
+    app.contact().closeAlarm();
     app.goTo().homePage(); //Chrome слишком быстро все делает и список не успевает вывестись - нужно его чем-то занять
     Contacts after = app.contact().getAll();
     assertThat(after.size(), equalTo(before.size() - 1));

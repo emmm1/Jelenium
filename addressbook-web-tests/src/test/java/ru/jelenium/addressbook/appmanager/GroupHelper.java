@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import ru.jelenium.addressbook.model.GroupData;
 import ru.jelenium.addressbook.model.Groups;
 
-import java.util.Comparator;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,6 +38,7 @@ public class GroupHelper extends HelperBase {
 
   public void delete() {
     click(By.name("delete"));
+    groupsCashe = null;
   }
 
   public void edit(GroupData group) {
@@ -46,6 +46,7 @@ public class GroupHelper extends HelperBase {
     fillOutFields(group);
     saveUpdatedGroup();
     confirm();
+    groupsCashe = null;
   }
 
   public void create(GroupData group) {
@@ -53,11 +54,12 @@ public class GroupHelper extends HelperBase {
     fillOutFields(group);
     saveNewGroup();
     confirm();
+    groupsCashe = null;
   }
 
-  public void createWhenNo(GroupData group) {
+  public void createWhenNo(Groups before, GroupData group) {
 
-    if (!isThereAGroup()) {
+    if (before.size() == 0) {
       create(group);
     }
   }
@@ -66,11 +68,16 @@ public class GroupHelper extends HelperBase {
     return isElementHere(By.name("selected[]"));
   }
 
-  public Groups getAll() {
+  private Groups groupsCashe = null;
 
-    return wd.findElements(By.cssSelector("span.group")).stream()
-            .map(e -> new GroupData().withId(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value"))).withName(e.getText()))
-            .collect(Collectors.toCollection(Groups::new));
+  public Groups getAll() {
+    if (groupsCashe == null){
+      groupsCashe = wd.findElements(By.cssSelector("span.group")).stream()
+              .map(e -> new GroupData().withId(Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value"))).withName(e.getText()))
+              .collect(Collectors.toCollection(Groups::new));
+      return groupsCashe;
+    }
+    return new Groups(groupsCashe);
   }
 
   public GroupData findDiff(Set<GroupData> small, Set<GroupData> full) {

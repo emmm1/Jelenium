@@ -3,6 +3,7 @@ package ru.jelenium.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import ru.jelenium.addressbook.model.Contacts;
 
 /**
  * Created by Idea on 08.03.2016.
@@ -21,7 +22,6 @@ public class HelperBase {
   protected boolean isSelected(By locator) {
     return wd.findElement(locator).isSelected();
   }
-
 
   protected void choose(By locator) {
     if (!isSelected(locator)) {

@@ -6,10 +6,9 @@ import org.openqa.selenium.WebElement;
 import ru.jelenium.addressbook.model.ContactData;
 import ru.jelenium.addressbook.model.Contacts;
 
-import java.io.ByteArrayOutputStream;
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -19,6 +18,8 @@ public class ContactHelper extends HelperBase {
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
+
+  public Contacts contactsCashe = null;
 
   public void fillOutForm(ContactData cDate) {
     type(By.name("firstname"), cDate.getFirstname());
@@ -42,7 +43,6 @@ public class ContactHelper extends HelperBase {
     type(By.name("phone2"), cDate.getPhone().getHome2());
     type(By.name("notes"), cDate.getTextInfo().getNotes());
   }
-
 
   public void chooseDate(Integer day, Integer month, String year, Boolean isBirthday) {
     //оставить как было - первая позиция
@@ -69,7 +69,6 @@ public class ContactHelper extends HelperBase {
     type(By.name(yearLocator), year);
   }
 
-
   public void chooseGroup(Integer groupNum) {
     //xpath .//*[@id='content']/form/select[5]/option[3] - последний элемент - номер группы в выпадающем списке
     choose(By.xpath("//div[@id='content']/form/select[5]//option[" + groupNum + "]"));
@@ -77,6 +76,7 @@ public class ContactHelper extends HelperBase {
 
   public void deleteRecord() {
     click(By.xpath(".//*[@id='content']/form[2]/input[2]"));
+    contactsCashe = null;
   }
 
   public void create(ContactData cDate) {
@@ -86,11 +86,13 @@ public class ContactHelper extends HelperBase {
       chooseGroup(cDate.getGroupNum());
     }
     pushEnterAddNewPage();
+    contactsCashe = null;
   }
 
   public void updateTo(ContactData cDate) {
     fillOutForm(cDate);
     pushUpdateEditPage();
+    contactsCashe = null;
   }
 
 
@@ -98,9 +100,10 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public boolean createWhenNoContact(ContactData cDate) {
-    if (!isThereAContact()) {
+  public boolean createWhenNoContact(Contacts before, ContactData cDate) {
+    if (before.size() == 0) {
       create(cDate);
+      return true;
     }
     return false;
   }
@@ -109,6 +112,10 @@ public class ContactHelper extends HelperBase {
     return isElementHere(By.name("selected[]"));
   }
 
+  public void closeAlarm() {
+    wd.switchTo().alert().accept();
+    contactsCashe = null;
+  }
 
   public void pushUpdateEditPage() {
     click(By.xpath(".//*[@id='content']/form[1]/input[22]"));
@@ -116,13 +123,17 @@ public class ContactHelper extends HelperBase {
 
   public Contacts getAll() {
     //Set<ContactData> contacts = new HashSet<>();
-    List<WebElement> rows = wd.findElements(By.name("entry"));
-    return (rows.stream()
-            .map(r -> new ContactData(
-                    Integer.parseInt(r.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")),
-                    r.findElements(By.tagName("td")).get(2).getText(),
-                    r.findElements(By.tagName("td")).get(1).getText()))
-            .collect(Collectors.toCollection(Contacts::new)));
+    if (contactsCashe == null) {
+      List<WebElement> rows = wd.findElements(By.name("entry"));
+      contactsCashe = (rows.stream()
+              .map(r -> new ContactData(
+                      Integer.parseInt(r.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")),
+                      r.findElements(By.tagName("td")).get(2).getText(),
+                      r.findElements(By.tagName("td")).get(1).getText()))
+              .collect(Collectors.toCollection(Contacts::new)));
+      return contactsCashe;
+    }
+    return new Contacts(contactsCashe);
   }
 
   public ContactData findDifference(Set<ContactData> small, Set<ContactData> full) {

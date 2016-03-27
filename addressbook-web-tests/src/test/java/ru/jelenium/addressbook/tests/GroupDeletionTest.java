@@ -13,7 +13,8 @@ public class GroupDeletionTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().groupPage();
-    app.group().createWhenNo(new GroupData().withName("Create 2del" + unicDate).withName("For delete header").withFooter("For delete footer"));
+    Groups before = app.group().getAll();
+    app.group().createWhenNo(before, new GroupData().withName("Create 2del" + unicDate).withName("For delete header").withFooter("For delete footer"));
   }
 
   @Test

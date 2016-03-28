@@ -1,11 +1,13 @@
 package ru.jelenium.addressbook.appmanager;
 
+import com.machinepublishers.jbrowserdriver.JBrowserDriver;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import ru.jelenium.addressbook.model.AuthData;
 
 import java.util.concurrent.TimeUnit;
@@ -47,6 +49,10 @@ public class AppManger {
       wd = new InternetExplorerDriver();
     } else if (browser.equals("HU")) {
       wd = new HtmlUnitDriver();
+    } else if (browser.equals("Phantom")) {
+      wd = new PhantomJSDriver();
+    } else if (browser.equals("JB")) {
+      wd = new JBrowserDriver();
     }
 
 

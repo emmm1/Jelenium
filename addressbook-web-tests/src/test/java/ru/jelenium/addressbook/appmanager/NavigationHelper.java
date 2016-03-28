@@ -27,7 +27,9 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("home"));
   }
 
+  /*
   public void details(ContactData deleted) {
-    wd.findElement(By.cssSelector("a[href=\"view.php?id=" +deleted.getId()+ "\"")).click();
+    wd.findElement(By.cssSelector("a[href=\"view.php?id=" + deleted.getId() + "\"]")).click();
   }
+  */
 }

@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class TestBase {
 
-  protected static String browserType = "Firefox";
+  protected static String browserType = "JB";
   protected static AppManger app = new AppManger(browserType);
 
   //Чтобы лучше контролировать результат работы HTMLUnit

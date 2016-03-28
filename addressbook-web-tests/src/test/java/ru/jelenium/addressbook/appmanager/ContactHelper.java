@@ -159,4 +159,9 @@ public class ContactHelper extends HelperBase {
   public void edit(ContactData changed) {
     wd.findElement(By.cssSelector("a[href=\"edit.php?id=" + changed.getId() + "\"]")).click();
   }
+
+  public void details(ContactData deleted) {
+    wd.findElement(By.cssSelector("a[href=\"view.php?id=" + deleted.getId() + "\"]")).click();
+  }
+
 }

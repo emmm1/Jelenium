@@ -47,8 +47,8 @@ public class NewRecordTest extends TestBase {
                     .year("2011"));
     app.contact().create(contact);
     app.goTo().homePage();
+    assertThat(app.contact().getQty(), equalTo(before.size() + 1));
     Contacts after = app.contact().getAll();
-    assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(before.with(contact.withId((app.contact().findDifference(before, after)).getId()))));
   }
 }

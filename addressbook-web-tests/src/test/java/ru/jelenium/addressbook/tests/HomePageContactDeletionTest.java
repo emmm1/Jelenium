@@ -36,8 +36,9 @@ public class HomePageContactDeletionTest extends TestBase {
     app.onHomepage().pushDelete();
     app.contact().closeAlarm();
     app.goTo().homePage(); //Chrome слишком быстро все делает и список не успевает вывестись - нужно его чем-то занять
+    assertThat(app.contact().getQty(), equalTo(before.size() - 1));
     Contacts after = app.contact().getAll();
-    assertThat(after.size(), equalTo(before.size() - 1));
+
     assertThat(after, equalTo(before.without(deleted)));
   }
 

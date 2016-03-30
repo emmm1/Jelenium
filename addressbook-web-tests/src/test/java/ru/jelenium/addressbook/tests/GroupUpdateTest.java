@@ -34,8 +34,8 @@ public class GroupUpdateTest extends TestBase {
             .withHeader("Updated header")
             .withFooter("Updated footer");
     app.group().edit(newData);
+    assertThat(app.group().getQty(), equalTo(before.size()));
     Groups after = app.group().getAll();
-    assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before.withChangedGroup(((app.group().findDiff(after, before))), newData)));
   }
 }

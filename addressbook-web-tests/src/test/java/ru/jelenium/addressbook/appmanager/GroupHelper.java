@@ -105,4 +105,8 @@ public class GroupHelper extends HelperBase {
   public void choose(GroupData group) {
     wd.findElement(By.cssSelector("input[value='" + group.getId() + "']")).click();
   }
+
+  public int getQty() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
 }

@@ -19,8 +19,8 @@ public class GroupCreationTest extends TestBase {
             .withHeader("SB header")
             .withFooter("SB footer");
     app.group().create(group);
+    assertThat(app.group().getQty(), equalTo(before.size() + 1));
     Groups after = app.group().getAll();
-    assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(before.with(group.withId(app.group().findDiff(before, after).getId()))));
   }
 

@@ -56,8 +56,8 @@ public class ContactUpdateTest extends TestBase {
                     .year("2011"));
     app.contact().updateTo(newInfo);
     app.goTo().homePage();
+    assertThat(before.size(), equalTo(app.contact().getQty()));
     Contacts after = app.contact().getAll();
-    assertThat(before.size(), equalTo(after.size()));
     assertThat(app.contact().findDifference(before, after), equalTo(newInfo.withId(changed.getId())));//проверяем, что изменная группа такая же что и данные для изменений+меняем ид
     assertThat(after, equalTo(before.change(changed, newInfo)));
   }

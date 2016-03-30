@@ -25,8 +25,8 @@ public class GroupDeletionTest extends TestBase {
     app.group().choose(group);
     app.group().delete();
     app.goTo().groupPage();
+    assertThat(app.group().getQty(), equalTo(before.size() - 1));
     Groups after = app.group().getAll();
-    assertThat(after.size(), equalTo(before.size() - 1));
     assertThat(after, equalTo(before.without(group)));
   }
 }

@@ -151,7 +151,9 @@ public class ContactHelper extends HelperBase {
     }
     click(By.linkText("add new"));
   }
-
+public int getQty() {
+  return wd.findElements(By.name("entry")).size();
+  }
   public void modify() {
     click(By.name("modifiy"));
   }
@@ -163,5 +165,6 @@ public class ContactHelper extends HelperBase {
   public void details(ContactData deleted) {
     wd.findElement(By.cssSelector("a[href=\"view.php?id=" + deleted.getId() + "\"]")).click();
   }
+
 
 }

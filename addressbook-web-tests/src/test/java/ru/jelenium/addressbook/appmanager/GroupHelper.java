@@ -103,7 +103,7 @@ public class GroupHelper extends HelperBase {
   }*/
 
   public void choose(GroupData group) {
-    wd.findElement(By.cssSelector("input[value='" + group.getId() + "']")).click();
+    wd.findElement(By.cssSelector(String.format("input[value='%s']", group.getId()))).click();
   }
 
   public int getQty() {

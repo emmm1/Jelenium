@@ -18,8 +18,7 @@ public class ContactDeletionTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
-    Contacts before = app.contact().getAll();
-    app.contact().createWhenNoContact(before, new ContactData().withFirstname("ForHomePageDeleteТест").withLastname("2HPRDel" + unicDate));
+    app.contact().createWhenNoContact(app.contact().getQty(), new ContactData().withFirstname("ForHomePageDeleteТест").withLastname("2HPRDel" + unicDate));
   }
 
   @Test

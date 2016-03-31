@@ -3,8 +3,7 @@ package ru.jelenium.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.jelenium.addressbook.model.ContactData;
-import ru.jelenium.addressbook.model.Contacts;
+import ru.jelenium.addressbook.model.*;
 
 import java.util.List;
 import java.util.Set;
@@ -71,7 +70,7 @@ public class ContactHelper extends HelperBase {
 
   public void chooseGroup(Integer groupNum) {
     //xpath .//*[@id='content']/form/select[5]/option[3] - последний элемент - номер группы в выпадающем списке
-    choose(By.xpath("//div[@id='content']/form/select[5]//option[" + groupNum + "]"));
+    choose(By.xpath(String.format("//div[@id='content']/form/select[5]//option[s%]", groupNum)));
   }
 
   public void deleteRecord() {
@@ -100,8 +99,8 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public boolean createWhenNoContact(Contacts before, ContactData cDate) {
-    if (before.size() == 0) {
+  public boolean createWhenNoContact(int qty, ContactData cDate) {
+    if (qty == 0) {
       create(cDate);
       return true;
     }
@@ -126,10 +125,14 @@ public class ContactHelper extends HelperBase {
     if (contactsCashe == null) {
       List<WebElement> rows = wd.findElements(By.name("entry"));
       contactsCashe = (rows.stream()
-              .map(r -> new ContactData(
-                      Integer.parseInt(r.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")),
-                      r.findElements(By.tagName("td")).get(2).getText(),
-                      r.findElements(By.tagName("td")).get(1).getText()))
+              .map(r -> new ContactData()
+                      .withId(Integer.parseInt(r.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")))
+                      .withFirstname(r.findElements(By.tagName("td")).get(2).getText())
+                      .withLastname(r.findElements(By.tagName("td")).get(1).getText())
+                      .where(new ContactTextInfo().address1(r.findElements(By.tagName("td")).get(3).getText()))
+                      .withEmails(r.findElements(By.tagName("td")).get(4).getText())
+                      .withPhones(r.findElements(By.tagName("td")).get(5).getText())
+              )
               .collect(Collectors.toCollection(Contacts::new)));
       return contactsCashe;
     }
@@ -158,13 +161,28 @@ public int getQty() {
     click(By.name("modifiy"));
   }
 
-  public void edit(ContactData changed) {
-    wd.findElement(By.cssSelector("a[href=\"edit.php?id=" + changed.getId() + "\"]")).click();
+  public void edit(ContactData contact) {
+    wd.findElement(By.cssSelector(String.format("a[href=\"edit.php?id=%s\"]", contact.getId()))).click();
   }
 
   public void details(ContactData deleted) {
-    wd.findElement(By.cssSelector("a[href=\"view.php?id=" + deleted.getId() + "\"]")).click();
+    wd.findElement(By.cssSelector(String.format("a[href=\"view.php?id=%s\"]", deleted.getId()))).click();
   }
 
-
+  public ContactData fromEditPage(int id) {
+    return new ContactData()
+            .withId(id)
+            .withFirstname(wd.findElement(By.name("firstname")).getAttribute("value"))
+            .withLastname(wd.findElement(By.name("lastname")).getAttribute("value"))
+            .where(new ContactTextInfo().address1(wd.findElement(By.name("address")).getAttribute("value")))
+            .and(new ContactEData()
+                    .email1(wd.findElement(By.name("email")).getAttribute("value"))
+                    .email2(wd.findElement(By.name("email2")).getAttribute("value"))
+                    .email3(wd.findElement(By.name("email3")).getAttribute("value")))
+            .withNumbersOf(new ContactPhone()
+                    .phoneHome1(wd.findElement(By.name("home")).getAttribute("value"))
+                    .mobilePhone(wd.findElement(By.name("mobile")).getAttribute("value"))
+                    .workPhone(wd.findElement(By.name("work")).getAttribute("value"))
+                    .phoneHome2(wd.findElement(By.name("phone2")).getAttribute("value")));
+  }
 }

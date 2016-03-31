@@ -8,6 +8,8 @@ public class ContactData {
   private String lastname;
   private String nickname;
   private String title;
+  private String allEmails;
+  private String allPhones;
   private Integer groupNum;
   private ContactPhone phone;
   private ContactEData contactEData;
@@ -92,6 +94,24 @@ public class ContactData {
 
   public ContactData withMiddlename(String middlename) {
     this.middlename = middlename;
+    return this;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public ContactData withEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public ContactData withPhones(String allPhones) {
+    this.allPhones = allPhones;
     return this;
   }
 

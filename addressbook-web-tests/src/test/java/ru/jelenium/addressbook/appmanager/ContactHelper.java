@@ -70,7 +70,7 @@ public class ContactHelper extends HelperBase {
 
   public void chooseGroup(Integer groupNum) {
     //xpath .//*[@id='content']/form/select[5]/option[3] - последний элемент - номер группы в выпадающем списке
-    choose(By.xpath(String.format("//div[@id='content']/form/select[5]//option[s%]", groupNum)));
+    choose(By.xpath(String.format("//div[@id='content']/form/select[5]//option[%s]", groupNum)));
   }
 
   public void deleteRecord() {
@@ -185,4 +185,6 @@ public int getQty() {
                     .workPhone(wd.findElement(By.name("work")).getAttribute("value"))
                     .phoneHome2(wd.findElement(By.name("phone2")).getAttribute("value")));
   }
+
+
 }

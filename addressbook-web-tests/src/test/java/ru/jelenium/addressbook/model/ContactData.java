@@ -1,5 +1,8 @@
 package ru.jelenium.addressbook.model;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class ContactData {
 
   private int id;
@@ -115,56 +118,54 @@ public class ContactData {
     return this;
   }
 
-/*
-  public ContactData(String firstname, String middlename, String lastname, String nickname, String title, Integer groupNum,
-                     ContactTextInfo textInfo, ContactPhone phone, ContactEData contactEData, DatesData birthDate,
-                     DatesData annDate) {
-    //Сделал отключения ненужных блоков информации
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.title = title;
-    this.groupNum = (Integer) notNull(groupNum, null);
-    this.textInfo = (ContactTextInfo) notNull(textInfo, new ContactTextInfo(null, null, null, null));
-    this.phone = (ContactPhone) notNull(phone, new ContactPhone(null, null, null, null, null));
-    this.contactEData = (ContactEData) notNull(contactEData, new ContactEData(null, null, null, null));
-    this.birthDate = (DatesData) notNull(birthDate, new DatesData(null, null, null));
-    this.annDate = (DatesData) notNull(annDate, new DatesData(null, null, null));
-  }
 
-  public ContactData(String firstname, String lastname) {
-    //Минимальный конструктор
-    this.firstname = firstname;
-    this.middlename = null;
-    this.lastname = lastname;
-    this.nickname = null;
-    this.title = null;
-    this.groupNum = null;
-    this.textInfo = new ContactTextInfo(null, null, null, null);
-    this.phone = new ContactPhone(null, null, null, null, null);
-    this.contactEData = new ContactEData(null, null, null, null);
-    this.birthDate = new DatesData(null, null, null);
-    this.annDate = new DatesData(null, null, null);
-  }
-
-  public ContactData(int id, String firstname, String lastname) {
-    //Минимальный конструктор с ид
-    this.id = id;
-    this.firstname = firstname;
-    this.middlename = null;
-    this.lastname = lastname;
-    this.nickname = null;
-    this.title = null;
-    this.groupNum = null;
-    this.textInfo = new ContactTextInfo(null, null, null, null);
-    this.phone = new ContactPhone(null, null, null, null, null);
-    this.contactEData = new ContactEData(null, null, null, null);
-    this.birthDate = new DatesData(null, null, null);
-    this.annDate = new DatesData(null, null, null);
-  }
-
-*/
+//  public ContactData(String firstname, String middlename, String lastname, String nickname, String title, Integer groupNum,
+//                     ContactTextInfo textInfo, ContactPhone phone, ContactEData contactEData, DatesData birthDate,
+//                     DatesData annDate) {
+//    //Сделал отключения ненужных блоков информации
+//    this.firstname = firstname;
+//    this.middlename = middlename;
+//    this.lastname = lastname;
+//    this.nickname = nickname;
+//    this.title = title;
+//    this.groupNum = (Integer) notNull(groupNum, null);
+//    this.textInfo = (ContactTextInfo) notNull(textInfo, new ContactTextInfo(null, null, null, null));
+//    this.phone = (ContactPhone) notNull(phone, new ContactPhone(null, null, null, null, null));
+//    this.contactEData = (ContactEData) notNull(contactEData, new ContactEData(null, null, null, null));
+//    this.birthDate = (DatesData) notNull(birthDate, new DatesData(null, null, null));
+//    this.annDate = (DatesData) notNull(annDate, new DatesData(null, null, null));
+//  }
+//
+//  public ContactData(String firstname, String lastname) {
+//    //Минимальный конструктор
+//    this.firstname = firstname;
+//    this.middlename = null;
+//    this.lastname = lastname;
+//    this.nickname = null;
+//    this.title = null;
+//    this.groupNum = null;
+//    this.textInfo = new ContactTextInfo(null, null, null, null);
+//    this.phone = new ContactPhone(null, null, null, null, null);
+//    this.contactEData = new ContactEData(null, null, null, null);
+//    this.birthDate = new DatesData(null, null, null);
+//    this.annDate = new DatesData(null, null, null);
+//  }
+//
+//  public ContactData(int id, String firstname, String lastname) {
+//    //Минимальный конструктор с ид
+//    this.id = id;
+//    this.firstname = firstname;
+//    this.middlename = null;
+//    this.lastname = lastname;
+//    this.nickname = null;
+//    this.title = null;
+//    this.groupNum = null;
+//    this.textInfo = new ContactTextInfo(null, null, null, null);
+//    this.phone = new ContactPhone(null, null, null, null, null);
+//    this.contactEData = new ContactEData(null, null, null, null);
+//    this.birthDate = new DatesData(null, null, null);
+//    this.annDate = new DatesData(null, null, null);
+//  }
 
 
   public String getFirstname() {
@@ -229,7 +230,9 @@ public class ContactData {
 
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+    if (allEmails != null ? !allEmails.equals(that.allEmails) : that.allEmails != null) return false;
+    return allPhones != null ? allPhones.equals(that.allPhones) : that.allPhones == null;
 
   }
 
@@ -238,6 +241,8 @@ public class ContactData {
     int result = id;
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
+    result = 31 * result + (allPhones != null ? allPhones.hashCode() : 0);
     return result;
   }
 
@@ -249,4 +254,23 @@ public class ContactData {
             ", lastname='" + lastname + '\'' +
             '}';
   }
+
+  public void makeAllEmails() {
+    allEmails = Arrays.asList(new String[]{contactEData.getEmail1(), contactEData.getEmail2(), contactEData.getEmail3()})
+            .stream().filter(email -> !email.equals(""))
+            .map(e -> e.replaceAll("\\s", "").replaceAll("-()", ""))
+            .collect(Collectors.joining("/n"));
+  }
+
+
+
+
+  public void makeAllPhones() {
+    //удаляем лишнее через регулярные выражения и клеим в одно
+    allPhones = Arrays.asList(new String[] {phone.getHome1(), phone.getMobile(), phone.getWork(), phone.getHome2()})
+            .stream().filter(p -> ! p.equals(""))
+            .map(e -> e.replaceAll("\\s", "").replaceAll("-()", ""))
+            .collect(Collectors.joining("/n"));
+  }
+
 }

@@ -25,20 +25,10 @@ public class ContactComapre extends TestBase{
     app.contact().edit(homePageContact);
     //создаем второй контакт собрав те же поля со страницы редактирования
     ContactData editPageContact = app.contact().fromEditPage(homePageContact.getId());
-    //    Мурыжим почту
-    if (editPageContact.getContactEData().getEmail1() != null) {
-      String allEmails = editPageContact.getContactEData().getEmail1();
-      if (editPageContact.getContactEData().getEmail2() != null) allEmails = "\n" + editPageContact.getContactEData().getEmail2();
-      if (editPageContact.getContactEData().getEmail3() != null) allEmails = "\n" + editPageContact.getContactEData().getEmail3();
-    } else if (editPageContact.getContactEData().getEmail2() != null) {
-      String allEmails = editPageContact.getContactEData().getEmail2();
-      if (editPageContact.getContactEData().getEmail3() != null) allEmails = "\n" + editPageContact.getContactEData().getEmail3();
-    } else if (editPageContact.getContactEData().getEmail3() != null) {
-      String allEmails = editPageContact.getContactEData().getEmail3();
-    }
-
-
+    homePageContact.makeAllEmails();
+    homePageContact.makeAllPhones();
     //сравниваем
+
   }
 
 }

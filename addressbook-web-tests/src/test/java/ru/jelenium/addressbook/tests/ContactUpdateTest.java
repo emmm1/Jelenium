@@ -12,7 +12,6 @@ public class ContactUpdateTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
-    Contacts before = app.contact().getAll();
     app.contact().createWhenNoContact(app.contact().getQty(), new ContactData().withFirstname("ForHomePageDeleteТест").withLastname("2HPRDel" + unicDate));
   }
 
@@ -30,8 +29,8 @@ public class ContactUpdateTest extends TestBase {
             .withLastname("UpdatedТестовый" + unicDate)
             .withTitle("UpdatedДорогой")
             .withNickname("Updatedттт")
+            .withAddress1("UpdatedРФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13")
             .where(new ContactTextInfo()
-                    .address1("UpdatedРФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13")
                     .address2("UpdatedТестовый район, с. Тестовое, 1я тестовая улица, д. 23")
                     .company("Тест продакшн")//нужно же что-то и оставить как есть
                     .notes("Помрешь, пока заполнишь"))

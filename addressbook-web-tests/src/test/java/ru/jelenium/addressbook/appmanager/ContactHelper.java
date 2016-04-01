@@ -27,7 +27,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("nickname"), cDate.getNickname());
     type(By.name("title"), cDate.getTitle());
     type(By.name("company"), cDate.getTextInfo().getCompany());
-    type(By.name("address"), cDate.getTextInfo().getAddress1());
+    type(By.name("address"), cDate.getAddress1());
     type(By.name("home"), cDate.getPhone().getHome1());
     type(By.name("mobile"), cDate.getPhone().getMobile());
     type(By.name("work"), cDate.getPhone().getWork());
@@ -129,7 +129,7 @@ public class ContactHelper extends HelperBase {
                       .withId(Integer.parseInt(r.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("id")))
                       .withFirstname(r.findElements(By.tagName("td")).get(2).getText())
                       .withLastname(r.findElements(By.tagName("td")).get(1).getText())
-                      .where(new ContactTextInfo().address1(r.findElements(By.tagName("td")).get(3).getText()))
+                      .withAddress1(r.findElements(By.tagName("td")).get(3).getText())
                       .withEmails(r.findElements(By.tagName("td")).get(4).getText())
                       .withPhones(r.findElements(By.tagName("td")).get(5).getText())
               )
@@ -154,9 +154,11 @@ public class ContactHelper extends HelperBase {
     }
     click(By.linkText("add new"));
   }
-public int getQty() {
+
+  public int getQty() {
   return wd.findElements(By.name("entry")).size();
   }
+
   public void modify() {
     click(By.name("modifiy"));
   }
@@ -165,8 +167,8 @@ public int getQty() {
     wd.findElement(By.cssSelector(String.format("a[href=\"edit.php?id=%s\"]", contact.getId()))).click();
   }
 
-  public void details(ContactData deleted) {
-    wd.findElement(By.cssSelector(String.format("a[href=\"view.php?id=%s\"]", deleted.getId()))).click();
+  public void details(ContactData contact) {
+    wd.findElement(By.cssSelector(String.format("a[href=\"view.php?id=%s\"]", contact.getId()))).click();
   }
 
   public ContactData fromEditPage(int id) {
@@ -174,7 +176,7 @@ public int getQty() {
             .withId(id)
             .withFirstname(wd.findElement(By.name("firstname")).getAttribute("value"))
             .withLastname(wd.findElement(By.name("lastname")).getAttribute("value"))
-            .where(new ContactTextInfo().address1(wd.findElement(By.name("address")).getAttribute("value")))
+            .withAddress1(wd.findElement(By.name("address")).getAttribute("value"))
             .and(new ContactEData()
                     .email1(wd.findElement(By.name("email")).getAttribute("value"))
                     .email2(wd.findElement(By.name("email2")).getAttribute("value"))
@@ -187,4 +189,30 @@ public int getQty() {
   }
 
 
+  public ContactData fromDetailsPage(int id) {
+    return new ContactData()
+            .withId(id)
+            //надо видимо склеивать строки ласт и ферстнэйм в одну и так проверять. Еще одно поле?
+            //content <b>first last</b>
+            .withFirstname(wd.findElement(By.name("firstname")).getAttribute("value"))
+            .withLastname(wd.findElement(By.name("lastname")).getAttribute("value"))
+            //content после первого блока <br></br>
+            .withAddress1(wd.findElement(By.name("address")).getAttribute("value"))
+            .and(new ContactEData()
+                    // седьмой с a href
+                    .email1(wd.findElement(By.name("email")).getAttribute("value"))
+                    // восьмой с a href
+                    .email2(wd.findElement(By.name("email2")).getAttribute("value"))
+                    // девятый с a href
+                    .email3(wd.findElement(By.name("email3")).getAttribute("value")))
+            .withNumbersOf(new ContactPhone()
+                    // после третьего блока <br></br>
+                    .phoneHome1(wd.findElement(By.name("home")).getAttribute("value"))
+                    // после четвертого блока <br></br>
+                    .mobilePhone(wd.findElement(By.name("mobile")).getAttribute("value"))
+                    // после пятого
+                    .workPhone(wd.findElement(By.name("work")).getAttribute("value"))
+                    //после 13го
+                    .phoneHome2(wd.findElement(By.name("phone2")).getAttribute("value")));
+  }
 }

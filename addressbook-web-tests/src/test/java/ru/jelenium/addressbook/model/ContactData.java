@@ -10,6 +10,7 @@ public class ContactData {
   private String middlename;
   private String lastname;
   private String nickname;
+  private String address1;
   private String title;
   private String allEmails;
   private String allPhones;
@@ -19,7 +20,6 @@ public class ContactData {
   private DatesData birthDate;
   private DatesData annDate;
   private ContactTextInfo textInfo;
-
 
   public ContactData(int id, String firstname, String lastname) {
     this.id = id;
@@ -32,7 +32,6 @@ public class ContactData {
     this.annDate = new DatesData();
   }
 
-
   public ContactData() {
     this.id = 0;
     this.phone = new ContactPhone();
@@ -43,12 +42,10 @@ public class ContactData {
 
   }
 
-
   public ContactData where(ContactTextInfo textInfo) {
     this.textInfo = textInfo;
     return this;
   }
-
 
   public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
@@ -221,6 +218,10 @@ public class ContactData {
     return this;
   }
 
+  public String getAddress1() {
+    return address1;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -230,9 +231,7 @@ public class ContactData {
 
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-    if (allEmails != null ? !allEmails.equals(that.allEmails) : that.allEmails != null) return false;
-    return allPhones != null ? allPhones.equals(that.allPhones) : that.allPhones == null;
+    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
 
   }
 
@@ -241,9 +240,13 @@ public class ContactData {
     int result = id;
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-    result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
-    result = 31 * result + (allPhones != null ? allPhones.hashCode() : 0);
     return result;
+  }
+
+  public ContactData withAddress1(String address1) {
+    this.address1 = address1;
+    return this;
+
   }
 
   @Override
@@ -258,19 +261,19 @@ public class ContactData {
   public void makeAllEmails() {
     allEmails = Arrays.asList(new String[]{contactEData.getEmail1(), contactEData.getEmail2(), contactEData.getEmail3()})
             .stream().filter(email -> !email.equals(""))
-            .map(e -> e.replaceAll("\\s", "").replaceAll("-()", ""))
-            .collect(Collectors.joining("/n"));
+//            .map(e -> e.replaceAll("\\s", "").replaceAll("-()", ""))
+            .collect(Collectors.joining("\n"));
+    contactEData = null;
   }
-
-
 
 
   public void makeAllPhones() {
     //удаляем лишнее через регулярные выражения и клеим в одно
-    allPhones = Arrays.asList(new String[] {phone.getHome1(), phone.getMobile(), phone.getWork(), phone.getHome2()})
-            .stream().filter(p -> ! p.equals(""))
-            .map(e -> e.replaceAll("\\s", "").replaceAll("-()", ""))
-            .collect(Collectors.joining("/n"));
+    allPhones = Arrays.asList(new String[]{phone.getHome1(), phone.getMobile(), phone.getWork(), phone.getHome2()})
+            .stream().filter(p -> !p.equals(""))
+            .map(e -> e.replaceAll("\\s", "").replaceAll("[-()]", ""))
+            .collect(Collectors.joining("\n"));
+    phone = null;
   }
 
 }

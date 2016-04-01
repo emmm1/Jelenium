@@ -2,7 +2,6 @@ package ru.jelenium.addressbook.model;
 
 public class ContactTextInfo {
   private String company;
-  private String address1;
   private String address2;
   private String notes;
 
@@ -22,18 +21,9 @@ public class ContactTextInfo {
     return this;
   }
 
-  public ContactTextInfo address1(String address1) {
-    this.address1 = address1;
-    return this;
-  }
-
 
   public String getCompany() {
     return company;
-  }
-
-  public String getAddress1() {
-    return address1;
   }
 
   public String getAddress2() {

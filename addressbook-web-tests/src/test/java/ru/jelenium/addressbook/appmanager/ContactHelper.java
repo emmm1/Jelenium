@@ -94,7 +94,6 @@ public class ContactHelper extends HelperBase {
     contactsCashe = null;
   }
 
-
   public void pushEnterAddNewPage() {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
@@ -143,9 +142,6 @@ public class ContactHelper extends HelperBase {
     return full.stream().filter(f -> !small.contains(f)).findFirst().get();
   }
 
-//  public Comparator<? super ContactData> ById = (c1, c2) -> (Integer.compare(c1.getId(), c2.getId()));
-
-
   public void gotoAddNewPage() {
     if (isElementHere(By.cssSelector("div#content h1")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
             && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter")) {
@@ -163,15 +159,15 @@ public class ContactHelper extends HelperBase {
     click(By.name("modifiy"));
   }
 
-  public void edit(ContactData contact) {
-    wd.findElement(By.cssSelector(String.format("a[href=\"edit.php?id=%s\"]", contact.getId()))).click();
+  public void goToEdit(ContactData contact) {
+    wd.findElement(By.cssSelector(String.format("a[href=\"goToEdit.php?id=%s\"]", contact.getId()))).click();
   }
 
   public void details(ContactData contact) {
     wd.findElement(By.cssSelector(String.format("a[href=\"view.php?id=%s\"]", contact.getId()))).click();
   }
 
-  public ContactData fromEditPage(int id) {
+  public ContactData getInfoFromEditPage(int id) {
     return new ContactData()
             .withId(id)
             .withFirstname(wd.findElement(By.name("firstname")).getAttribute("value"))
@@ -190,29 +186,21 @@ public class ContactHelper extends HelperBase {
 
 
   public ContactData fromDetailsPage(int id) {
+    String[] tmp =  wd.findElement(By.id("content")).getText().split("\n");
     return new ContactData()
             .withId(id)
-            //надо видимо склеивать строки ласт и ферстнэйм в одну и так проверять. Еще одно поле?
-            //content <b>first last</b>
-            .withFirstname(wd.findElement(By.name("firstname")).getAttribute("value"))
-            .withLastname(wd.findElement(By.name("lastname")).getAttribute("value"))
-            //content после первого блока <br></br>
-            .withAddress1(wd.findElement(By.name("address")).getAttribute("value"))
-            .and(new ContactEData()
-                    // седьмой с a href
-                    .email1(wd.findElement(By.name("email")).getAttribute("value"))
-                    // восьмой с a href
-                    .email2(wd.findElement(By.name("email2")).getAttribute("value"))
-                    // девятый с a href
-                    .email3(wd.findElement(By.name("email3")).getAttribute("value")))
+            .withFullName(tmp[0])
+            .withAddress1(tmp[1])
             .withNumbersOf(new ContactPhone()
-                    // после третьего блока <br></br>
-                    .phoneHome1(wd.findElement(By.name("home")).getAttribute("value"))
-                    // после четвертого блока <br></br>
-                    .mobilePhone(wd.findElement(By.name("mobile")).getAttribute("value"))
-                    // после пятого
-                    .workPhone(wd.findElement(By.name("work")).getAttribute("value"))
-                    //после 13го
-                    .phoneHome2(wd.findElement(By.name("phone2")).getAttribute("value")));
+                    .phoneHome1(tmp[3].replaceFirst("H: ", ""))
+                    .mobilePhone(tmp[4].replaceFirst("M: ",""))
+                    .workPhone(tmp[5].replaceFirst("W: ",""))
+                    .phoneHome2(tmp[13].replaceFirst("P: ", "")))
+            .and(new ContactEData()
+                    .email1(tmp[7])
+                    .email2(tmp[8])
+                    .email3(tmp[9])
+                    )
+            ;
   }
 }

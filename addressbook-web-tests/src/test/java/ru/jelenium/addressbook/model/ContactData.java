@@ -14,6 +14,7 @@ public class ContactData {
   private String title;
   private String allEmails;
   private String allPhones;
+  private String fullName;
   private Integer groupNum;
   private ContactPhone phone;
   private ContactEData contactEData;
@@ -222,6 +223,17 @@ public class ContactData {
     return address1;
   }
 
+
+  public String getFullName() {
+    return fullName;
+  }
+
+  public ContactData withFullName(String fullName) {
+    this.fullName = fullName;
+    return this;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -249,31 +261,53 @@ public class ContactData {
 
   }
 
+  public ContactData makeAllEmails() {
+    allEmails = Arrays.asList(new String[]{contactEData.getEmail1(), contactEData.getEmail2(), contactEData.getEmail3()})
+            .stream().filter(email -> !email.equals(""))
+//            .map(e -> e.replaceAll("\\s", "").replaceAll("-()", ""))
+            .collect(Collectors.joining("\n"));
+    return this;
+  }
+
+
   @Override
   public String toString() {
     return "ContactData{" +
             "id=" + id +
             ", firstname='" + firstname + '\'' +
+            ", middlename='" + middlename + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", nickname='" + nickname + '\'' +
+            ", address1='" + address1 + '\'' +
+            ", title='" + title + '\'' +
+            ", allEmails='" + allEmails + '\'' +
+            ", allPhones='" + allPhones + '\'' +
+            ", fullName='" + fullName + '\'' +
+            ", groupNum=" + groupNum +
+            ", phone=" + phone +
+            ", contactEData=" + contactEData +
+            ", birthDate=" + birthDate +
+            ", annDate=" + annDate +
+            ", textInfo=" + textInfo +
             '}';
   }
 
-  public void makeAllEmails() {
-    allEmails = Arrays.asList(new String[]{contactEData.getEmail1(), contactEData.getEmail2(), contactEData.getEmail3()})
-            .stream().filter(email -> !email.equals(""))
-//            .map(e -> e.replaceAll("\\s", "").replaceAll("-()", ""))
-            .collect(Collectors.joining("\n"));
-    contactEData = null;
-  }
-
-
-  public void makeAllPhones() {
+  public ContactData makeAllPhones() {
     //удаляем лишнее через регулярные выражения и клеим в одно
     allPhones = Arrays.asList(new String[]{phone.getHome1(), phone.getMobile(), phone.getWork(), phone.getHome2()})
             .stream().filter(p -> !p.equals(""))
             .map(e -> e.replaceAll("\\s", "").replaceAll("[-()]", ""))
             .collect(Collectors.joining("\n"));
-    phone = null;
+    return this;
   }
 
+  public ContactData makeFullName() {
+    //клеим first & last в одно
+    fullName = Arrays.asList(new String[]{firstname, lastname})
+            .stream().filter(p -> !p.equals(""))
+            .collect(Collectors.joining("\n"));
+    firstname = null;
+    lastname = null;
+    return this;
+  }
 }

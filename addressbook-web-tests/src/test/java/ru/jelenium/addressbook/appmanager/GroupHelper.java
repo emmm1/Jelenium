@@ -42,7 +42,7 @@ public class GroupHelper extends HelperBase {
   }
 
   public void edit(GroupData group) {
-    click(By.name("edit"));
+    click(By.name("goToEdit"));
     fillOutFields(group);
     saveUpdatedGroup();
     confirm();

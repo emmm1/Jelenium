@@ -22,7 +22,7 @@ public class ContactUpdateTest extends TestBase {
     app.goTo().homePage();
     Contacts before = app.contact().getAll();
     ContactData changed = before.iterator().next();
-    app.contact().edit(changed);
+    app.contact().goToEdit(changed);
     ContactData newInfo = new ContactData()
             .withFirstname("UpdatedТест")
             .withMiddlename("UpdatedТестович")

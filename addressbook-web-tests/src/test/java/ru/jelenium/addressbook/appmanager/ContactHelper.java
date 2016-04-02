@@ -160,7 +160,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void goToEdit(ContactData contact) {
-    wd.findElement(By.cssSelector(String.format("a[href=\"goToEdit.php?id=%s\"]", contact.getId()))).click();
+    wd.findElement(By.cssSelector(String.format("a[href=\"edit.php?id=%s\"]", contact.getId()))).click();
   }
 
   public void details(ContactData contact) {
@@ -187,6 +187,7 @@ public class ContactHelper extends HelperBase {
 
   public ContactData fromDetailsPage(int id) {
     String[] tmp =  wd.findElement(By.id("content")).getText().split("\n");
+    if (tmp.length > 14) return new ContactData().withId(Integer.MAX_VALUE);
     return new ContactData()
             .withId(id)
             .withFullName(tmp[0])

@@ -2,7 +2,6 @@ package ru.jelenium.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.internal.junit.ArrayAsserts;
 import ru.jelenium.addressbook.model.ContactData;
 import ru.jelenium.addressbook.model.Contacts;
 
@@ -23,42 +22,20 @@ public class CompareWithDetailsPage extends TestBase {
 
   @Test
   public void contactCheckDetailsPage() {
-    app.goTo().homePage();
-    Contacts homePage = app.contact().getAll();
-    ContactData homePageInfo = homePage.iterator().next();
+    ContactData homePageInfo = getContactData();
     app.contact().goToEdit(homePageInfo);
     ContactData editPageInfo = app.contact().getInfoFromEditPage(homePageInfo.getId());
     app.goTo().homePage();
     app.contact().details(homePageInfo);
-    String detailsPage = app.contact().fromDetailsPage();
-    String[] blocks = detailsPage.split("\n\n");
-    String fullName = Arrays.asList(editPageInfo.getFirstname(), editPageInfo.getMiddlename(), editPageInfo.getLastname())
-            .stream()
-            .filter(s -> ! s.equals(""))
-            .collect(Collectors.joining(" "));
-    String firstBlock =
-            Arrays.asList(fullName, editPageInfo.getNickname(), editPageInfo.getTitle(),
-                    editPageInfo.getTextInfo().getCompany(), editPageInfo.getAddress1())
-                    .stream()
-                    .filter(s -> !s.equals(""))
-                    .collect(Collectors.joining("\n"));
+    String[] detailsBlocks = app.contact().fromDetailsPage();
+    assertThat(detailsBlocks[0], equalTo(editPageInfo.fisrtBlock()));
+    assertThat(detailsBlocks[1].replaceAll("H: |M: |W: |F: ", ""), equalTo(editPageInfo.phoneBlock()));
+    assertThat(detailsBlocks[2].replaceAll("\\(.*?\\)","").replaceAll(" \n", "\n").replaceAll("Homepage:", ""),
+            equalTo(editPageInfo.emailsBlock()));
+    assertThat(detailsBlocks[4], equalTo(editPageInfo.getTextInfo().getAddress2()));
+    assertThat(detailsBlocks[5].replaceAll("P: ", ""), equalTo(editPageInfo.getPhone().getHome2()));
+    assertThat(detailsBlocks[6], equalTo(editPageInfo.getTextInfo().getNotes()));
 
-    String phonesBlock = Arrays.asList(editPageInfo.getPhone().getHome1(),
-            editPageInfo.getPhone().getMobile(),
-            editPageInfo.getPhone().getWork(),
-            editPageInfo.getPhone().getFax())
-            .stream()
-            .filter(s -> !s.equals(""))
-            .collect(Collectors.joining("\n"));
-
-    assertThat(blocks[0], equalTo(firstBlock));
-
-//    if (detailsPageInfo.getId() != Integer.MAX_VALUE) {
-//      detailsPageInfo.makeAllEmails().makeAllPhones();
-//      assertThat(homePageInfo.getAllEmails(), equalTo(detailsPageInfo.getAllEmails()));
-//      assertThat(homePageInfo.getAllPhones(), equalTo(detailsPageInfo.getAllPhones()));
-//      assertThat(detailsPageInfo, equalTo(homePageInfo));
-//    }
   }
 
 }

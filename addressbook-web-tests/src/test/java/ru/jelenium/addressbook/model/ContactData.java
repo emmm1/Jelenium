@@ -257,6 +257,14 @@ public class ContactData {
     return this;
   }
 
+  public String fisrtBlock() {
+    String fullName = Arrays.asList(getFirstname(), getMiddlename(), getLastname()).stream()
+            .filter(s -> !s.equals(""))
+            .collect(Collectors.joining(" "));
+    return Arrays.asList(fullName, getNickname(), getTitle(), getTextInfo().getCompany(), getAddress1()).stream()
+            .filter(s -> !s.equals(""))
+            .collect(Collectors.joining("\n"));
+  }
 
   @Override
   public String toString() {
@@ -286,5 +294,18 @@ public class ContactData {
             .map(e -> e.replaceAll("\\s", "").replaceAll("[-()]", ""))
             .collect(Collectors.joining("\n"));
     return this;
+  }
+
+  public String phoneBlock() {
+    return Arrays.asList(getPhone().getHome1(), getPhone().getMobile(), getPhone().getWork(), getPhone().getFax()).stream()
+            .filter(s -> !s.equals(""))
+            .collect(Collectors.joining("\n"));
+  }
+
+  public String emailsBlock() {
+    return Arrays.asList(getContactEData().getEmail1(), getContactEData().getEmail2(), getContactEData().getEmail3(),
+            getContactEData().getHomepage()).stream()
+            .filter(s -> !s.equals(""))
+            .collect(Collectors.joining("\n")).replaceAll("http://", "");
   }
 }

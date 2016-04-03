@@ -171,37 +171,46 @@ public class ContactHelper extends HelperBase {
     return new ContactData()
             .withId(id)
             .withFirstname(wd.findElement(By.name("firstname")).getAttribute("value"))
+            .withMiddlename(wd.findElement(By.name("middlename")).getAttribute("value"))
             .withLastname(wd.findElement(By.name("lastname")).getAttribute("value"))
+            .withNickname(wd.findElement(By.name("nickname")).getAttribute("value"))
+            .where(new ContactTextInfo()
+                    .company(wd.findElement(By.name("company")).getAttribute("value"))
+                    .address2(wd.findElement(By.name("address2")).getAttribute("value"))
+                    .notes(wd.findElement(By.name("notes")).getAttribute("value"))
+            )
+            .withTitle(wd.findElement(By.name("title")).getAttribute("value"))
             .withAddress1(wd.findElement(By.name("address")).getAttribute("value"))
             .and(new ContactEData()
                     .email1(wd.findElement(By.name("email")).getAttribute("value"))
                     .email2(wd.findElement(By.name("email2")).getAttribute("value"))
-                    .email3(wd.findElement(By.name("email3")).getAttribute("value")))
+                    .email3(wd.findElement(By.name("email3")).getAttribute("value"))
+                    .homepage(wd.findElement(By.name("homepage")).getAttribute("value"))
+            )
             .withNumbersOf(new ContactPhone()
                     .phoneHome1(wd.findElement(By.name("home")).getAttribute("value"))
                     .mobilePhone(wd.findElement(By.name("mobile")).getAttribute("value"))
                     .workPhone(wd.findElement(By.name("work")).getAttribute("value"))
-                    .phoneHome2(wd.findElement(By.name("phone2")).getAttribute("value")));
+                    .fax(wd.findElement(By.name("fax")).getAttribute("value"))
+                    .phoneHome2(wd.findElement(By.name("phone2")).getAttribute("value"))
+            )
+            .withBirth(new DatesData()
+                    .day(Integer.parseInt(wd.findElement(By.name("bday"))
+                            .findElement(By.cssSelector("option[selected=\"selected\"]"))
+                            .getAttribute("value")))
+// на досуге надо дописать функцию преобразования имен в номера месяца.month(Integer.parseInt(wd.findElement(By.name("bmonth")).findElement(By.cssSelector("option[selected=]\"selected\"")).getText()))
+                    .year(wd.findElement(By.name("byear")).getAttribute("value"))
+            )
+            .withAnniversary(new DatesData()
+                            .day(Integer.parseInt(wd.findElement(By.name("aday"))
+                                    .findElement(By.cssSelector("option[selected=\"selected\"]"))
+                                    .getText()))
+                            .year(wd.findElement(By.name("ayear")).getAttribute("value"))
+            );
   }
 
 
-  public ContactData fromDetailsPage(int id) {
-    String[] tmp =  wd.findElement(By.id("content")).getText().split("\n");
-    if (tmp.length > 14) return new ContactData().withId(Integer.MAX_VALUE);
-    return new ContactData()
-            .withId(id)
-            .withFullName(tmp[0])
-            .withAddress1(tmp[1])
-            .withNumbersOf(new ContactPhone()
-                    .phoneHome1(tmp[3].replaceFirst("H: ", ""))
-                    .mobilePhone(tmp[4].replaceFirst("M: ",""))
-                    .workPhone(tmp[5].replaceFirst("W: ",""))
-                    .phoneHome2(tmp[13].replaceFirst("P: ", "")))
-            .and(new ContactEData()
-                    .email1(tmp[7])
-                    .email2(tmp[8])
-                    .email3(tmp[9])
-                    )
-            ;
+  public String[] fromDetailsPage() {
+    return wd.findElement(By.id("content")).getText().split("\n\n");
   }
 }

@@ -14,7 +14,6 @@ public class ContactData {
   private String title;
   private String allEmails;
   private String allPhones;
-  private String fullName;
   private Integer groupNum;
   private ContactPhone phone;
   private ContactEData contactEData;
@@ -223,17 +222,6 @@ public class ContactData {
     return address1;
   }
 
-
-  public String getFullName() {
-    return fullName;
-  }
-
-  public ContactData withFullName(String fullName) {
-    this.fullName = fullName;
-    return this;
-  }
-
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -282,7 +270,6 @@ public class ContactData {
             ", title='" + title + '\'' +
             ", allEmails='" + allEmails + '\'' +
             ", allPhones='" + allPhones + '\'' +
-            ", fullName='" + fullName + '\'' +
             ", groupNum=" + groupNum +
             ", phone=" + phone +
             ", contactEData=" + contactEData +
@@ -298,16 +285,6 @@ public class ContactData {
             .stream().filter(p -> !p.equals(""))
             .map(e -> e.replaceAll("\\s", "").replaceAll("[-()]", ""))
             .collect(Collectors.joining("\n"));
-    return this;
-  }
-
-  public ContactData makeFullName() {
-    //клеим first & last в одно
-    fullName = Arrays.asList(new String[]{firstname, lastname})
-            .stream().filter(p -> !p.equals(""))
-            .collect(Collectors.joining("\n"));
-    firstname = null;
-    lastname = null;
     return this;
   }
 }

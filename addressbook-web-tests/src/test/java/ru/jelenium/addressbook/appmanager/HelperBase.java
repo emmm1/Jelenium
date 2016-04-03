@@ -29,7 +29,6 @@ public class HelperBase {
     }
   }
 
-
   protected void type(By locator, String text) {
     click(locator);
     if (text != null) {

@@ -36,11 +36,11 @@ public class NewRecordTest extends TestBase {
                     .email2("test.testowy@gmail.com")
                     .email3("testy_1987@mail.ru")
                     .homepage("http://localhost/addressbook"))
-            .withAnniversary(new DatesData()
+            .withBirth(new DatesData()
                     .day(12)
                     .month(5)
                     .year("1987"))
-            .withBirth(new DatesData()
+            .withAnniversary(new DatesData()
                     .day(25)
                     .month(11)
                     .year("2011"));

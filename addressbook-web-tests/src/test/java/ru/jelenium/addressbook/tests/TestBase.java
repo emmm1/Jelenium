@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class TestBase {
 
-  protected static String browserType = "HU";
+  protected static String browserType = "Chrome";
   protected static AppManger app = new AppManger(browserType);
 
   //Чтобы лучше контролировать результат работы HTMLUnit
@@ -32,9 +32,5 @@ public class TestBase {
     app.stop();
   }
 
-  protected ContactData getContactData() {
-    app.goTo().homePage();
-    Contacts homePage = app.contact().getAll();
-    return homePage.iterator().next();
-  }
+
 }

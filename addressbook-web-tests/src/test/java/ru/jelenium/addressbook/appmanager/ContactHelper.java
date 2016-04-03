@@ -167,9 +167,9 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector(String.format("a[href=\"view.php?id=%s\"]", contact.getId()))).click();
   }
 
-  public ContactData getInfoFromEditPage(int id) {
+  public ContactData getInfoFromEditPage(ContactData cont) {
     return new ContactData()
-            .withId(id)
+            .withId(cont.getId())
             .withFirstname(wd.findElement(By.name("firstname")).getAttribute("value"))
             .withMiddlename(wd.findElement(By.name("middlename")).getAttribute("value"))
             .withLastname(wd.findElement(By.name("lastname")).getAttribute("value"))

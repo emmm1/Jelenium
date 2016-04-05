@@ -34,7 +34,6 @@ public class CompareWithDetailsPage extends TestBase {
     String[] detailsBlocks = app.contact().fromDetailsPage();
     int shift = 0;
     String tmp1 = editPageInfo.fisrtBlock();
-    System.out.println(detailsBlocks.length);
     if (!tmp1.equals("")) {
       System.out.println(tmp1);
       System.out.println(detailsBlocks[0]);
@@ -49,8 +48,6 @@ public class CompareWithDetailsPage extends TestBase {
     } else shift = shift + 1;
 
     String tmp3 = editPageInfo.emailsBlock();
-    System.out.println(tmp3);
-    System.out.println(detailsBlocks[2 - shift]);
     if (!tmp3.equals("")) {
       System.out.println(tmp3);
       System.out.println(detailsBlocks[2 - shift]);

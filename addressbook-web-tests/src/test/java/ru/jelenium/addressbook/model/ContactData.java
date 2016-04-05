@@ -252,6 +252,7 @@ public class ContactData {
   public ContactData makeAllEmails() {
     allEmails = Arrays.asList(new String[]{contactEData.getEmail1(), contactEData.getEmail2(), contactEData.getEmail3()})
             .stream().filter(email -> !email.equals(""))
+            .map(t -> t.replaceAll("\\s$", ""))
 //            .map(e -> e.replaceAll("\\s", "").replaceAll("-()", ""))
             .collect(Collectors.joining("\n"));
     return this;
@@ -260,6 +261,7 @@ public class ContactData {
   public String fisrtBlock() {
     String fullName = Arrays.asList(getFirstname(), getMiddlename(), getLastname()).stream()
             .filter(s -> !s.equals(""))
+            .map(t -> t.replaceAll("\\s$", ""))
             .collect(Collectors.joining(" "));
     return Arrays.asList(fullName, getNickname(), getTitle(), getTextInfo().getCompany(), getAddress1()).stream()
             .filter(s -> !s.equals(""))
@@ -306,6 +308,7 @@ public class ContactData {
     return Arrays.asList(getContactEData().getEmail1(), getContactEData().getEmail2(), getContactEData().getEmail3(),
             getContactEData().getHomepage()).stream()
             .filter(s -> !s.equals(""))
+            .map(t -> t.replaceAll("\\s$", ""))
             .collect(Collectors.joining("\n")).replaceAll("http://", "");
   }
 }

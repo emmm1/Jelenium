@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class TestBase {
 
-  protected static String browserType = "HU";
+  protected static String browserType = "IE";
   protected static AppManger app = new AppManger(browserType);
 
   //Чтобы лучше контролировать результат работы HTMLUnit
@@ -31,6 +31,4 @@ public class TestBase {
   public void tearDown() {
     app.stop();
   }
-
-
 }

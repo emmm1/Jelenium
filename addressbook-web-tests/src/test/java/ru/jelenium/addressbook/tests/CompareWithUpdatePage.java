@@ -24,11 +24,12 @@ public class CompareWithUpdatePage extends TestBase {
     app.goTo().homePage();
     Contacts homePage = app.contact().getAll();
     ContactData homePageInfo = homePage.iterator().next();
+//    ContactData homePageInfo = homePage.stream().filter(c -> c.getId() == 116).findFirst().get();
     app.contact().goToEdit(homePageInfo);
     ContactData editPageInfo = app.contact().getInfoFromEditPage(homePageInfo).makeAllEmails().makeAllPhones();
     assertThat(homePageInfo.getAllEmails(), equalTo(editPageInfo.getAllEmails()));
 //    выяснилось,что пробел в конце адреса удаляется на хомяке
-    assertThat(homePageInfo.getAddress1().replaceAll("\\s", ""), equalTo(editPageInfo.getAddress1().replaceAll("\\s", "")));
+    assertThat(homePageInfo.getAddress1(), equalTo(editPageInfo.getAddress1().replaceAll("\\s$", "")));
     assertThat(homePageInfo.getAllPhones(), equalTo(editPageInfo.getAllPhones()));
     assertThat(editPageInfo, equalTo(homePageInfo));
   }

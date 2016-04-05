@@ -32,14 +32,31 @@ public class CompareWithDetailsPage extends TestBase {
     app.goTo().homePage();
     app.contact().details(contact);
     String[] detailsBlocks = app.contact().fromDetailsPage();
-
+    int shift = 0;
     String tmp1 = editPageInfo.fisrtBlock();
-    assertThat(detailsBlocks[0], equalTo(editPageInfo.fisrtBlock()));
+    System.out.println(detailsBlocks.length);
+    if (!tmp1.equals("")) {
+      System.out.println(tmp1);
+      System.out.println(detailsBlocks[0]);
+      assertThat(detailsBlocks[0], equalTo(editPageInfo.fisrtBlock()));
+    } else shift = shift+1;
+
     String tmp2 = editPageInfo.phoneBlock();
-    assertThat(detailsBlocks[1].replaceAll("H: |M: |W: |F: ", ""), equalTo(editPageInfo.phoneBlock()));
+    if (!tmp2.equals("")) {
+      System.out.println(tmp2);
+      System.out.println(detailsBlocks[1 - shift]);
+      assertThat(detailsBlocks[1 - shift].replaceAll("H: |M: |W: |F: ", ""), equalTo(editPageInfo.phoneBlock()));
+    } else shift = shift + 1;
+
     String tmp3 = editPageInfo.emailsBlock();
-    assertThat(detailsBlocks[2].replaceAll("\\(.*?\\)", "").replaceAll(" \n", "\n").replaceAll("Homepage:", ""),
-            equalTo(editPageInfo.emailsBlock()));
+    System.out.println(tmp3);
+    System.out.println(detailsBlocks[2 - shift]);
+    if (!tmp3.equals("")) {
+      System.out.println(tmp3);
+      System.out.println(detailsBlocks[2 - shift]);
+      assertThat(detailsBlocks[2 - shift].replaceAll("\\s\\(.*?\\)", "").replaceAll(" \n", "\n").replaceAll("Homepage:", ""),
+              equalTo(editPageInfo.emailsBlock()));
+    }
 //    оставил на будущее
 //    assertThat(detailsBlocks[4], equalTo(editPageInfo.getTextInfo().getAddress2()));
 //    assertThat(detailsBlocks[5].replaceAll("P: ", ""), equalTo(editPageInfo.getPhone().getHome2()));

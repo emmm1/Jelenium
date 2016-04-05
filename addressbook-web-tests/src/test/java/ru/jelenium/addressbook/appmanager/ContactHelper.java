@@ -204,7 +204,7 @@ public class ContactHelper extends HelperBase {
             .withAnniversary(new DatesData()
                             .day(Integer.parseInt(wd.findElement(By.name("aday"))
                                     .findElement(By.cssSelector("option[selected=\"selected\"]"))
-                                    .getText()))
+                                    .getAttribute("value")))
                             .year(wd.findElement(By.name("ayear")).getAttribute("value"))
             );
   }

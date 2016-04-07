@@ -9,5 +9,5 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:2.52.0'
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
     compile 'com.codeborne:phantomjsdriver:1.2.1'
-    compile 'com.machinepublishers:jbrowserdriver:0.10.3'
+    compile 'com.machinepublishers:jbrowserdriver:0.10.4'
 }

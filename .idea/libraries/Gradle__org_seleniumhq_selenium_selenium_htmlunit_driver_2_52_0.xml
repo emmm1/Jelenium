@@ -2,12 +2,10 @@
   <library name="Gradle: org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/addressbook-web-tests/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-htmlunit-driver/2.52.0/b9945a26ec2518b9d094e43e7d47b8e9146d5d39/selenium-htmlunit-driver-2.52.0.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-htmlunit-driver/2.52.0/b9945a26ec2518b9d094e43e7d47b8e9146d5d39/selenium-htmlunit-driver-2.52.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/addressbook-web-tests/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-htmlunit-driver/2.52.0/63eb13416f90efc063d20681646af5b5be8eccb1/selenium-htmlunit-driver-2.52.0-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-htmlunit-driver/2.52.0/63eb13416f90efc063d20681646af5b5be8eccb1/selenium-htmlunit-driver-2.52.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

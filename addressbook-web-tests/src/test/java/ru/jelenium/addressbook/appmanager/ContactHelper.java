@@ -143,8 +143,10 @@ public class ContactHelper extends HelperBase {
   }
 
   public void gotoAddNewPage() {
-    if (isElementHere(By.cssSelector("div#content h1")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
-            && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter")) {
+    if (isElementHere(By.cssSelector("div#content h1"))
+            && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
+            && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter")
+     ) {
       // && isElementHere(By.name("Submit"))
       return;
     }

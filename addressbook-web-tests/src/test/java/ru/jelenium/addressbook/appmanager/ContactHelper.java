@@ -26,6 +26,8 @@ public class ContactHelper extends HelperBase {
     type(By.name("lastname"), cDate.getLastname());
     type(By.name("nickname"), cDate.getNickname());
     type(By.name("title"), cDate.getTitle());
+    attach(By.name("photo"), cDate.getPhoto());
+    System.out.println(cDate.getPhoto().getAbsolutePath());
     type(By.name("company"), cDate.getTextInfo().getCompany());
     type(By.name("address"), cDate.getAddress1());
     type(By.name("home"), cDate.getPhone().getHome1());
@@ -145,16 +147,15 @@ public class ContactHelper extends HelperBase {
   public void gotoAddNewPage() {
     if (isElementHere(By.cssSelector("div#content h1"))
             && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Edit / add address book entry")
-            && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter")
-     ) {
-      // && isElementHere(By.name("Submit"))
+            && wd.findElement(By.cssSelector("#content>form>input")).getAttribute("Value").equals("Enter") && isElementHere(By.name("Submit"))
+            ) {
       return;
     }
     click(By.linkText("add new"));
   }
 
   public int getQty() {
-  return wd.findElements(By.name("entry")).size();
+    return wd.findElements(By.name("entry")).size();
   }
 
   public void modify() {
@@ -197,17 +198,17 @@ public class ContactHelper extends HelperBase {
                     .phoneHome2(wd.findElement(By.name("phone2")).getAttribute("value"))
             )
             .withBirth(new DatesData()
-                    .day(Integer.parseInt(wd.findElement(By.name("bday"))
-                            .findElement(By.cssSelector("option[selected=\"selected\"]"))
-                            .getAttribute("value")))
-// на досуге надо дописать функцию преобразования имен в номера месяца.month(Integer.parseInt(wd.findElement(By.name("bmonth")).findElement(By.cssSelector("option[selected=]\"selected\"")).getText()))
-                    .year(wd.findElement(By.name("byear")).getAttribute("value"))
-            )
-            .withAnniversary(new DatesData()
-                            .day(Integer.parseInt(wd.findElement(By.name("aday"))
+                            .day(Integer.parseInt(wd.findElement(By.name("bday"))
                                     .findElement(By.cssSelector("option[selected=\"selected\"]"))
                                     .getAttribute("value")))
-                            .year(wd.findElement(By.name("ayear")).getAttribute("value"))
+// на досуге надо дописать функцию преобразования имен в номера месяца.month(Integer.parseInt(wd.findElement(By.name("bmonth")).findElement(By.cssSelector("option[selected=]\"selected\"")).getText()))
+                            .year(wd.findElement(By.name("byear")).getAttribute("value"))
+            )
+            .withAnniversary(new DatesData()
+                    .day(Integer.parseInt(wd.findElement(By.name("aday"))
+                            .findElement(By.cssSelector("option[selected=\"selected\"]"))
+                            .getAttribute("value")))
+                    .year(wd.findElement(By.name("ayear")).getAttribute("value"))
             );
   }
 

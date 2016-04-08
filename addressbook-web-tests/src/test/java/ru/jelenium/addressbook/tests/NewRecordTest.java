@@ -2,6 +2,9 @@ package ru.jelenium.addressbook.tests;
 
 import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.*;
+
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -21,6 +24,7 @@ public class NewRecordTest extends TestBase {
             .withNickname("ттт")
             .withGroupNum(1)
             .withAddress1("РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13")
+            .withPhoto(new File("src/test/resources/macronomica.png"))
             .where(new ContactTextInfo()
                     .address2("Тестовый район, с. Тестовое, 1я тестовая улица, д. 23")
                     .company("Тест продакшн")

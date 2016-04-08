@@ -1,5 +1,6 @@
 package ru.jelenium.addressbook.model;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -7,6 +8,16 @@ public class ContactData {
 
   private int id;
   private String firstname;
+
+  public File getPhoto() {
+    return photo;
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
+
   private String middlename;
   private String lastname;
   private String nickname;
@@ -20,6 +31,7 @@ public class ContactData {
   private DatesData birthDate;
   private DatesData annDate;
   private ContactTextInfo textInfo;
+  private File photo;
 
   public ContactData(int id, String firstname, String lastname) {
     this.id = id;

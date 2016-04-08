@@ -5,6 +5,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import ru.jelenium.addressbook.model.Contacts;
 
+import java.io.File;
+
 /**
  * Created by Idea on 08.03.2016.
  */
@@ -36,6 +38,12 @@ public class HelperBase {
         wd.findElement(locator).clear();
         wd.findElement(locator).sendKeys(text);
       }
+    }
+  }
+
+  protected void attach(By locator, File file) {
+    if (file != null) {
+      wd.findElement(locator).sendKeys(file.getAbsolutePath());
     }
   }
 

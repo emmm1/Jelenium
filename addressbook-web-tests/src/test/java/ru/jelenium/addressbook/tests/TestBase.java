@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class TestBase {
 
-  protected static String browserType = "Chrome";
+  protected static String browserType = "HU";
   protected static AppManger app = new AppManger(browserType);
 
   //Чтобы лучше контролировать результат работы HTMLUnit

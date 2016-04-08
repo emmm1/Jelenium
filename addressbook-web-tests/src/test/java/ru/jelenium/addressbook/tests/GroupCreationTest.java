@@ -45,8 +45,8 @@ public class GroupCreationTest extends TestBase {
       line = reader.readLine();
     }
     Gson gson = new Gson();
-    Type GroupData = new TypeToken<Collection<Integer>>(){}.getType();
-    List<GroupData> groups = gson.fromJson(json, GroupData);
+    Type jgroups = new TypeToken<List<GroupData>>(){}.getType();
+    List<GroupData> groups = gson.fromJson(json, jgroups);
 //    List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
     return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }

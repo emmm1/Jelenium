@@ -27,7 +27,6 @@ public class ContactHelper extends HelperBase {
     type(By.name("nickname"), cDate.getNickname());
     type(By.name("title"), cDate.getTitle());
     attach(By.name("photo"), cDate.getPhoto());
-    System.out.println(cDate.getPhoto().getAbsolutePath());
     type(By.name("company"), cDate.getTextInfo().getCompany());
     type(By.name("address"), cDate.getAddress1());
     type(By.name("home"), cDate.getPhone().getHome1());
@@ -171,6 +170,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public ContactData getInfoFromEditPage(ContactData cont) {
+
     return new ContactData()
             .withId(cont.getId())
             .withFirstname(wd.findElement(By.name("firstname")).getAttribute("value"))
@@ -212,8 +212,16 @@ public class ContactHelper extends HelperBase {
             );
   }
 
+  public boolean hasContactImage() {
+//    Работает только на странице details
+    return isElementHere(By.cssSelector("img[alt=\"Embedded Image\"]"));
+  }
 
   public String[] fromDetailsPage() {
-    return wd.findElement(By.id("content")).getText().split("\n\n");
+    String fromDetailPage[] = wd.findElement(By.id("content")).getText().split("\n\n");
+    if (hasContactImage()) {
+      fromDetailPage[1] = "";
+    }
+    return fromDetailPage;
   }
 }

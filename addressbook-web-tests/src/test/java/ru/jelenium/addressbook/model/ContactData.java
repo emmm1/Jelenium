@@ -13,7 +13,7 @@ public class ContactData {
     return photo;
   }
 
-  public ContactData withPhoto(File photo) {
+  public ContactData withImage(File photo) {
     this.photo = photo;
     return this;
   }
@@ -271,13 +271,19 @@ public class ContactData {
   }
 
   public String fisrtBlock() {
-    String fullName = Arrays.asList(getFirstname(), getMiddlename(), getLastname()).stream()
-            .filter(s -> !s.equals(""))
-            .map(t -> t.replaceAll("\\s$", ""))
-            .collect(Collectors.joining(" "));
-    return Arrays.asList(fullName, getNickname(), getTitle(), getTextInfo().getCompany(), getAddress1()).stream()
+    String fullName = fullName();
+    String tmp = getAddress1();
+    String block = Arrays.asList(fullName, getNickname(), getTitle(), getTextInfo().getCompany(), getAddress1()).stream()
             .filter(s -> !s.equals(""))
             .collect(Collectors.joining("\n"));
+    return block;
+  }
+
+  public String fullName() {
+    return Arrays.asList(getFirstname(), getMiddlename(), getLastname()).stream()
+              .filter(s -> !s.equals(""))
+              .map(t -> t.replaceAll("\\s$", ""))
+              .collect(Collectors.joining(" "));
   }
 
   @Override

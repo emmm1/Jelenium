@@ -12,7 +12,9 @@ public class ContactUpdateTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
-    app.contact().createWhenNoContact(app.contact().getQty(), new ContactData().withFirstname("ForHomePageDeleteТест").withLastname("2HPRDel" + unicDate));
+    app.contact().createWhenNoContact(app.contact().getQty(), new ContactData()
+            .withFirstname("ForHomePageDeleteТест")
+            .withLastname("2HPRDel" + unicDate));
   }
 
 

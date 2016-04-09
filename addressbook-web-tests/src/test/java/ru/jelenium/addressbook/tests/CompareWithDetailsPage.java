@@ -28,16 +28,32 @@ public class CompareWithDetailsPage extends TestBase {
     app.goTo().homePage();
     app.contact().details(contact);
     String[] detailsBlocks = app.contact().fromDetailsPage();
+
     int shift = 0;
-    String mainBlock = editPageInfo.fisrtBlock();
-    if (!mainBlock.equals("")) {assertThat(detailsBlocks[0], equalTo(mainBlock));} else {shift = shift + 1;}
+    String fullName = editPageInfo.fullName();
+    String fromDetailsPageFirstBlock[] = detailsBlocks[0].split("\\n");
+    if (!fullName.equals("")) {
+      assertThat(fromDetailsPageFirstBlock[0], equalTo(fullName));
+    } else {
+      shift = shift + 1;
+    }
+
+//    проверяем отсутствие разбиения первого блока на два в связи с наличием картинки
+    if (detailsBlocks[1].isEmpty()) {
+      shift = shift - 1;
+    }
 
     String phones = editPageInfo.phoneBlock();
-    if (!phones.equals("")) {assertThat(detailsBlocks[1 - shift].replaceAll("H: |M: |W: |F: ", ""), equalTo(phones));} else {shift = shift + 1;}
+    if (!phones.equals("")) {
+      assertThat(detailsBlocks[1 - shift].replaceAll("H: |M: |W: |F: ", ""), equalTo(phones));
+    } else {
+      shift = shift + 1;
+    }
 
     String emials = editPageInfo.emailsBlock();
 //    обнаружил, что иногда домен не создается - например для gmail.com, решил просто отрывать все, что в скобках
-    if (!emials.equals("")) {assertThat(detailsBlocks[2 - shift].replaceAll("\\s\\(.*?\\)", "").replaceAll("Homepage:", "").replaceAll("\\n+", "\n"), equalTo(emials));
+    if (!emials.equals("")) {
+      assertThat(detailsBlocks[2 - shift].replaceAll("\\s\\(.*?\\)", "").replaceAll("Homepage:", "").replaceAll("\\n+", "\n"), equalTo(emials));
     }
   }
 }

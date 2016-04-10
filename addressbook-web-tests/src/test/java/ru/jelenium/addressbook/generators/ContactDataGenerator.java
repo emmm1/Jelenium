@@ -1,6 +1,8 @@
 package ru.jelenium.addressbook.generators;
 
+import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.jelenium.addressbook.model.*;
@@ -9,13 +11,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Idea on 10.04.2016.
  */
-public class ContactDataGenerator extends GeneratorBase {
+public class ContactDataGenerator {
   @Parameter(names = "-qty", description = "quantity of contacts")
   private int qty;
   @Parameter(names = "-file", description = "path to file")
@@ -27,14 +30,42 @@ public class ContactDataGenerator extends GeneratorBase {
     init(args);
   }
 
-  private List<ContactData> generate (int qty) {
+  protected static void init(String[] args) throws IOException {
+    ContactDataGenerator generator = new ContactDataGenerator();
+    JCommander jCommander = new JCommander(generator);
+    try {
+      jCommander.parse(args);
+    } catch (ParameterException ex) {
+      jCommander.usage();
+      return;
+    }
+
+    if (args.length == 0) {
+      jCommander.usage();
+      return;
+    }
+    generator.run(generator);
+  }
+
+  public void run(ContactDataGenerator generator) throws IOException {
+    if (type.toLowerCase().equals("csv")) {
+      saveCSV(generate(qty), new File(file));
+    } else if (type.toLowerCase().equals("json")) {
+      saveJSON(generate(qty), new File(file));
+    } else {
+      System.out.println("Incorrect file format");
+    }
+  }
+
+
+  private List<ContactData> generate(int qty) {
     String unicDate = new Date(System.currentTimeMillis()).toString();
-    List<ContactData> contacts = null;
+    List<ContactData> contacts = new ArrayList<>();
     for (; qty > 0; qty = qty - 1) {
       contacts.add(new ContactData()
               .withFirstname("Тест" + qty)
               .withMiddlename("Тестович")
-              .withLastname("Тестовый" + unicDate)
+              .withLastname("Тестовый" + " " + qty + " " + unicDate)
               .withTitle("Дорогой")
               .withNickname("ттт")
               .withGroupNum(1)
@@ -69,7 +100,7 @@ public class ContactDataGenerator extends GeneratorBase {
 
   private void saveJSON(List<ContactData> generate, File file) throws IOException {
     GsonBuilder builder = new GsonBuilder();
-    Gson gson = builder.excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+    Gson gson = builder.setPrettyPrinting().create();
     Writer writer = new FileWriter(file);
     writer.write(gson.toJson(generate));
     writer.close();
@@ -78,8 +109,32 @@ public class ContactDataGenerator extends GeneratorBase {
   private void saveCSV(List<ContactData> generate, File groupFile) throws IOException {
 //    System.out.println(groupFile.getAbsolutePath());
     Writer writer = new FileWriter(groupFile);
-    for (ContactData tmp : generate) {
-      writer.write(String.format("%s;%s;%s\n", tmp.getFirstname(), tmp.getMiddlename(), tmp.getLastname()));
+    for (ContactData cDate : generate) {
+      writer.write(cDate.getFirstname() + ";" +
+              cDate.getMiddlename() + ";" +
+              cDate.getLastname() + ";" +
+              cDate.getNickname() + ";" +
+              cDate.getTitle() + ";" +
+              cDate.getPhoto() + ";" +
+              cDate.getTextInfo().getCompany() + ";" +
+              cDate.getAddress1() + ";" +
+              cDate.getPhone().getHome1() + ";" +
+              cDate.getPhone().getMobile() + ";" +
+              cDate.getPhone().getWork() + ";" +
+              cDate.getPhone().getFax() + ";" +
+              cDate.getContactEData().getEmail1() + ";" +
+              cDate.getContactEData().getEmail2() + ";" +
+              cDate.getContactEData().getEmail3() + ";" +
+              cDate.getContactEData().getHomepage() + ";" +
+              cDate.getBirthDate().getDay() + ";" +
+              cDate.getBirthDate().getMonth() + ";" +
+              cDate.getBirthDate().getYear() + ";" +
+              cDate.getAnnDate().getDay() + ";" +
+              cDate.getAnnDate().getMonth() + ";" +
+              cDate.getAnnDate().getYear() + ";" +
+              cDate.getTextInfo().getAddress2() + ";" +
+              cDate.getPhone().getHome2() + ";" +
+              cDate.getTextInfo().getNotes() + ";\n");
     }
     writer.close();
   }

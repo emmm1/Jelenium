@@ -1,6 +1,8 @@
 package ru.jelenium.addressbook.generators;
 
+import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.jelenium.addressbook.model.GroupData;
@@ -16,7 +18,7 @@ import java.util.List;
 /**
  * Created by mikhail.evseev on 05.04.2016.
  */
-public class GroupDataGenerator extends GeneratorBase {
+public class GroupDataGenerator {
   @Parameter(names = "-qty", description = "quantity of groups")
   private int qty;
   @Parameter(names = "-file", description = "path to file")
@@ -28,7 +30,20 @@ public class GroupDataGenerator extends GeneratorBase {
 //  -qty 10 -file src\test\resources\groups.csv
 
   public static void main(String[] args) throws IOException {
-    init(args);
+    GroupDataGenerator generator = new GroupDataGenerator();
+    JCommander jCommander = new JCommander(generator);
+    try {
+      jCommander.parse(args);
+    } catch (ParameterException ex) {
+      jCommander.usage();
+      return;
+    }
+
+    if (args.length == 0) {
+      jCommander.usage();
+      return;
+    }
+    generator.run();
   }
 
   public void run() throws IOException {
@@ -58,7 +73,6 @@ public class GroupDataGenerator extends GeneratorBase {
     }
     writer.close();
   }
-
 
 
   private List<GroupData> generate(int qty) {

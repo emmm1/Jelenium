@@ -55,13 +55,9 @@ public class GroupCreationTest extends TestBase {
 
 
   @Test(dataProvider = "groupListJSON")
-  public void testGroupCreation(GroupData grp) {
+  public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
     Groups before = app.group().getAll();
-    GroupData group = new GroupData()
-            .withName(grp.getName())
-            .withHeader(grp.getHeader())
-            .withFooter(grp.getFooter());
     app.group().create(group);
     assertThat(app.group().getQty(), equalTo(before.size() + 1));
     Groups after = app.group().getAll();

@@ -3,8 +3,6 @@ package ru.jelenium.addressbook.tests;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.jelenium.addressbook.appmanager.AppManger;
-import ru.jelenium.addressbook.model.ContactData;
-import ru.jelenium.addressbook.model.Contacts;
 
 import java.util.Date;
 

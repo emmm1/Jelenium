@@ -8,7 +8,7 @@ import java.io.File;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class NewRecordTest extends TestBase {
+public class NewContactTest extends TestBase {
 
   @Test
   public void newRecordTest() {

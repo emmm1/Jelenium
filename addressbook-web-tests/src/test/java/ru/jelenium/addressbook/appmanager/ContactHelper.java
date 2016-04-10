@@ -222,10 +222,12 @@ public class ContactHelper extends HelperBase {
 
   public String[] fromDetailsPage() {
     String[] tmp = wd.findElement(By.id("content")).getText().split("\n\n");
-    List<String> details = new ArrayList<String>();
+    List<String> details = new ArrayList<String>(Arrays.asList(tmp));
+/*
     for (String tmp1 : tmp) {
       details.add(tmp1);
     }
+*/
 
     if (hasContactImage()) {
       details.set(0, details.get(0).trim() + "\n" + details.get(1).trim());

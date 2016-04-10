@@ -5,9 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.jelenium.addressbook.model.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by mikhail.evseev on 04.03.2016.
@@ -218,10 +221,19 @@ public class ContactHelper extends HelperBase {
   }
 
   public String[] fromDetailsPage() {
-    String fromDetailPage[] = wd.findElement(By.id("content")).getText().split("\n\n");
-    if (hasContactImage()) {
-      fromDetailPage[1] = "";
+    String[] tmp = wd.findElement(By.id("content")).getText().split("\n\n");
+    List<String> details = new ArrayList<String>();
+    for (String tmp1 : tmp) {
+      details.add(tmp1);
     }
-    return fromDetailPage;
+
+    if (hasContactImage()) {
+      details.set(0, details.get(0).trim() + "\n" + details.get(1).trim());
+//      details.set(1, null);
+      details.remove(1);
+    }
+
+    String[] size = new String[details.size()];
+    return details.toArray(size);
   }
 }

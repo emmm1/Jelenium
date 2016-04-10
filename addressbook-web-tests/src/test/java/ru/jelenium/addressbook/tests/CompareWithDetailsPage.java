@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.ContactData;
 import ru.jelenium.addressbook.model.Contacts;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -30,17 +32,12 @@ public class CompareWithDetailsPage extends TestBase {
     String[] detailsBlocks = app.contact().fromDetailsPage();
 
     int shift = 0;
-    String fullName = editPageInfo.fullName();
-    String fromDetailsPageFirstBlock[] = detailsBlocks[0].split("\\n");
-    if (!fullName.equals("")) {
-      assertThat(fromDetailsPageFirstBlock[0], equalTo(fullName));
+    String mainBlock = editPageInfo.fisrtBlock();
+
+    if (!mainBlock.equals("")) {
+      assertThat(detailsBlocks[0], equalTo(mainBlock));
     } else {
       shift = shift + 1;
-    }
-
-//    проверяем отсутствие разбиения первого блока на два в связи с наличием картинки
-    if (detailsBlocks[1].isEmpty()) {
-      shift = shift - 1;
     }
 
     String phones = editPageInfo.phoneBlock();

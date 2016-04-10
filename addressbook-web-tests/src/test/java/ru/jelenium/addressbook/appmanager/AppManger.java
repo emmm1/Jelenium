@@ -10,6 +10,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import ru.jelenium.addressbook.model.AuthData;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -17,7 +22,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class AppManger {
   WebDriver wd;
-
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
@@ -25,10 +29,12 @@ public class AppManger {
   private AuthData authData;
   private HomePageNavigationHelper homeNav;
   private String browser;
+  private Properties properties;
 
 
   public AppManger(String browser) {
     this.browser = browser;
+    properties = new Properties();
   }
 
   public static boolean isAlertPresent(WebDriver wd) {
@@ -40,7 +46,11 @@ public class AppManger {
     }
   }
 
-  public void init() {
+  public void init() throws IOException {
+    String target = System.getProperty("target","local");
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    browser = properties.getProperty("browser");
+
     if (browser.equals("Firefox")) {
       wd = new FirefoxDriver();
     } else if (browser.equals("Chrome")) {
@@ -57,13 +67,13 @@ public class AppManger {
 
 
     wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/");
+    wd.get(properties.getProperty("web.BaseUrl"));
     navigationHelper = new NavigationHelper(wd);
     contactHelper = new ContactHelper(wd);
     groupHelper = new GroupHelper(wd);
     sessionHelper = new SessionHelper(wd);
     homeNav = new HomePageNavigationHelper(wd);
-    authData = new AuthData("admin", "secret");
+    authData = new AuthData(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPass"));
     sessionHelper.login(authData.getLogin(), authData.getPass());
   }
 

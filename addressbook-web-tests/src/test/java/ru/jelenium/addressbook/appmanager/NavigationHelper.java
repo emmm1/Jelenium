@@ -14,7 +14,10 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void groupPage() {
-    if (isElementHere(By.cssSelector("div#content h1")) && isElementHere(By.name("new")) && wd.findElement(By.cssSelector("div#content h1")).getText().equals("Groups")) {
+    if (isElementHere(By.cssSelector("div#content h1"))
+            && isElementHere(By.name("new"))
+            && wd.findElement(By.cssSelector("div#content h1"))
+            .getText().equals("Groups")) {
       return;
     }
     click(By.linkText("groups"));

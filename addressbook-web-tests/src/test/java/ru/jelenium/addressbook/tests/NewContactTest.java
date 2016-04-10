@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -32,7 +31,8 @@ public class NewContactTest extends TestBase {
               .withFirstname(value[0])
               .withMiddlename(value[1])
               .withLastname(value[2])
-/*Лень всю кучу делать, да и не буду этим форматом пользоваться.
+/*
+Лень всю кучу делать, да и не буду этим форматом пользоваться.
               .withTitle("Дорогой")
               .withNickname("ттт")
               .withGroupNum(1)
@@ -60,7 +60,8 @@ public class NewContactTest extends TestBase {
               .withAnniversary(new DatesData()
               .day(25)
               .month(11)
-              .year("2011"))))*/
+              .year("2011"))))
+              */
       });
       line = reader.readLine();
     }

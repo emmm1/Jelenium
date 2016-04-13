@@ -13,3 +13,21 @@ dependencies {
     compile "com.beust:jcommander:1.48"
     compile 'com.google.code.gson:gson:2.6.2'
 }
+
+task allTests(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/test-all.xml'
+    }
+}
+
+task testsWithAlert(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/test-with-alert.xml'
+    }
+}
+
+task testsWithoutAlert(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/test-without-alert.xml'
+    }
+}

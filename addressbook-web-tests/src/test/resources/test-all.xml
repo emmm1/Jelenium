@@ -1,0 +1,16 @@
+<suite name="AddressBook" verbose="1" >
+    <test name="AllTests" >
+        <classes>
+            <class name="ru.jelenium.addressbook.tests.CompareWithDetailsPage" />
+            <class name="ru.jelenium.addressbook.tests.CompareWithUpdatePage" />
+            <class name="ru.jelenium.addressbook.tests.ContactDeletionTest" />
+            <class name="ru.jelenium.addressbook.tests.ContactUpdateTest" />
+            <class name="ru.jelenium.addressbook.tests.GroupCreationTest" />
+            <class name="ru.jelenium.addressbook.tests.GroupDeletionTest" />
+            <class name="ru.jelenium.addressbook.tests.GroupUpdateTest" />
+            <class name="ru.jelenium.addressbook.tests.NewContactTest" />
+            <class name="ru.jelenium.addressbook.tests.HomePageContactDeletionTest"/>
+            <class name="ru.jelenium.addressbook.tests.AllRecordDeletionTest"/>
+        </classes>
+    </test>
+</suite>

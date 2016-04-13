@@ -4,6 +4,7 @@ import com.machinepublishers.jbrowserdriver.JBrowserDriver;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -63,6 +64,8 @@ public class AppManger {
       wd = new PhantomJSDriver();
     } else if (browser.equals("JB")) {
       wd = new JBrowserDriver();
+    } else if (browser.equals("EDGE")) {
+      wd = new EdgeDriver();
     }
 
 

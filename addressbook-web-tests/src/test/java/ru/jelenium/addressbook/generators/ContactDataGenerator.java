@@ -101,42 +101,42 @@ public class ContactDataGenerator {
   private void saveJSON(List<ContactData> generate, File file) throws IOException {
     GsonBuilder builder = new GsonBuilder();
     Gson gson = builder.setPrettyPrinting().create();
-    Writer writer = new FileWriter(file);
-    writer.write(gson.toJson(generate));
-    writer.close();
+    try (Writer writer = new FileWriter(file + ".json")) {
+      writer.write(gson.toJson(generate));
+    }
   }
 
-  private void saveCSV(List<ContactData> generate, File groupFile) throws IOException {
-//    System.out.println(groupFile.getAbsolutePath());
-    Writer writer = new FileWriter(groupFile);
-    for (ContactData cDate : generate) {
-      writer.write(cDate.getFirstname() + ";" +
-              cDate.getMiddlename() + ";" +
-              cDate.getLastname() + ";" +
-              cDate.getNickname() + ";" +
-              cDate.getTitle() + ";" +
-              cDate.getPhoto() + ";" +
-              cDate.getTextInfo().getCompany() + ";" +
-              cDate.getAddress1() + ";" +
-              cDate.getPhone().getHome1() + ";" +
-              cDate.getPhone().getMobile() + ";" +
-              cDate.getPhone().getWork() + ";" +
-              cDate.getPhone().getFax() + ";" +
-              cDate.getContactEData().getEmail1() + ";" +
-              cDate.getContactEData().getEmail2() + ";" +
-              cDate.getContactEData().getEmail3() + ";" +
-              cDate.getContactEData().getHomepage() + ";" +
-              cDate.getBirthDate().getDay() + ";" +
-              cDate.getBirthDate().getMonth() + ";" +
-              cDate.getBirthDate().getYear() + ";" +
-              cDate.getAnnDate().getDay() + ";" +
-              cDate.getAnnDate().getMonth() + ";" +
-              cDate.getAnnDate().getYear() + ";" +
-              cDate.getTextInfo().getAddress2() + ";" +
-              cDate.getPhone().getHome2() + ";" +
-              cDate.getTextInfo().getNotes() + ";\n");
+  private void saveCSV(List<ContactData> generate, File file) throws IOException {
+//    System.out.println(file.getAbsolutePath());
+    try (Writer writer = new FileWriter(file + ".csv")) {
+      for (ContactData cDate : generate) {
+        writer.write(cDate.getFirstname() + ";" +
+                cDate.getMiddlename() + ";" +
+                cDate.getLastname() + ";" +
+                cDate.getNickname() + ";" +
+                cDate.getTitle() + ";" +
+                cDate.getPhoto() + ";" +
+                cDate.getTextInfo().getCompany() + ";" +
+                cDate.getAddress1() + ";" +
+                cDate.getPhone().getHome1() + ";" +
+                cDate.getPhone().getMobile() + ";" +
+                cDate.getPhone().getWork() + ";" +
+                cDate.getPhone().getFax() + ";" +
+                cDate.getContactEData().getEmail1() + ";" +
+                cDate.getContactEData().getEmail2() + ";" +
+                cDate.getContactEData().getEmail3() + ";" +
+                cDate.getContactEData().getHomepage() + ";" +
+                cDate.getBirthDate().getDay() + ";" +
+                cDate.getBirthDate().getMonth() + ";" +
+                cDate.getBirthDate().getYear() + ";" +
+                cDate.getAnnDate().getDay() + ";" +
+                cDate.getAnnDate().getMonth() + ";" +
+                cDate.getAnnDate().getYear() + ";" +
+                cDate.getTextInfo().getAddress2() + ";" +
+                cDate.getPhone().getHome2() + ";" +
+                cDate.getTextInfo().getNotes() + ";\n");
+      }
     }
-    writer.close();
   }
 
 

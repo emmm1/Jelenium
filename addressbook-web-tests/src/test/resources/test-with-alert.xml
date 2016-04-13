@@ -1,0 +1,8 @@
+<suite name="AddressBook" verbose="1" >
+    <test name="WithAlert">
+        <classes>
+            <class name="ru.jelenium.addressbook.tests.HomePageContactDeletionTest"/>
+            <class name="ru.jelenium.addressbook.tests.AllRecordDeletionTest"/>
+        </classes>
+    </test>
+</suite>

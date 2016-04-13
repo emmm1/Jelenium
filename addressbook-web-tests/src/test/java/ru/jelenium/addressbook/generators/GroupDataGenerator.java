@@ -60,18 +60,18 @@ public class GroupDataGenerator {
   private void saveJSON(List<GroupData> generate, File file) throws IOException {
     GsonBuilder builder = new GsonBuilder();
     Gson gson = builder.excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
-    Writer writer = new FileWriter(file);
-    writer.write(gson.toJson(generate));
-    writer.close();
+    try (Writer writer = new FileWriter(file + ".json")) {
+      writer.write(gson.toJson(generate));
+    }
   }
 
   private void saveCSV(List<GroupData> generate, File groupFile) throws IOException {
 //    System.out.println(groupFile.getAbsolutePath());
-    Writer writer = new FileWriter(groupFile);
-    for (GroupData tmp : generate) {
-      writer.write(String.format("%s;%s;%s\n", tmp.getName(), tmp.getHeader(), tmp.getFooter()));
+    try (Writer writer = new FileWriter(groupFile + ".csv")) {
+      for (GroupData tmp : generate) {
+        writer.write(String.format("%s;%s;%s\n", tmp.getName(), tmp.getHeader(), tmp.getFooter()));
+      }
     }
-    writer.close();
   }
 
 

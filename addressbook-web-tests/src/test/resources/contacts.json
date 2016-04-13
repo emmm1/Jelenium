@@ -1,209 +1,9 @@
 [
   {
     "id": 0,
-    "firstname": "Тест10",
-    "middlename": "Тестович",
-    "lastname": "Тестовый 10 Sun Apr 10 18:57:40 MSK 2016",
-    "nickname": "ттт",
-    "address1": "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
-    "title": "Дорогой",
-    "groupNum": 1,
-    "phone": {
-      "home1": "465464611263112",
-      "mobile": "+132(464) 54651 1564651 31",
-      "work": "3546131564631",
-      "fax": "2345464",
-      "home2": "+1245 54 545 68595489"
-    },
-    "contactEData": {
-      "email2": "test.testowy@gmail.com",
-      "email3": "testy_1987@mail.ru",
-      "homepage": "http://localhost/addressbook"
-    },
-    "birthDate": {
-      "day": 12,
-      "month": 5,
-      "year": "1987"
-    },
-    "annDate": {
-      "day": 25,
-      "month": 11,
-      "year": "2011"
-    },
-    "textInfo": {
-      "company": "Тест продакшн",
-      "address2": "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-      "notes": "Помрешь, пока заполнишь, 10, Sun Apr 10 18:57:40 MSK 2016"
-    },
-    "photo": {
-      "path": "src\\test\\resources\\macronomica.png"
-    }
-  },
-  {
-    "id": 0,
-    "firstname": "Тест9",
-    "middlename": "Тестович",
-    "lastname": "Тестовый 9 Sun Apr 10 18:57:40 MSK 2016",
-    "nickname": "ттт",
-    "address1": "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
-    "title": "Дорогой",
-    "groupNum": 1,
-    "phone": {
-      "home1": "465464611263112",
-      "mobile": "+132(464) 54651 1564651 31",
-      "work": "3546131564631",
-      "fax": "2345464",
-      "home2": "+1245 54 545 68595489"
-    },
-    "contactEData": {
-      "email2": "test.testowy@gmail.com",
-      "email3": "testy_1987@mail.ru",
-      "homepage": "http://localhost/addressbook"
-    },
-    "birthDate": {
-      "day": 12,
-      "month": 5,
-      "year": "1987"
-    },
-    "annDate": {
-      "day": 25,
-      "month": 11,
-      "year": "2011"
-    },
-    "textInfo": {
-      "company": "Тест продакшн",
-      "address2": "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-      "notes": "Помрешь, пока заполнишь, 9, Sun Apr 10 18:57:40 MSK 2016"
-    },
-    "photo": {
-      "path": "src\\test\\resources\\macronomica.png"
-    }
-  },
-  {
-    "id": 0,
-    "firstname": "Тест8",
-    "middlename": "Тестович",
-    "lastname": "Тестовый 8 Sun Apr 10 18:57:40 MSK 2016",
-    "nickname": "ттт",
-    "address1": "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
-    "title": "Дорогой",
-    "groupNum": 1,
-    "phone": {
-      "home1": "465464611263112",
-      "mobile": "+132(464) 54651 1564651 31",
-      "work": "3546131564631",
-      "fax": "2345464",
-      "home2": "+1245 54 545 68595489"
-    },
-    "contactEData": {
-      "email2": "test.testowy@gmail.com",
-      "email3": "testy_1987@mail.ru",
-      "homepage": "http://localhost/addressbook"
-    },
-    "birthDate": {
-      "day": 12,
-      "month": 5,
-      "year": "1987"
-    },
-    "annDate": {
-      "day": 25,
-      "month": 11,
-      "year": "2011"
-    },
-    "textInfo": {
-      "company": "Тест продакшн",
-      "address2": "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-      "notes": "Помрешь, пока заполнишь, 8, Sun Apr 10 18:57:40 MSK 2016"
-    },
-    "photo": {
-      "path": "src\\test\\resources\\macronomica.png"
-    }
-  },
-  {
-    "id": 0,
-    "firstname": "Тест7",
-    "middlename": "Тестович",
-    "lastname": "Тестовый 7 Sun Apr 10 18:57:40 MSK 2016",
-    "nickname": "ттт",
-    "address1": "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
-    "title": "Дорогой",
-    "groupNum": 1,
-    "phone": {
-      "home1": "465464611263112",
-      "mobile": "+132(464) 54651 1564651 31",
-      "work": "3546131564631",
-      "fax": "2345464",
-      "home2": "+1245 54 545 68595489"
-    },
-    "contactEData": {
-      "email2": "test.testowy@gmail.com",
-      "email3": "testy_1987@mail.ru",
-      "homepage": "http://localhost/addressbook"
-    },
-    "birthDate": {
-      "day": 12,
-      "month": 5,
-      "year": "1987"
-    },
-    "annDate": {
-      "day": 25,
-      "month": 11,
-      "year": "2011"
-    },
-    "textInfo": {
-      "company": "Тест продакшн",
-      "address2": "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-      "notes": "Помрешь, пока заполнишь, 7, Sun Apr 10 18:57:40 MSK 2016"
-    },
-    "photo": {
-      "path": "src\\test\\resources\\macronomica.png"
-    }
-  },
-  {
-    "id": 0,
-    "firstname": "Тест6",
-    "middlename": "Тестович",
-    "lastname": "Тестовый 6 Sun Apr 10 18:57:40 MSK 2016",
-    "nickname": "ттт",
-    "address1": "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
-    "title": "Дорогой",
-    "groupNum": 1,
-    "phone": {
-      "home1": "465464611263112",
-      "mobile": "+132(464) 54651 1564651 31",
-      "work": "3546131564631",
-      "fax": "2345464",
-      "home2": "+1245 54 545 68595489"
-    },
-    "contactEData": {
-      "email2": "test.testowy@gmail.com",
-      "email3": "testy_1987@mail.ru",
-      "homepage": "http://localhost/addressbook"
-    },
-    "birthDate": {
-      "day": 12,
-      "month": 5,
-      "year": "1987"
-    },
-    "annDate": {
-      "day": 25,
-      "month": 11,
-      "year": "2011"
-    },
-    "textInfo": {
-      "company": "Тест продакшн",
-      "address2": "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-      "notes": "Помрешь, пока заполнишь, 6, Sun Apr 10 18:57:40 MSK 2016"
-    },
-    "photo": {
-      "path": "src\\test\\resources\\macronomica.png"
-    }
-  },
-  {
-    "id": 0,
     "firstname": "Тест5",
     "middlename": "Тестович",
-    "lastname": "Тестовый 5 Sun Apr 10 18:57:40 MSK 2016",
+    "lastname": "Тестовый 5 Wed Apr 13 19:21:35 MSK 2016",
     "nickname": "ттт",
     "address1": "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
     "title": "Дорогой",
@@ -233,7 +33,7 @@
     "textInfo": {
       "company": "Тест продакшн",
       "address2": "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-      "notes": "Помрешь, пока заполнишь, 5, Sun Apr 10 18:57:40 MSK 2016"
+      "notes": "Помрешь, пока заполнишь, 5, Wed Apr 13 19:21:35 MSK 2016"
     },
     "photo": {
       "path": "src\\test\\resources\\macronomica.png"
@@ -243,7 +43,7 @@
     "id": 0,
     "firstname": "Тест4",
     "middlename": "Тестович",
-    "lastname": "Тестовый 4 Sun Apr 10 18:57:40 MSK 2016",
+    "lastname": "Тестовый 4 Wed Apr 13 19:21:35 MSK 2016",
     "nickname": "ттт",
     "address1": "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
     "title": "Дорогой",
@@ -273,7 +73,7 @@
     "textInfo": {
       "company": "Тест продакшн",
       "address2": "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-      "notes": "Помрешь, пока заполнишь, 4, Sun Apr 10 18:57:40 MSK 2016"
+      "notes": "Помрешь, пока заполнишь, 4, Wed Apr 13 19:21:35 MSK 2016"
     },
     "photo": {
       "path": "src\\test\\resources\\macronomica.png"
@@ -283,7 +83,7 @@
     "id": 0,
     "firstname": "Тест3",
     "middlename": "Тестович",
-    "lastname": "Тестовый 3 Sun Apr 10 18:57:40 MSK 2016",
+    "lastname": "Тестовый 3 Wed Apr 13 19:21:35 MSK 2016",
     "nickname": "ттт",
     "address1": "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
     "title": "Дорогой",
@@ -313,7 +113,7 @@
     "textInfo": {
       "company": "Тест продакшн",
       "address2": "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-      "notes": "Помрешь, пока заполнишь, 3, Sun Apr 10 18:57:40 MSK 2016"
+      "notes": "Помрешь, пока заполнишь, 3, Wed Apr 13 19:21:35 MSK 2016"
     },
     "photo": {
       "path": "src\\test\\resources\\macronomica.png"
@@ -323,7 +123,7 @@
     "id": 0,
     "firstname": "Тест2",
     "middlename": "Тестович",
-    "lastname": "Тестовый 2 Sun Apr 10 18:57:40 MSK 2016",
+    "lastname": "Тестовый 2 Wed Apr 13 19:21:35 MSK 2016",
     "nickname": "ттт",
     "address1": "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
     "title": "Дорогой",
@@ -353,7 +153,7 @@
     "textInfo": {
       "company": "Тест продакшн",
       "address2": "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-      "notes": "Помрешь, пока заполнишь, 2, Sun Apr 10 18:57:40 MSK 2016"
+      "notes": "Помрешь, пока заполнишь, 2, Wed Apr 13 19:21:35 MSK 2016"
     },
     "photo": {
       "path": "src\\test\\resources\\macronomica.png"
@@ -363,7 +163,7 @@
     "id": 0,
     "firstname": "Тест1",
     "middlename": "Тестович",
-    "lastname": "Тестовый 1 Sun Apr 10 18:57:40 MSK 2016",
+    "lastname": "Тестовый 1 Wed Apr 13 19:21:35 MSK 2016",
     "nickname": "ттт",
     "address1": "РФ, Тестовая область, г. Тестовск, тестовый тупик, д. 26, кв 13",
     "title": "Дорогой",
@@ -393,7 +193,7 @@
     "textInfo": {
       "company": "Тест продакшн",
       "address2": "Тестовый район, с. Тестовое, 1я тестовая улица, д. 23",
-      "notes": "Помрешь, пока заполнишь, 1, Sun Apr 10 18:57:40 MSK 2016"
+      "notes": "Помрешь, пока заполнишь, 1, Wed Apr 13 19:21:35 MSK 2016"
     },
     "photo": {
       "path": "src\\test\\resources\\macronomica.png"

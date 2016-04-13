@@ -26,14 +26,15 @@ public class GroupCreationTest extends TestBase {
   @DataProvider
   public Iterator<Object[]> groupListCSV() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
-    String line = reader.readLine();
-    while (line != null) {
-      String[] value = line.split(";");
-      list.add(new Object[] {new GroupData().withName(value[0]).withHeader(value[1]).withFooter(value[2])});
-      line = reader.readLine();
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")))) {
+      String line = reader.readLine();
+      while (line != null) {
+        String[] value = line.split(";");
+        list.add(new Object[]{new GroupData().withName(value[0]).withHeader(value[1]).withFooter(value[2])});
+        line = reader.readLine();
+      }
+      return list.iterator();
     }
-    return list.iterator();
   }
 
   @DataProvider

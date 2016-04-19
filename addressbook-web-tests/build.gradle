@@ -12,11 +12,15 @@ dependencies {
     compile 'com.machinepublishers:jbrowserdriver:0.10.4'
     compile "com.beust:jcommander:1.48"
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'ch.qos.logback:logback-classic:1.1.7'
 }
 
 task allTests(type: Test) {
     useTestNG {
         suites 'src/test/resources/test-all.xml'
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
     }
 }
 
@@ -24,10 +28,16 @@ task testsWithAlert(type: Test) {
     useTestNG {
         suites 'src/test/resources/test-with-alert.xml'
     }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
 }
 
 task testsWithoutAlert(type: Test) {
     useTestNG {
         suites 'src/test/resources/test-without-alert.xml'
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
     }
 }

@@ -5,12 +5,15 @@ import org.testng.annotations.Test;
 import ru.jelenium.addressbook.model.GroupData;
 import ru.jelenium.addressbook.model.Groups;
 
+import java.io.File;
 import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupUpdateTest extends TestBase {
+
+
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -37,5 +40,7 @@ public class GroupUpdateTest extends TestBase {
     assertThat(app.group().getQty(), equalTo(before.size()));
     Groups after = app.group().getAll();
     assertThat(after, equalTo(before.withChangedGroup(((app.group().findDiff(after, before))), newData)));
+    File file = new File("");
+    System.out.println(file.getAbsolutePath());
   }
 }

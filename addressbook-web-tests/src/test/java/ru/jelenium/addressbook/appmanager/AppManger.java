@@ -66,8 +66,9 @@ public class AppManger {
       wd = new JBrowserDriver();
     } else if (browser.equals("EDGE")) {
       wd = new EdgeDriver();
+    } else {
+      wd = new ChromeDriver();
     }
-
 
     wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.BaseUrl"));

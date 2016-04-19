@@ -36,4 +36,13 @@ public class DatesData {
   public String getYear() {
     return year;
   }
+
+  @Override
+  public String toString() {
+    return "DatesData{" +
+            "day=" + day +
+            ", month=" + month +
+            ", year='" + year + '\'' +
+            '}';
+  }
 }

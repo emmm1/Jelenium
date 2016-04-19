@@ -26,6 +26,15 @@ public class ContactTextInfo {
     return company;
   }
 
+  @Override
+  public String toString() {
+    return "ContactTextInfo{" +
+            "company='" + company + '\'' +
+            ", address2='" + address2 + '\'' +
+            ", notes='" + notes + '\'' +
+            '}';
+  }
+
   public String getAddress2() {
     return address2;
   }

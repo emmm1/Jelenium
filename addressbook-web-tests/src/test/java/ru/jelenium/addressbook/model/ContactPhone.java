@@ -62,5 +62,15 @@ public class ContactPhone {
     return home2;
   }
 
+  @Override
+  public String toString() {
+    return "ContactPhone{" +
+            "home1='" + home1 + '\'' +
+            ", mobile='" + mobile + '\'' +
+            ", work='" + work + '\'' +
+            ", fax='" + fax + '\'' +
+            ", home2='" + home2 + '\'' +
+            '}';
+  }
 }
 

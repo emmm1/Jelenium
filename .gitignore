@@ -16,3 +16,6 @@ gradle-app.setting
 # Gradle:
 .idea/gradle.xml
 .idea/libraries
+*.java
+*.log
+.idea/libraries/Gradle__xalan_xalan_2_7_2.xml

@@ -13,6 +13,28 @@ public class ContactData {
     return photo;
   }
 
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
+            ", middlename='" + middlename + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", nickname='" + nickname + '\'' +
+            ", address1='" + address1 + '\'' +
+            ", title='" + title + '\'' +
+            ", allEmails='" + allEmails + '\'' +
+            ", allPhones='" + allPhones + '\'' +
+            ", groupNum=" + groupNum +
+            ", phone=" + phone +
+            ", contactEData=" + contactEData +
+            ", birthDate=" + birthDate +
+            ", annDate=" + annDate +
+            ", textInfo=" + textInfo +
+            ", photo=" + photo +
+            '}';
+  }
+
   public ContactData withImage(File photo) {
     this.photo = photo;
     return this;
@@ -284,27 +306,6 @@ public class ContactData {
               .filter(s -> !s.equals(""))
               .map(t -> t.replaceAll("\\s$", ""))
               .collect(Collectors.joining(" "));
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id=" + id +
-            ", firstname='" + firstname + '\'' +
-            ", middlename='" + middlename + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", nickname='" + nickname + '\'' +
-            ", address1='" + address1 + '\'' +
-            ", title='" + title + '\'' +
-            ", allEmails='" + allEmails + '\'' +
-            ", allPhones='" + allPhones + '\'' +
-            ", groupNum=" + groupNum +
-            ", phone=" + phone +
-            ", contactEData=" + contactEData +
-            ", birthDate=" + birthDate +
-            ", annDate=" + annDate +
-            ", textInfo=" + textInfo +
-            '}';
   }
 
   public ContactData makeAllPhones() {

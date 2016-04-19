@@ -58,4 +58,14 @@ public class ContactEData {
   public String getHomepage() {
     return homepage;
   }
+
+  @Override
+  public String toString() {
+    return "ContactEData{" +
+            "email1='" + email1 + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", homepage='" + homepage + '\'' +
+            '}';
+  }
 }
